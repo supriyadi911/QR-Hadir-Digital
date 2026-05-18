@@ -58,8 +58,8 @@
         </div>
 
         <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-lg p-6 md:p-10 text-center border border-white dark:border-gray-700/50 relative z-10">
-            <div class="bg-primary text-white w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-5xl mx-auto mb-5 md:mb-6 shadow-lg transform rotate-3"><i class="fa-solid fa-school -rotate-3"></i></div>
-            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-2 tracking-tight">Hadir Digital</h1>
+            <div id="welcome-logo" class="bg-primary text-white w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-5xl mx-auto mb-5 md:mb-6 shadow-lg transform rotate-3 overflow-hidden transition-all"><i class="fa-solid fa-school -rotate-3" id="welcome-logo-icon"></i></div>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-2 tracking-tight school-name-display">Hadir Digital</h1>
             <p class="text-sm md:text-base text-gray-500 dark:text-gray-400 mb-2 px-4">Sistem Manajemen Kehadiran Siswa Pintar Berbasis QR Code.</p>
             
             <p class="text-xs font-semibold text-primary dark:text-blue-400 mb-6 px-4 bg-blue-50 dark:bg-blue-900/20 py-2 rounded-lg border border-blue-100 dark:border-blue-800 mx-auto inline-block" id="welcome-school-info"></p>
@@ -80,7 +80,7 @@
         <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl w-full max-w-md p-6 md:p-8 z-10 border border-gray-100 dark:border-gray-700">
             <button onclick="backToWelcome()" class="absolute top-6 left-6 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 md:hidden"><i class="fa-solid fa-arrow-left text-xl"></i></button>
             <div class="text-center mb-6 md:mb-8 mt-2 md:mt-0">
-                <div class="bg-primary text-white w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl mx-auto mb-3 md:mb-4 shadow-lg"><i class="fa-solid fa-school"></i></div>
+                <div id="login-logo" class="bg-primary text-white w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl mx-auto mb-3 md:mb-4 shadow-lg overflow-hidden transition-all"><i class="fa-solid fa-school"></i></div>
                 <h1 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white school-name-display">Login Masuk</h1>
                 <p class="text-gray-500 dark:text-gray-400 text-xs md:text-sm mt-1">Silakan masukkan kredensial Anda</p>
             </div>
@@ -96,7 +96,7 @@
     <!-- ================= MAIN APP ================= -->
     <div id="page-app" class="hidden flex h-screen overflow-hidden relative">
         <aside id="sidebar" class="bg-white dark:bg-gray-800 w-64 border-r dark:border-gray-700 flex flex-col transition-transform duration-300 fixed md:relative inset-y-0 left-0 z-[60] md:z-40 h-full -translate-x-full md:translate-x-0">
-            <div class="p-4 md:p-5 border-b dark:border-gray-700 flex items-center justify-between"><div class="flex items-center gap-3"><div class="bg-primary text-white w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm"><i class="fa-solid fa-school"></i></div><h2 class="font-bold text-base md:text-lg dark:text-white truncate school-name-display">Hadir Digital</h2></div><button id="btn-close-sidebar" class="md:hidden text-gray-500 hover:text-gray-700 p-2"><i class="fa-solid fa-times text-lg"></i></button></div>
+            <div class="p-4 md:p-5 border-b dark:border-gray-700 flex items-center justify-between"><div class="flex items-center gap-3"><div id="sidebar-logo" class="bg-primary text-white w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm overflow-hidden transition-all"><i class="fa-solid fa-school"></i></div><h2 class="font-bold text-base md:text-lg dark:text-white truncate school-name-display">Hadir Digital</h2></div><button id="btn-close-sidebar" class="md:hidden text-gray-500 hover:text-gray-700 p-2"><i class="fa-solid fa-times text-lg"></i></button></div>
             <div class="p-4 flex items-center gap-3 border-b dark:border-gray-700"><img src="https://ui-avatars.com/api/?name=User&background=random" id="user-avatar" class="w-9 h-9 md:w-10 md:h-10 rounded-full" alt="User"><div><p id="user-name" class="text-sm font-semibold dark:text-white truncate">Admin</p><p id="user-role" class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400">Administrator</p></div></div>
             
             <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1 hidden md:block custom-scrollbar">
@@ -216,7 +216,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div><label class="block text-sm font-medium mb-1 dark:text-gray-300">Alamat Lengkap</label><input type="text" id="cfg-school-alamat" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-primary" placeholder="Contoh: Jl. Pendidikan No.10, Jakarta"></div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-medium mb-1 dark:text-gray-300">Alamat Lengkap</label><input type="text" id="cfg-school-alamat" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-primary" placeholder="Contoh: Jl. Pendidikan No.10, Jakarta"></div>
+                                <div><label class="block text-sm font-medium mb-1 dark:text-gray-300">URL Logo Sekolah (Opsional)</label><input type="text" id="cfg-school-logo" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-primary" placeholder="https://contoh.com/logo.png"></div>
+                            </div>
                             
                             <div class="mt-8 pt-6 border-t dark:border-gray-700">
                                 <h3 class="font-bold text-base dark:text-white mb-1">Pengaturan Jam Masuk & Kelas (Pagi/Siang)</h3>
@@ -660,7 +663,34 @@
     </div>
     
     <!-- Modal Cetak QR -->
-    <div id="modal-qr" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[70] p-4 opacity-0 transition-opacity"><div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-xs overflow-hidden transform scale-95 transition-transform duration-300" id="modal-qr-content"><div class="p-3 border-b dark:border-gray-700 flex justify-between items-center"><h3 class="font-bold text-sm dark:text-white">Kartu QR Siswa</h3><button onclick="closeModal('modal-qr')" class="text-gray-500 hover:text-red-500"><i class="fa-solid fa-times"></i></button></div><div class="p-4 md:p-5 text-center" id="print-qr-area"><h4 class="font-bold text-base md:text-lg dark:text-white mb-1" id="qr-nama">Nama</h4><p class="text-xs text-gray-500 mb-4">NISN: <span id="qr-nisn"></span> | Kls: <span id="qr-kelas"></span></p><div class="bg-white p-3 inline-block rounded-xl border-2 border-gray-200" id="qrcode-display"></div></div><div class="p-3 border-t dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"><button onclick="printQR()" class="w-full py-2 bg-secondary text-white rounded-lg text-xs md:text-sm font-medium"><i class="fa-solid fa-print mr-1"></i> Cetak</button></div></div></div>
+    <div id="modal-qr" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[70] p-4 opacity-0 transition-opacity"><div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-sm overflow-hidden transform scale-95 transition-transform duration-300" id="modal-qr-content"><div class="p-3 border-b dark:border-gray-700 flex justify-between items-center"><h3 class="font-bold text-sm dark:text-white">Preview Kartu ID</h3><button onclick="closeModal('modal-qr')" class="text-gray-500 hover:text-red-500"><i class="fa-solid fa-times"></i></button></div>
+    <div class="p-4 md:p-5 flex justify-center bg-gray-100 dark:bg-gray-900" id="print-qr-area">
+        <div class="relative w-[204px] h-[325px] rounded-xl overflow-hidden shadow-lg flex flex-col bg-white border border-gray-200" id="qr-card-preview" style="background-color: white;">
+            <!-- Header CR80 dengan Gradasi & Logo -->
+            <div id="qr-header-bg" class="text-white p-3 text-center shrink-0 flex flex-col items-center justify-center h-[95px] bg-gradient-to-br from-blue-500 to-blue-700">
+                <div id="qr-logo-container" class="w-10 h-10 bg-white rounded-full p-1 mb-1 shadow-sm flex items-center justify-center overflow-hidden">
+                    <i class="fa-solid fa-school text-blue-600 text-lg" id="qr-logo-icon"></i>
+                </div>
+                <p class="text-[8px] font-bold leading-tight uppercase px-1 line-clamp-2" id="qr-school-name" style="color: white;"></p>
+            </div>
+            <!-- Body CR80 -->
+            <div class="flex-1 flex flex-col items-center justify-start pt-3 px-3 relative bg-white">
+                <!-- Nama Siswa (Mendukung 2 Baris) -->
+                <h4 class="font-bold text-[12px] text-gray-800 text-center leading-tight z-10 px-1 line-clamp-2 mb-2 uppercase min-h-[28px] flex items-center justify-center" id="qr-nama" style="color: #1f2937;"></h4>
+                
+                <div class="bg-white p-1.5 border border-gray-200 rounded-lg shadow-sm z-10 mb-2" id="qrcode-display"></div>
+                
+                <p class="text-[9px] text-gray-500 z-10 m-0 text-center" style="color: #6b7280;">NISN: <span id="qr-nisn" class="font-bold text-gray-800" style="color: #1f2937;"></span></p>
+                <p class="text-[9px] text-gray-500 z-10 m-0 text-center" style="color: #6b7280;">Kelas: <span id="qr-kelas" class="font-bold text-gray-800" style="color: #1f2937;"></span></p>
+            </div>
+            <!-- Footer CR80 -->
+            <div class="bg-gray-50 p-2 text-center border-t border-gray-200 shrink-0 h-[35px] flex flex-col justify-center">
+                <p class="text-[7px] text-gray-400 italic m-0" style="color: #9ca3af;">Kartu Presensi Digital</p>
+                <p class="text-[6px] text-gray-500 font-medium truncate mt-0.5 m-0" id="qr-school-address" style="color: #6b7280;"></p>
+            </div>
+        </div>
+    </div>
+    <div class="p-3 border-t dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"><button onclick="printQR()" class="w-full py-2 bg-secondary text-white rounded-lg text-xs md:text-sm font-medium shadow-md hover:bg-primary transition-colors"><i class="fa-solid fa-print mr-1"></i> Cetak Satuan (CR80)</button></div></div></div>
     
     <!-- Modal Guru -->
     <div id="modal-guru" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[70] p-4 opacity-0 transition-opacity">
@@ -698,7 +728,7 @@
             user: null, 
             theme: localStorage.getItem('theme') || 'light', 
             school: JSON.parse(localStorage.getItem('schoolSettings')) || { 
-                nama: 'SDN Nusantara 1', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue',
+                nama: 'SDN Nusantara 1', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue', logo: '',
                 sessions: {
                     SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
                     SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
@@ -727,6 +757,28 @@
         }
 
         const MOCK_ATTENDANCE = []; const today = new Date(); const todayStr = getLocalDateStr(today);
+
+        // ================= MANAJEMEN PENGATURAN SEKOLAH (AMAN DARI OVERWRITE DB) =================
+        function safeMergeSchool(fetchedData) {
+            if (!fetchedData) return;
+            const currentData = JSON.parse(localStorage.getItem('schoolSettings')) || STATE.school;
+            
+            STATE.school = {
+                nama: fetchedData.nama || currentData.nama || 'SDN Nusantara 1',
+                alamat: fetchedData.alamat || currentData.alamat || '',
+                tahun: fetchedData.tahun || currentData.tahun || '',
+                jenjang: fetchedData.jenjang || currentData.jenjang || 'SD',
+                theme: fetchedData.theme || currentData.theme || 'blue',
+                logo: fetchedData.logo !== undefined ? fetchedData.logo : (currentData.logo || ''),
+                sessions: fetchedData.sessions || currentData.sessions || {
+                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
+                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
+                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } }
+                }
+            };
+            localStorage.setItem('schoolSettings', JSON.stringify(STATE.school));
+            applySchoolSettings();
+        }
 
         // ================= FITUR AUTO REFRESH & STATUS DB =================
         let autoRefreshTimer = null;
@@ -758,7 +810,7 @@
                     STATE.students = (json.students || []).map(s => { if(s.nisn && s.nisn.startsWith("'")) s.nisn = s.nisn.substring(1); if(s.hp && s.hp.startsWith("'")) s.hp = s.hp.substring(1); return s; });
                     STATE.attendance = (json.attendance || []).map(a => { if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1); a.tanggal = normalizeDateStr(a.tanggal); return a; });
                     STATE.teachers = json.teachers || [];
-                    if (json.school) { STATE.school = json.school; localStorage.setItem('schoolSettings', JSON.stringify(STATE.school)); applySchoolSettings(); }
+                    if (json.school) { safeMergeSchool(json.school); }
                     
                     const vDash = document.getElementById('view-dashboard'); if(vDash && !vDash.classList.contains('hidden')) renderDashboard();
                     const vRekap = document.getElementById('view-rekap'); if(vRekap && !vRekap.classList.contains('hidden')) renderRekap();
@@ -887,6 +939,7 @@
             document.querySelectorAll('.school-name-display').forEach(el => el.innerText = STATE.school.nama);
 
             applyThemeColor(STATE.school.theme || 'blue');
+            applySchoolLogo();
 
             const roleEl = document.getElementById('user-role');
             if(roleEl && STATE.user) {
@@ -899,6 +952,7 @@
                 fnama.value = STATE.school.nama || '';
                 document.getElementById('cfg-school-alamat').value = STATE.school.alamat || '';
                 document.getElementById('cfg-school-tahun').value = STATE.school.tahun || '';
+                document.getElementById('cfg-school-logo').value = STATE.school.logo || '';
                 
                 const fjenjang = document.getElementById('cfg-school-jenjang');
                 if(fjenjang) {
@@ -934,6 +988,7 @@
             const tahun = document.getElementById('cfg-school-tahun').value;
             const jenjang = document.getElementById('cfg-school-jenjang').value;
             const theme = document.getElementById('cfg-school-theme').value;
+            const logo = document.getElementById('cfg-school-logo').value;
             
             if(!nama) { showToast("Nama sekolah wajib diisi", "warning"); return; }
             
@@ -952,12 +1007,62 @@
                 }
             };
 
-            STATE.school = { nama, alamat, tahun, jenjang, theme, sessions };
+            STATE.school = { nama, alamat, tahun, jenjang, theme, logo, sessions };
             localStorage.setItem('schoolSettings', JSON.stringify(STATE.school)); 
             applySchoolSettings();
             
             apiPost("saveSchool", STATE.school); 
             showToast("Pengaturan Sekolah & Waktu Sesi disimpan");
+        }
+
+        // ================= BACKGROUND SYNC & LOGO LOGIC =================
+        window.handleImageError = function(imgEl, containerId, iconCls) {
+            const el = document.getElementById(containerId);
+            if(el) {
+                el.innerHTML = `<i class="${iconCls}"></i>`;
+                el.classList.add('bg-primary', 'text-white');
+                el.classList.remove('bg-white', 'p-0.5', 'border-2', 'border-primary/20');
+                if(containerId === 'welcome-logo') el.classList.add('transform', 'rotate-3');
+            } else if (imgEl && imgEl.parentElement) {
+                imgEl.parentElement.innerHTML = '<i class="fa-solid fa-school text-gray-500 text-lg"></i>';
+            }
+        };
+
+        async function silentInitSync() {
+            if(!CONFIG.USE_REAL_BACKEND) return;
+            try {
+                const response = await fetch(CONFIG.GAS_API_URL + "?action=getData");
+                const json = await response.json();
+                if(json.status === "success" && json.school) {
+                    safeMergeSchool(json.school);
+                }
+            } catch(e) { console.log("Silent sync error", e); }
+        }
+
+        function applySchoolLogo() {
+            const logoContainers = [
+                { id: 'welcome-logo', iconCls: 'fa-solid fa-school -rotate-3 text-4xl md:text-5xl' },
+                { id: 'login-logo', iconCls: 'fa-solid fa-school text-2xl md:text-3xl' },
+                { id: 'sidebar-logo', iconCls: 'fa-solid fa-school text-xs md:text-sm' }
+            ];
+
+            logoContainers.forEach(container => {
+                const el = document.getElementById(container.id);
+                if (!el) return;
+                
+                if (STATE.school.logo && STATE.school.logo.trim() !== '') {
+                    el.innerHTML = `<img src="${STATE.school.logo}" class="w-full h-full object-cover" onerror="window.handleImageError(this, '${container.id}', '${container.iconCls}')">`;
+                    // Jika ada gambar logo, buat container jadi putih polos & tanpa rotate padding yang aneh
+                    el.classList.remove('bg-primary', 'text-white', 'p-3', 'rotate-3');
+                    el.classList.add('bg-white', 'p-0.5', 'border-2', 'border-primary/20');
+                    if(container.id === 'welcome-logo') el.classList.remove('transform', 'rotate-3');
+                } else {
+                    el.innerHTML = `<i class="${container.iconCls}"></i>`;
+                    el.classList.add('bg-primary', 'text-white');
+                    el.classList.remove('bg-white', 'p-0.5', 'border-2', 'border-primary/20');
+                    if(container.id === 'welcome-logo') el.classList.add('transform', 'rotate-3');
+                }
+            });
         }
 
         // ================= FULLSCREEN & THEME UTILITIES =================
@@ -1002,6 +1107,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             applyTheme(); checkSession(); updateClock(); setInterval(updateClock, 1000);
             applySchoolSettings(); toggleAutoRefresh();
+            
+            // Background Sync agar Welcome Page langsung terupdate dari server (Termasuk Logo)
+            silentInitSync();
             
             const fd = document.getElementById('filter-date'); if (fd) fd.value = todayStr;
             const ft = document.getElementById('laporan-val-tanggal'); if (ft) ft.value = todayStr;
@@ -1153,9 +1261,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                     if(json.status === "success") {
                         updateDbStatus('success');
                         if (json.school) {
-                            STATE.school = json.school;
-                            localStorage.setItem('schoolSettings', JSON.stringify(STATE.school));
-                            applySchoolSettings();
+                            safeMergeSchool(json.school);
                         }
                         STATE.students = (json.students || []).map(s => {
                             if(s.nisn && s.nisn.startsWith("'")) s.nisn = s.nisn.substring(1);
@@ -1470,8 +1576,65 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
         function editSiswa(id) { const student = STATE.students.find(s => s.id === id); if(!student) return; document.getElementById('form-siswa-id').value = student.id; document.getElementById('form-siswa-nisn').value = student.nisn; document.getElementById('form-siswa-nama').value = student.nama; document.getElementById('form-siswa-jk').value = student.jk; document.getElementById('form-siswa-hp').value = student.hp; document.getElementById('modal-siswa-title').innerText = 'Edit Data Siswa'; const fj = document.getElementById('form-siswa-jenjang'); fj.value = getJenjangFromKelas(student.kelas); populateKelas('form-siswa-jenjang', 'form-siswa-kelas', student.kelas); const fk = document.getElementById('form-siswa-kelas'); if(!STATE.user.isAdmin) { fk.disabled = true; fj.disabled = true; } else { fk.disabled = false; fj.disabled = false; } const m = document.getElementById('modal-siswa'), c = document.getElementById('modal-siswa-content'); m.classList.remove('hidden'); m.classList.add('flex'); setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10); }
         function saveSiswa() { const id = document.getElementById('form-siswa-id').value; const nisn = document.getElementById('form-siswa-nisn').value; const nama = document.getElementById('form-siswa-nama').value; const kelas = document.getElementById('form-siswa-kelas').value; const jk = document.getElementById('form-siswa-jk').value; const hp = document.getElementById('form-siswa-hp').value; if(!nisn || !nama) { showToast('NISN dan Nama wajib diisi!', 'warning'); return; } const newStud = { id: id || "S"+Date.now(), nisn, nama, kelas, jk, hp }; if(id) { const idx = STATE.students.findIndex(s => s.id === id); if (idx !== -1) STATE.students[idx] = newStud; showToast('Data diupdate', 'success'); } else { STATE.students.push(newStud); showToast('Siswa ditambahkan', 'success'); } apiPost("saveSiswa", newStud); closeModal('modal-siswa'); updateFilterKelasOptions(); renderSiswa(); }
         function deleteSiswa(id) { if(confirm('Hapus data siswa ini?')) { STATE.students = STATE.students.filter(s => s.id !== id); apiPost("deleteSiswa", {id: id}); updateFilterKelasOptions(); renderSiswa(); showToast('Data dihapus', 'success'); } }
-        function showQR(nisn) { const s = STATE.students.find(x => x.nisn === nisn); if(!s) return; document.getElementById('qr-nama').innerText = s.nama; document.getElementById('qr-nisn').innerText = s.nisn; document.getElementById('qr-kelas').innerText = s.kelas; const q = document.getElementById('qrcode-display'); q.innerHTML = ''; new QRCode(q, { text: s.nisn, width: 160, height: 160, colorDark:"#000", colorLight:"#fff" }); const m=document.getElementById('modal-qr'),c=document.getElementById('modal-qr-content'); m.classList.remove('hidden'); m.classList.add('flex'); setTimeout(()=>{m.classList.remove('opacity-0'); c.classList.remove('scale-95');},10); }
-        function printQR() { const printContent = document.getElementById('print-qr-area').innerHTML; const printWindow = window.open('', '', 'width=600,height=600'); printWindow.document.write(`<html><head><title>Cetak QR Code</title><style>body{font-family:sans-serif;text-align:center;padding:20px;}.qr-card{border:2px dashed #ccc;padding:30px;display:inline-block;border-radius:10px;}img{margin:20px auto;}h4{margin:0;font-size:24px;}p{color:#555;}</style></head><body><div class="qr-card">${printContent}</div><script>window.onload=function(){window.print();window.close();}<\/script></body></html>`); printWindow.document.close(); }
+        
+        function showQR(nisn) { 
+            const s = STATE.students.find(x => x.nisn === nisn); 
+            if(!s) return; 
+            document.getElementById('qr-nama').innerText = s.nama; 
+            document.getElementById('qr-nisn').innerText = s.nisn; 
+            document.getElementById('qr-kelas').innerText = s.kelas; 
+            document.getElementById('qr-school-name').innerText = STATE.school.nama;
+            document.getElementById('qr-school-address').innerText = STATE.school.alamat;
+            
+            // Penanganan Logo di Kartu QR
+            const logoContainer = document.getElementById('qr-logo-container');
+            if (STATE.school.logo && STATE.school.logo.trim() !== '') {
+                logoContainer.innerHTML = `<img src="${STATE.school.logo}" class="w-full h-full object-cover rounded-full" onerror="window.handleImageError(this, '', 'fa-solid fa-school text-gray-400')">`;
+            } else {
+                const themeColors = { blue: 'text-blue-600', emerald: 'text-emerald-600', purple: 'text-purple-600', rose: 'text-rose-600', amber: 'text-amber-600' };
+                const iconColor = themeColors[STATE.school.theme] || 'text-blue-600';
+                logoContainer.innerHTML = `<i class="fa-solid fa-school ${iconColor} text-lg"></i>`;
+            }
+            
+            const q = document.getElementById('qrcode-display'); q.innerHTML = ''; 
+            new QRCode(q, { text: s.nisn, width: 100, height: 100, colorDark:"#1f2937", colorLight:"#ffffff", correctLevel : QRCode.CorrectLevel.M }); 
+            
+            // Terapkan Tema Gradasi
+            const headerBg = document.getElementById('qr-header-bg');
+            headerBg.className = `text-white p-3 text-center shrink-0 flex flex-col items-center justify-center h-[95px] bg-gradient-to-br`;
+            if(STATE.school.theme === 'emerald') headerBg.classList.add('from-emerald-500', 'to-emerald-700');
+            else if(STATE.school.theme === 'purple') headerBg.classList.add('from-purple-500', 'to-purple-700');
+            else if(STATE.school.theme === 'rose') headerBg.classList.add('from-rose-500', 'to-rose-700');
+            else if(STATE.school.theme === 'amber') headerBg.classList.add('from-amber-500', 'to-amber-700');
+            else headerBg.classList.add('from-blue-500', 'to-blue-700');
+            
+            const m=document.getElementById('modal-qr'),c=document.getElementById('modal-qr-content'); 
+            m.classList.remove('hidden'); m.classList.add('flex'); 
+            setTimeout(()=>{m.classList.remove('opacity-0'); c.classList.remove('scale-95');},10); 
+        }
+
+        function printQR() { 
+            const printContent = document.getElementById('print-qr-area').innerHTML; 
+            const printWindow = window.open('', '', 'width=600,height=800'); 
+            printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Cetak Kartu QR - CR80</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                    <style>
+                        @page { size: auto; margin: 0mm; } 
+                        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f3f4f6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                        /* Ensures colors and borders print perfectly */
+                    </style>
+                </head>
+                <body>
+                    ${printContent}
+                    <script>window.onload=function(){ setTimeout(function(){ window.print(); window.close(); }, 800); }<\/script>
+                </body>
+            </html>`); 
+            printWindow.document.close(); 
+        }
+        
         function closeModal(id) { const m=document.getElementById(id),c=m.querySelector('div'); m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(()=>{m.classList.add('hidden'); m.classList.remove('flex');}, 300); }
 
         function downloadTemplate() { const ws = XLSX.utils.aoa_to_sheet([["NISN", "Nama Lengkap", "Kelas", "L/P", "No HP Orang Tua"], ["0001234567", "Siswa Contoh", "1A", "L", "6281234567890"]]); ws['!cols'] = [{wch: 15}, {wch: 30}, {wch: 10}, {wch: 5}, {wch: 20}]; const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Template_Siswa"); XLSX.writeFile(wb, "Template_Data_Siswa.xlsx"); showToast("Template diunduh"); }
@@ -1498,40 +1661,224 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                         const id = existIdx >= 0 ? STATE.students[existIdx].id : "S" + Date.now() + "_" + i; 
                         const newStud = { id, nisn, nama, kelas, jk, hp }; 
                         if (existIdx >= 0) { if(STATE.user.isAdmin || STATE.students[existIdx].kelas === String(STATE.user.kelas)) { STATE.students[existIdx] = newStud; updated++; batchData.push(newStud); } } 
-                        else { STATE.students.push(newStud); added++; batchData.push(newStud); } 
-                    } 
-                    if(CONFIG.USE_REAL_BACKEND && batchData.length > 0) { 
-                        showToast(`Menyinkronkan ${batchData.length} data ke server...`, "info"); 
-                        batchData.forEach((stud, index) => { setTimeout(() => { apiPost("saveSiswa", stud); }, index * 600); }); 
-                    }
-                    updateFilterKelasOptions(); siswaPage = 1; renderSiswa(); showToast(`${added} ditambah, ${updated} diupdate`, "success"); event.target.value = ''; 
-                } catch (err) { console.error(err); showToast("Gagal membaca Excel", "error"); } 
-            }; 
-            reader.readAsArrayBuffer(file); 
-        }
-
-        async function downloadAllQR() { 
-            const myStd = getMyStudents(); if(myStd.length === 0) { showToast("Tidak ada data siswa", "warning"); return; } 
-            showToast("Sedang memproses PDF Kartu QR...", "info"); 
-            try { 
-                const { jsPDF } = window.jspdf; const doc = new jsPDF('p', 'mm', 'a4'); const cardW = 90; const cardH = 65; const startX = 10; const startY = 10; const gapX = 10; const gapY = 5; let col = 0; let row = 0; 
-                const sorted = [...myStd].sort((a,b) => { if(a.kelas === b.kelas) return a.nama.localeCompare(b.nama); return a.kelas.localeCompare(b.kelas); }); 
-                for (let i = 0; i < sorted.length; i++) { 
-                    const s = sorted[i]; if (row > 3) { doc.addPage(); col = 0; row = 0; } 
-                    const x = startX + (col * (cardW + gapX)); const y = startY + (row * (cardH + gapY)); 
-                    doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.5); doc.rect(x, y, cardW, cardH); 
-                    doc.setFillColor(37, 99, 235); doc.rect(x, y, cardW, 14, 'F'); doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.text("KARTU ABSENSI DIGITAL", x + (cardW/2), y + 5, { align: "center" }); doc.setFontSize(8); doc.text(STATE.school.nama, x + (cardW/2), y + 9, { align: "center" }); doc.setFont("helvetica", "normal"); doc.setFontSize(7); doc.text(`T.A. ${STATE.school.tahun}`, x + (cardW/2), y + 12.5, { align: "center" }); 
-                    const qrBase64 = await generateQRBase64(s.nisn); if(qrBase64) doc.addImage(qrBase64, 'PNG', x + 5, y + 18, 35, 35); 
-                    doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold"); doc.setFontSize(10); let dName = s.nama; if(dName.length > 20) dName = dName.substring(0, 20) + "..."; doc.text(dName, x + 43, y + 25); doc.setFont("helvetica", "normal"); doc.setFontSize(8); doc.setTextColor(100, 100, 100); doc.text("NISN", x + 43, y + 31); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold"); doc.text(s.nisn, x + 43, y + 35); doc.setFont("helvetica", "normal"); doc.setTextColor(100, 100, 100); doc.text("Kelas", x + 43, y + 41); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold"); doc.text(s.kelas, x + 43, y + 45); doc.setFont("helvetica", "italic"); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text("Bawa kartu ini setiap hari untuk pemindaian.", x + (cardW/2), y + 59, { align: "center" }); doc.setFont("helvetica", "bold"); doc.setFontSize(6); doc.text(STATE.school.alamat, x + (cardW/2), y + 62, { align: "center" }); 
-                    col++; if (col > 1) { col = 0; row++; } 
+                    else { STATE.students.push(newStud); added++; batchData.push(newStud); } 
                 } 
-                doc.save(`ID_Card_Siswa_${getLocalDateStr()}.pdf`); showToast("PDF ID Card berhasil diunduh!", "success"); 
-            } catch (error) { showToast("Gagal memproses PDF", "error"); } 
-        }
+                if(CONFIG.USE_REAL_BACKEND && batchData.length > 0) { 
+                    showToast(`Menyinkronkan ${batchData.length} data ke server...`, "info"); 
+                    batchData.forEach((stud, index) => { setTimeout(() => { apiPost("saveSiswa", stud); }, index * 600); }); 
+                }
+                updateFilterKelasOptions(); siswaPage = 1; renderSiswa(); showToast(`${added} ditambah, ${updated} diupdate`, "success"); event.target.value = ''; 
+            } catch (err) { console.error(err); showToast("Gagal membaca Excel", "error"); } 
+        }; 
+        reader.readAsArrayBuffer(file); 
+    }
 
-        function generateQRBase64(text) { return new Promise((resolve) => { const tempDiv = document.createElement('div'); new QRCode(tempDiv, { text: text, width: 128, height: 128, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.M }); setTimeout(() => { const canvas = tempDiv.querySelector('canvas'); resolve(canvas ? canvas.toDataURL('image/png') : tempDiv.querySelector('img')?.src); }, 10); }); }
+    async function downloadAllQR() { 
+        const myStd = getMyStudents(); 
+        if(myStd.length === 0) { 
+            showToast("Tidak ada data siswa", "warning"); 
+            return; 
+        } 
+        
+        showToast("Sedang memproses PDF Kartu QR (CR80 Standard)...", "info"); 
+        
+        try { 
+            const { jsPDF } = window.jspdf; 
+            const doc = new jsPDF('p', 'mm', 'a4'); 
+            
+            // Ukuran Kartu CR80 Standar
+            const cardW = 54; 
+            const cardH = 86; 
+            
+            // Konfigurasi Margin & Gap
+            const startX = 15; 
+            const startY = 15; 
+            const gapX = 10; 
+            const gapY = 10; 
+            let col = 0; 
+            let row = 0; 
+            
+            // Palet Warna Tema (Digunakan untuk membuat fallback block color)
+            const themesRGB = { 
+                blue: { top: [37, 99, 235], bottom: [29, 78, 216] }, // Tailwind blue-600 to blue-700
+                emerald: { top: [16, 185, 129], bottom: [4, 120, 87] },
+                purple: { top: [139, 92, 246], bottom: [109, 40, 217] },
+                rose: { top: [244, 63, 94], bottom: [190, 18, 60] },
+                amber: { top: [245, 158, 11], bottom: [180, 83, 9] }
+            };
+            const themeColor = themesRGB[STATE.school.theme] || themesRGB.blue;
 
-        // ================= PENGATURAN AKUN GURU =================
+            // Pre-load Logo if exists
+            let logoB64 = null;
+            if(STATE.school.logo && STATE.school.logo.trim() !== '') {
+                try {
+                    const img = new Image();
+                    img.crossOrigin = 'Anonymous';
+                    img.src = STATE.school.logo;
+                    await new Promise((resolve) => {
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = img.width; 
+                            canvas.height = img.height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0);
+                            logoB64 = canvas.toDataURL('image/png');
+                            resolve();
+                        };
+                        img.onerror = resolve; // Lanjut meskipun gagal
+                    });
+                } catch(e) {}
+            }
+
+            const sorted = [...myStd].sort((a,b) => { 
+                if(a.kelas === b.kelas) return a.nama.localeCompare(b.nama); 
+                return a.kelas.localeCompare(b.kelas); 
+            }); 
+            
+            for (let i = 0; i < sorted.length; i++) { 
+                const s = sorted[i]; 
+                // Jika baris ke-3 penuh, buat halaman baru
+                if (row > 2) { 
+                    doc.addPage(); 
+                    col = 0; 
+                    row = 0; 
+                } 
+                
+                const x = startX + (col * (cardW + gapX)); 
+                const y = startY + (row * (cardH + gapY)); 
+                
+                // ================= BACKDROP KARTU (WARNA DASAR TEMA) =================
+                // Karena PDF murni sulit render CSS Gradient, kita simulasi menggunakan background solid tema
+                doc.setFillColor(themeColor.bottom[0], themeColor.bottom[1], themeColor.bottom[2]); 
+                doc.roundedRect(x, y, cardW, cardH, 2, 2, 'F');
+                
+                // Border Kartu
+                doc.setDrawColor(220, 220, 220); 
+                doc.setLineWidth(0.3); 
+                doc.roundedRect(x, y, cardW, cardH, 2, 2, 'S');
+                
+                // ================= HEADER KARTU (LOGO & NAMA SEKOLAH) =================
+                let logoYOffset = 0;
+                if (logoB64) {
+                    // Background bulat putih untuk logo
+                    doc.setFillColor(255, 255, 255);
+                    doc.circle(x + (cardW/2), y + 7, 4.5, 'F');
+                    // Render gambar logo
+                    doc.addImage(logoB64, 'PNG', x + (cardW/2) - 3.5, y + 3.5, 7, 7);
+                    logoYOffset = 9;
+                }
+
+                // Teks Nama Sekolah (Rata Tengah)
+                doc.setTextColor(255, 255, 255); 
+                doc.setFont("helvetica", "bold"); 
+                doc.setFontSize(7); 
+                
+                let schoolNameLines = doc.splitTextToSize(STATE.school.nama.toUpperCase(), cardW - 8);
+                if(schoolNameLines.length > 2) schoolNameLines = schoolNameLines.slice(0,2); // Max 2 baris
+                
+                let headerTextY = y + 5 + logoYOffset;
+                for(let l=0; l<schoolNameLines.length; l++) {
+                    doc.text(schoolNameLines[l], x + (cardW/2), headerTextY + (l*3), { align: "center" }); 
+                }
+                
+                // ================= BACKGROUND BAWAH (PUTIH) =================
+                // Area putih dari tengah ke bawah untuk tempat informasi siswa
+                const whiteAreaStartY = y + 25;
+                doc.setFillColor(255, 255, 255);
+                doc.rect(x, whiteAreaStartY, cardW, cardH - 25, 'F');
+                // Menutupi ujung bawah agar tetap melengkung
+                doc.roundedRect(x, y, cardW, cardH, 2, 2, 'S');
+
+                // ================= NAMA SISWA (MAX 2 BARIS, RATA TENGAH) =================
+                doc.setTextColor(31, 41, 55); // gray-800
+                doc.setFont("helvetica", "bold"); 
+                doc.setFontSize(10); 
+                
+                // Paksa pemisahan kata (word-wrap) agar tidak terpotong ke samping
+                let nameLines = doc.splitTextToSize(s.nama.toUpperCase(), cardW - 6);
+                if(nameLines.length > 2) nameLines = nameLines.slice(0, 2);
+                
+                let nameStartY = whiteAreaStartY + 6;
+                for(let l=0; l<nameLines.length; l++) {
+                    doc.text(nameLines[l], x + (cardW/2), nameStartY + (l*4.5), { align: "center" }); 
+                }
+                
+                // ================= QR CODE IMAGE =================
+                const qrSize = 30; 
+                const qrBase64 = await generateQRBase64(s.nisn); 
+                let qrY = nameStartY + (nameLines.length * 4.5) + 1; // Dinamis mengikuti panjang nama
+                
+                if(qrBase64) {
+                    // Bingkai tipis abu-abu untuk QR
+                    doc.setDrawColor(229, 231, 235); 
+                    doc.setLineWidth(0.3);
+                    doc.roundedRect(x + (cardW/2) - (qrSize/2) - 1.5, qrY - 1.5, qrSize + 3, qrSize + 3, 1.5, 1.5);
+                    // Render gambar QR
+                    doc.addImage(qrBase64, 'PNG', x + (cardW/2) - (qrSize/2), qrY, qrSize, qrSize); 
+                }
+                
+                // ================= INFORMASI SISWA (NISN & KELAS) =================
+                let infoY = qrY + qrSize + 5;
+                
+                // NISN
+                doc.setFont("helvetica", "normal"); 
+                doc.setFontSize(7.5); 
+                doc.setTextColor(107, 114, 128); // gray-500
+                doc.text(`NISN:`, x + (cardW/2) - 1.5, infoY, { align: "right" }); 
+                
+                doc.setFont("helvetica", "bold"); 
+                doc.setTextColor(31, 41, 55);
+                doc.text(`${s.nisn}`, x + (cardW/2) + 0.5, infoY, { align: "left" }); 
+
+                // Kelas
+                doc.setFont("helvetica", "normal"); 
+                doc.setTextColor(107, 114, 128); 
+                doc.text(`Kelas:`, x + (cardW/2) - 1.5, infoY + 4, { align: "right" }); 
+                
+                doc.setFont("helvetica", "bold"); 
+                doc.setTextColor(31, 41, 55);
+                doc.text(`${s.kelas}`, x + (cardW/2) + 0.5, infoY + 4, { align: "left" }); 
+                
+                // ================= FOOTER / WATERMARK =================
+                const footerY = y + cardH - 6.5;
+                
+                // Garis pembatas atas footer
+                doc.setDrawColor(243, 244, 246); // gray-100
+                doc.setLineWidth(0.5); 
+                doc.line(x, footerY - 2, x + cardW, footerY - 2);
+                
+                // Teks Watermark
+                doc.setFont("helvetica", "italic"); 
+                doc.setFontSize(5); 
+                doc.setTextColor(156, 163, 175); // gray-400
+                doc.text("Kartu Presensi Digital", x + (cardW/2), footerY, { align: "center" }); 
+                
+                // Alamat Sekolah (Terpotong jika terlalu panjang)
+                doc.setFont("helvetica", "normal"); 
+                doc.setTextColor(107, 114, 128); // gray-500
+                let shortAddress = STATE.school.alamat.length > 50 ? STATE.school.alamat.substring(0, 50) + "..." : STATE.school.alamat;
+                doc.text(shortAddress, x + (cardW/2), footerY + 3, { align: "center" }); 
+                
+                // ================= NAVIGASI BARIS & KOLOM =================
+                col++; 
+                if (col > 2) { 
+                    col = 0; 
+                    row++; 
+                } 
+            } 
+            
+            doc.save(`ID_Card_CR80_Massal_${getLocalDateStr()}.pdf`); 
+            showToast("PDF ID Card berhasil diunduh!", "success"); 
+            
+        } catch (error) { 
+            showToast("Gagal memproses PDF", "error"); 
+            console.log(error); 
+        } 
+    }
+
+    function generateQRBase64(text) { return new Promise((resolve) => { const tempDiv = document.createElement('div'); new QRCode(tempDiv, { text: text, width: 256, height: 256, colorDark : "#1e293b", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H }); setTimeout(() => { const canvas = tempDiv.querySelector('canvas'); resolve(canvas ? canvas.toDataURL('image/png') : tempDiv.querySelector('img')?.src); }, 10); }); }
+
+    // ================= PENGATURAN AKUN GURU =================
         function renderGuru() {
             if(!STATE.user.isAdmin) return;
             const tbody = document.getElementById('table-guru-body'); tbody.innerHTML = '';
