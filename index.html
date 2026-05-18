@@ -41,8 +41,8 @@
         #reader { border: none !important; border-radius: 1rem; overflow: hidden; }
         #reader video { object-fit: cover; }
         .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .toggle-checkbox:checked { right: 0; border-color: #2563eb; }
-        .toggle-checkbox:checked + .toggle-label { background-color: #2563eb; }
+        .toggle-checkbox:checked { right: 0; border-color: var(--color-primary); }
+        .toggle-checkbox:checked + .toggle-label { background-color: var(--color-primary); }
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
     </style>
 </head>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-lg p-6 md:p-10 text-center border border-white dark:border-gray-700/50 relative z-10">
-            <div class="bg-primary text-white w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-5xl mx-auto mb-5 md:mb-6 shadow-[0_10px_20px_rgba(37,99,235,0.3)] transform rotate-3"><i class="fa-solid fa-school -rotate-3"></i></div>
+            <div class="bg-primary text-white w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-5xl mx-auto mb-5 md:mb-6 shadow-lg transform rotate-3"><i class="fa-solid fa-school -rotate-3"></i></div>
             <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-2 tracking-tight">Hadir Digital</h1>
             <p class="text-sm md:text-base text-gray-500 dark:text-gray-400 mb-2 px-4">Sistem Manajemen Kehadiran Siswa Pintar Berbasis QR Code.</p>
             
@@ -68,7 +68,7 @@
                 <button onclick="openModalPanduan()" class="w-full bg-white dark:bg-gray-700 text-primary dark:text-blue-400 border border-primary dark:border-blue-500 font-semibold py-3.5 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-600 transition-all shadow-sm flex justify-center items-center gap-2">
                     <i class="fa-solid fa-book-open"></i> <span>Lihat Buku Panduan</span>
                 </button>
-                <button onclick="showLoginForm()" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3.5 rounded-xl transition-all duration-200 flex justify-center items-center gap-2 shadow-[0_4px_14px_rgba(37,99,235,0.4)] hover:-translate-y-0.5">
+                <button onclick="showLoginForm()" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3.5 rounded-xl transition-all duration-200 flex justify-center items-center gap-2 shadow-lg hover:-translate-y-0.5">
                     <span>Mulai Login</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -88,7 +88,7 @@
                 <div><label class="block text-xs md:text-sm font-medium mb-1">Username</label><div class="relative"><i class="fa-solid fa-user absolute left-3.5 top-3 md:top-3.5 text-gray-400 text-sm"></i><input type="text" id="login-username" class="w-full pl-10 pr-4 py-2.5 text-sm md:text-base border rounded-xl focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 outline-none" placeholder="Masukkan username" required></div></div>
                 <div><label class="block text-xs md:text-sm font-medium mb-1">Password</label><div class="relative"><i class="fa-solid fa-lock absolute left-3.5 top-3 md:top-3.5 text-gray-400 text-sm"></i><input type="password" id="login-password" class="w-full pl-10 pr-10 py-2.5 text-sm md:text-base border rounded-xl focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 outline-none" placeholder="Masukkan password" required><button type="button" onclick="togglePassword()" class="absolute right-3.5 top-3 md:top-3.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none transition-colors"><i id="eye-icon" class="fa-solid fa-eye text-sm md:text-base"></i></button></div></div>
                 <div><label class="block text-xs md:text-sm font-medium mb-1">Masuk Sebagai</label><div class="relative"><i class="fa-solid fa-user-tag absolute left-3.5 top-3 md:top-3.5 text-gray-400 text-sm"></i><select id="login-role" class="w-full pl-10 pr-10 py-2.5 text-sm md:text-base border rounded-xl focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 outline-none dark:text-white appearance-none cursor-pointer bg-transparent relative z-10"><option value="admin" class="dark:bg-gray-800">Admin TU</option><option value="guru" class="dark:bg-gray-800">Guru Kelas</option></select><i class="fa-solid fa-chevron-down absolute right-4 top-4 text-gray-400 text-[10px] z-0"></i></div></div>
-                <button id="btn-submit-login" type="submit" class="w-full bg-primary hover:bg-secondary text-white text-sm md:text-base font-semibold py-3 rounded-xl transition-all duration-200 mt-2 shadow-[0_4px_14px_rgba(37,99,235,0.3)] flex justify-center items-center gap-2">Masuk Ke Sistem</button>
+                <button id="btn-submit-login" type="submit" class="w-full bg-primary hover:bg-secondary text-white text-sm md:text-base font-semibold py-3 rounded-xl transition-all duration-200 mt-2 shadow-lg flex justify-center items-center gap-2">Masuk Ke Sistem</button>
             </form>
         </div>
     </div>
@@ -225,7 +225,7 @@
                                 <div class="flex flex-col gap-6">
                                     <!-- SD/MI -->
                                     <div id="cfg-block-SD" class="border dark:border-gray-600 rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm">
-                                        <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-child text-blue-500"></i> Jenjang SD/MI</h4>
+                                        <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-child text-primary"></i> Jenjang SD/MI</h4>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-100 dark:border-blue-800/50">
                                                 <p class="text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">Sesi Pagi</p>
@@ -248,7 +248,7 @@
 
                                     <!-- SMP/MTs -->
                                     <div id="cfg-block-SMP" class="hidden border dark:border-gray-600 rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm">
-                                        <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-user-graduate text-green-500"></i> Jenjang SMP/MTs</h4>
+                                        <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-user-graduate text-primary"></i> Jenjang SMP/MTs</h4>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-100 dark:border-blue-800/50">
                                                 <p class="text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">Sesi Pagi</p>
@@ -271,7 +271,7 @@
 
                                     <!-- SMA/SMK -->
                                     <div id="cfg-block-SMA" class="hidden border dark:border-gray-600 rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm">
-                                        <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-purple-500"></i> Jenjang SMA/SMK</h4>
+                                        <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-primary"></i> Jenjang SMA/SMK</h4>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-100 dark:border-blue-800/50">
                                                 <p class="text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">Sesi Pagi</p>
@@ -366,6 +366,7 @@
                                 <select id="rekap-status" onchange="renderRekap()" class="w-full border rounded-lg px-2 py-1.5 md:py-2 text-xs md:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none">
                                     <option value="all">Semua Status</option>
                                     <option value="Hadir">Hadir & Terlambat</option>
+                                    <option value="Terlambat">Terlambat</option>
                                     <option value="Izin">Izin</option>
                                     <option value="Sakit">Sakit</option>
                                     <option value="Alfa">Alfa</option>
@@ -472,7 +473,7 @@
                 </div>
             </div>
             <div class="p-5 md:p-8 overflow-y-auto custom-scrollbar text-sm md:text-base text-gray-700 dark:text-gray-300 space-y-4" id="panduan-teks-lengkap">
-                <p>Selamat datang di <strong>Sistem Kehadiran Digital Terpadu</strong>. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA) dan sistem sesi (Pagi/Siang).</p>
+                <p>Selamat datang di <strong>Sistem Kehadiran Digital Terpadu</strong>. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA), sistem sesi (Pagi/Siang), dan tema warna yang dapat disesuaikan.</p>
                 <p>Aplikasi ini membagi hak akses menjadi dua peran utama: <strong>Admin TU</strong> (Hak akses penuh) dan <strong>Guru Kelas</strong> (Hak akses terbatas/sesuai wewenang).</p>
                 
                 <h4 class="font-bold text-lg text-gray-900 dark:text-white mt-6 mb-2 border-b dark:border-gray-700 pb-2">BAB 1: PANDUAN UNTUK ADMIN TU</h4>
@@ -492,7 +493,9 @@
                 <ul class="list-disc pl-5 space-y-1">
                     <li>Buka menu <strong>Pengaturan Sekolah</strong> di panel sebelah kiri.</li>
                     <li>Isi Nama Instansi, Tahun Pelajaran, dan Alamat Lengkap. Data ini akan otomatis tercetak di kop Surat Laporan dan Kartu QR Siswa.</li>
-                    <li>Di bagian <strong>Pengaturan Jam Masuk & Kelas</strong>:<br>Tentukan Jam Masuk dan Toleransi Keterlambatan (dalam menit) untuk masing-masing jenjang (SD/SMP/SMA) pada Sesi Pagi dan Sesi Siang.</li>
+                    <li>Pilih <strong>Jenjang Aplikasi</strong> (SD/MI, SMP/MTs, atau SMA/SMK). Form pengaturan jam masuk di bawahnya akan menyesuaikan dengan jenjang yang dipilih.</li>
+                    <li>Pilih <strong>Warna Tema</strong> untuk menyesuaikan tampilan aplikasi dengan identitas sekolah.</li>
+                    <li>Di bagian <strong>Pengaturan Jam Masuk & Kelas</strong>:<br>Tentukan Jam Masuk dan Toleransi Keterlambatan (dalam menit). <br><span class="text-blue-600 dark:text-blue-400 font-medium">Penting:</span> Sistem menggunakan waktu ini untuk logika status otomatis. Jika siswa belum absen dan waktu masih berada dalam batas toleransi (Jam Masuk + Toleransi), statusnya adalah <strong>"Belum Presensi"</strong>. Jika waktu melewati batas toleransi, status otomatis berubah menjadi <strong>"Alfa"</strong>.</li>
                     <li class="italic text-gray-500">Catatan: Kolom ceklis kelas akan muncul secara otomatis setelah Anda menginput data siswa/guru. Centang kelas yang masuk di Sesi Pagi atau Sesi Siang.</li>
                     <li>Klik <strong>Simpan Pengaturan</strong>.</li>
                 </ul>
@@ -530,8 +533,8 @@
                 <h5 class="font-semibold text-gray-800 dark:text-gray-200 mt-4">1.5. Pemantauan & Modifikasi Kehadiran</h5>
                 <ul class="list-disc pl-5 space-y-1">
                     <li>Buka menu <strong>Rekap Absensi</strong>.</li>
-                    <li>Filter data berdasarkan Tanggal, Kelas, atau Status.</li>
-                    <li>Jika ada siswa yang lupa membawa kartu QR atau salah status, klik menu dropdown di kolom "Aksi" dan ubah statusnya (Hadir/Izin/Sakit/Alfa). Sistem akan otomatis memperbarui database.</li>
+                    <li>Filter data berdasarkan Tanggal, Kelas, atau Status (Anda dapat melihat siswa yang masih berstatus 'Belum Presensi' di sini).</li>
+                    <li>Jika ada siswa yang lupa membawa kartu QR atau salah status, klik menu dropdown di kolom "Aksi" dan ubah statusnya (Hadir / Terlambat / Sakit / Izin / Alfa). Sistem akan otomatis memperbarui database.</li>
                     <li>Anda dapat menghapus data rekapan yang salah dengan mencentang baris tabel dan mengklik tombol <strong>Hapus Terpilih</strong>.</li>
                 </ul>
 
@@ -540,8 +543,12 @@
                     <li>Buka menu <strong>Laporan Absensi</strong>.</li>
                     <li>Pilih Rentang Waktu (Hari Ini, Tanggal Spesifik, Bulanan, Semester, atau Tahunan).</li>
                     <li>Pilih Target Analisis (Semua Siswa, Per Kelas, atau Individu Siswa).</li>
+                    <li>Statistik laporan telah dipisah antara siswa yang Hadir, Terlambat, Sakit, Izin, dan Alfa.</li>
                     <li>Klik tombol <strong>PDF</strong> atau <strong>Excel</strong> untuk mengunduh laporan resmi yang siap diserahkan ke Kepala Sekolah.</li>
                 </ul>
+
+                <h5 class="font-semibold text-gray-800 dark:text-gray-200 mt-4">1.7. Mode Layar Penuh (Fullscreen)</h5>
+                <p>Untuk kenyamanan pemantauan atau jika Anda menggunakan aplikasi pada layar Kiosk (misal tablet di lobi sekolah), Anda dapat mengklik <strong>ikon panah (Expand)</strong> di sudut kanan atas layar (tepat di sebelah tombol Auto-Refresh) untuk membuat aplikasi tampil memenuhi seluruh layar.</p>
 
                 <h4 class="font-bold text-lg text-gray-900 dark:text-white mt-8 mb-2 border-b dark:border-gray-700 pb-2">BAB 2: PANDUAN UNTUK GURU KELAS</h4>
                 <p>Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi tanggung jawabnya. Beberapa menu mungkin terkunci bergantung pada hak "Full Fitur" yang diberikan oleh Admin.</p>
@@ -574,9 +581,9 @@
 
                 <h5 class="font-semibold text-gray-800 dark:text-gray-200 mt-4">2.3. Cek Data dan Rekapan Kelas</h5>
                 <ul class="list-disc pl-5 space-y-1">
-                    <li>Pada menu <strong>Dashboard</strong>, Guru dapat melihat ringkasan statistik (Hadir, Izin, Sakit, Alfa) khusus untuk kelas yang dibinanya.</li>
+                    <li>Pada menu <strong>Dashboard</strong>, Guru dapat melihat ringkasan statistik (Hadir, Terlambat, Sakit, Izin, Alfa) khusus untuk kelas yang dibinanya.</li>
                     <li>Di menu <strong>Data Siswa</strong>, Guru dapat mengedit informasi siswanya sendiri atau mencetak ulang QR Code siswa yang hilang (klik ikon QR warna biru di samping nama siswa, lalu klik cetak).</li>
-                    <li>Di menu <strong>Rekap Absensi</strong>, Guru dapat menginput secara manual siswa yang izin/sakit hari itu tanpa perlu scan barcode. Cukup cari nama siswa, lalu ubah status di kolom paling kanan menjadi "Izin" atau "Sakit".</li>
+                    <li>Di menu <strong>Rekap Absensi</strong>, Guru dapat menginput secara manual siswa yang izin/sakit hari itu melalui kolom Ubah Status (Hadir / Terlambat / Sakit / Izin / Alfa).</li>
                 </ul>
 
                 <h4 class="font-bold text-lg text-gray-900 dark:text-white mt-8 mb-2 border-b dark:border-gray-700 pb-2">BAB 3: TROUBLESHOOTING (PEMECAHAN MASALAH)</h4>
@@ -680,7 +687,6 @@
             theme: localStorage.getItem('theme') || 'light', 
             school: JSON.parse(localStorage.getItem('schoolSettings')) || { 
                 nama: 'SDN Nusantara 1', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue',
-                sd_masuk: '07:00', sd_toleransi: 15, smp_masuk: '07:00', smp_toleransi: 15, sma_masuk: '07:00', sma_toleransi: 15,
                 sessions: {
                     SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
                     SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
@@ -1021,87 +1027,61 @@
                 const doc = new jsPDF('p', 'mm', 'a4');
                 const text = `Buku Panduan Penggunaan Sistem Kehadiran Digital Terpadu
 
-Selamat datang di Sistem Kehadiran Digital Terpadu. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA) dan sistem sesi (Pagi/Siang).
-Aplikasi ini membagi hak akses menjadi dua peran utama: Admin TU (Hak akses penuh) dan Guru Kelas (Hak akses terbatas/sesuai wewenang).
+Selamat datang di Sistem Kehadiran Digital Terpadu. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA), sistem sesi (Pagi/Siang), dan tema kustom.
 
 BAB 1: PANDUAN UNTUK ADMIN TU
-Sebagai Admin, Anda memiliki kontrol penuh terhadap seluruh pengaturan sistem, manajemen data (seluruh kelas), dan pembuatan akun untuk guru.
+Sebagai Admin, Anda memiliki kontrol penuh terhadap seluruh pengaturan sistem.
 
 1.1. Login Pertama Kali
-- Buka aplikasi pada browser (disarankan Google Chrome).
 - Pada halaman utama, klik tombol Mulai Login.
-- Masukkan Username (silahkan hubungi Pengembang [Supriyadi : 082371962881])
-- Pada kolom "Masuk Sebagai", pilih Admin TU.
+- Masukkan Username dan Password. Pilih Admin TU.
 - Klik Masuk Ke Sistem.
 
 1.2. Pengaturan Sekolah & Jam Masuk (Wajib Dilakukan di Awal)
-Sebelum menginput data siswa, Anda wajib mengatur profil sekolah dan jam operasional:
-- Buka menu Pengaturan Sekolah di panel sebelah kiri.
-- Isi Nama Instansi, Tahun Pelajaran, dan Alamat Lengkap. Data ini akan otomatis tercetak di kop Surat Laporan dan Kartu QR Siswa.
-- Di bagian Pengaturan Jam Masuk & Kelas: Tentukan Jam Masuk dan Toleransi Keterlambatan (dalam menit) untuk masing-masing jenjang (SD/SMP/SMA) pada Sesi Pagi dan Sesi Siang.
-- Catatan: Kolom ceklis kelas akan muncul secara otomatis setelah Anda menginput data siswa/guru. Centang kelas yang masuk di Sesi Pagi atau Sesi Siang.
+- Buka menu Pengaturan Sekolah.
+- Isi Nama Instansi, Tahun Pelajaran, Alamat Lengkap.
+- Pilih Jenjang Aplikasi. Form jam masuk akan menyesuaikan otomatis.
+- Pilih Warna Tema untuk antarmuka aplikasi.
+- Tentukan Jam Masuk dan Toleransi Keterlambatan (dalam menit).
+- PENTING: Sistem menggunakan jam ini untuk mendeteksi status kehadiran. Sebelum batas toleransi habis, siswa yang belum absen berstatus "Belum Presensi". Setelah batas habis, otomatis menjadi "Alfa".
 - Klik Simpan Pengaturan.
 
 1.3. Manajemen Akun Guru
-Untuk memberikan akses kepada wali kelas:
 - Buka menu Pengaturan Guru.
 - Klik tombol + Tambah Guru.
-- Isi Username, Password, pilih Jenjang, dan masukkan Kelas (misal: 1A).
-- Opsi Full Fitur:
-  * Jika diaktifkan, guru tersebut dapat melakukan Scan QR, melihat Rekap, dan mengunduh Laporan.
-  * Jika dinonaktifkan, guru hanya bisa melihat data siswanya saja.
-- Klik Simpan.
+- Isi data dan Opsi Full Fitur (Akses Scan, Rekap, Laporan).
 
-1.4. Manajemen Data Siswa (Import Excel & Cetak QR)
+1.4. Manajemen Data Siswa
 - Buka menu Data Siswa.
-- Cara Menambah Manual: Klik tombol + Siswa, isi form (NISN, Nama, Kelas, dll), lalu Simpan.
-- Cara Import Massal (Excel):
-  * Klik tombol Template untuk mengunduh format standar.
-  * Buka file Excel tersebut, isi data siswa. Pastikan format kolom NISN di Excel adalah "Teks" agar angka 0 di depan tidak hilang.
-  * Simpan Excel, lalu kembali ke aplikasi dan klik tombol Import. Pilih file Excel tadi.
-- Mencetak Kartu QR Massal: Klik tombol Cetak QR. Sistem akan otomatis menghasilkan file PDF berisi seluruh ID Card.
-- Hapus Massal: Centang kotak di samping nama siswa, lalu klik tombol Hapus Terpilih.
+- Tambah manual atau Import Massal via Excel.
+- Cetak Kartu QR Massal untuk menghasilkan file PDF ID Card.
 
 1.5. Pemantauan & Modifikasi Kehadiran
-- Buka menu Rekap Absensi.
-- Filter data berdasarkan Tanggal, Kelas, atau Status.
-- Jika ada siswa yang lupa membawa kartu QR atau salah status, klik menu dropdown di kolom "Aksi" dan ubah statusnya.
-- Anda dapat menghapus data rekapan yang salah dengan mencentang baris tabel dan mengklik tombol Hapus Terpilih.
+- Buka menu Rekap Absensi. Filter berdasar Tanggal, Kelas, atau Status.
+- Ubah status secara manual melalui kolom Aksi (Hadir/Terlambat/Izin/Sakit/Alfa).
 
 1.6. Cetak Laporan
 - Buka menu Laporan Absensi.
-- Pilih Rentang Waktu (Hari Ini, Tanggal Spesifik, Bulanan, Semester, atau Tahunan).
-- Pilih Target Analisis (Semua Siswa, Per Kelas, atau Individu Siswa).
-- Klik tombol PDF atau Excel untuk mengunduh laporan resmi yang siap diserahkan ke Kepala Sekolah.
+- Pilih Rentang Waktu dan Target Analisis.
+- Unduh dalam bentuk PDF atau Excel. Statistik kini dipisah antara Terlambat, Izin, Sakit, dan Alfa.
+
+1.7. Mode Layar Penuh
+- Gunakan ikon panah di pojok kanan atas (samping jam) untuk mengaktifkan mode Fullscreen (layar penuh).
 
 BAB 2: PANDUAN UNTUK GURU KELAS
-Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi tanggung jawabnya. Beberapa menu mungkin terkunci bergantung pada hak "Full Fitur" yang diberikan oleh Admin.
+Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi tanggung jawabnya.
 
 2.1. Cara Login
-- Buka aplikasi dari browser HP/Laptop.
-- Klik Mulai Login.
-- Masukkan Username dan Password yang telah diberikan oleh Admin TU.
-- Ubah "Masuk Sebagai" menjadi Guru Kelas.
-- Klik Masuk Ke Sistem.
+- Masukkan Username dan Password. Pilih Guru Kelas.
 
-2.2. Menggunakan Fitur Scanner (Oleh Guru/Petugas Piket)
-(Hanya tersedia jika akun Anda memiliki hak "Full Fitur")
+2.2. Menggunakan Fitur Scanner
 - Buka menu Scan Kehadiran.
-- Izinkan akses Kamera di browser jika muncul notifikasi.
-- Klik tombol Mulai Scan.
-- Arahkan kamera ke QR Code pada ID Card Siswa.
-- Aplikasi akan berbunyi (Bip!) dan layar akan menampilkan status Hadir, Terlambat, atau Tidak Valid.
+- Arahkan kamera ke QR Code. Aplikasi akan memunculkan notifikasi status Hadir, Terlambat, atau Tidak Valid.
 
 2.3. Cek Data dan Rekapan Kelas
-- Pada menu Dashboard, Guru dapat melihat ringkasan statistik (Hadir, Izin, Sakit, Alfa) khusus untuk kelas yang dibinanya.
-- Di menu Data Siswa, Guru dapat mengedit informasi siswanya sendiri atau mencetak ulang QR Code siswa.
-- Di menu Rekap Absensi, Guru dapat menginput secara manual siswa yang izin/sakit hari itu tanpa perlu scan barcode.
-
-BAB 3: TROUBLESHOOTING (PEMECAHAN MASALAH)
-- Kamera Scanner Tidak Mau Terbuka: Pastikan perangkat Anda terhubung ke internet dengan protokol HTTPS://. Pastikan juga Anda sudah memberikan izin kamera.
-- Titik Indikator Merah di Pojok Kanan Atas: Ini berarti aplikasi gagal terhubung dengan Database (Google Spreadsheet). Pastikan koneksi internet stabil.
-- Angka Nol (0) di NISN Hilang Saat Import: Blok dulu kolom NISN di Excel Anda > Klik Kanan > Format Cells > Pilih jenis "Text" sebelum mempaste angka.
-- Data Kurang Up-to-date: Nyalakan toggle "Auto Refresh" di pojok kanan atas.`;
+- Dashboard memuat ringkasan statistik (Hadir, Terlambat, Sakit, Izin, Alfa).
+- Di menu Rekap Absensi, Guru dapat menginput secara manual siswa yang absen hari itu melalui pilihan Ubah Status.
+`;
                 
                 const lines = doc.splitTextToSize(text, 180);
                 let yPos = 20;
@@ -1588,6 +1568,7 @@ BAB 3: TROUBLESHOOTING (PEMECAHAN MASALAH)
                     
                     let matchStatus = true;
                     if(statusFilter === 'Hadir' && !['Hadir', 'Terlambat'].includes(st)) matchStatus = false;
+                    if(statusFilter === 'Terlambat' && st !== 'Terlambat') matchStatus = false;
                     if(statusFilter === 'Izin' && st !== 'Izin') matchStatus = false;
                     if(statusFilter === 'Sakit' && st !== 'Sakit') matchStatus = false;
                     if(statusFilter === 'Alfa' && st !== 'Alfa') matchStatus = false;
@@ -1717,7 +1698,7 @@ BAB 3: TROUBLESHOOTING (PEMECAHAN MASALAH)
                 });
                 dTh.push(thCount); 
             });
-            if(lapChart) lapChart.destroy(); lapChart = new Chart(document.getElementById('laporanLineChart').getContext('2d'), { type: 'line', data: { labels:lbls, datasets:[{label:'Hadir & Terlambat', data:dHd, borderColor:'#16a34a', backgroundColor: 'rgba(22, 163, 74, 0.1)', fill:true}, {label:'Tidak Hadir', data:dTh, borderColor:'#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', fill:true}] }, options: { responsive:true, maintainAspectRatio:false, animation: false } });
+            if(lapChart) lapChart.destroy(); lapChart = new Chart(document.getElementById('laporanLineChart').getContext('2d'), { type: 'line', data: { labels:lbls, datasets:[{label:'Hadir & Terlambat', data:dHd, borderColor:'var(--color-primary)', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill:true}, {label:'Tidak Hadir', data:dTh, borderColor:'#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', fill:true}] }, options: { responsive:true, maintainAspectRatio:false, animation: false } });
             
             const tb = document.getElementById('laporan-table-body'); tb.innerHTML='';
             if(vNisn.length === 0) { tb.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-xs text-gray-500">Tidak ada data</td></tr>`; } 
