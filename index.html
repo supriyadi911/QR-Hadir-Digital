@@ -374,8 +374,20 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="mt-3 flex justify-between items-center">
-                            <button id="btn-delete-selected-rekap" onclick="bulkDeleteRekap()" class="hidden bg-red-100 text-red-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1"><i class="fa-solid fa-trash-can"></i> Hapus Terpilih</button>
+                        <div class="mt-3 flex flex-wrap justify-between items-center gap-2">
+                            <div id="bulk-action-rekap" class="hidden flex flex-wrap items-center gap-2">
+                                <select id="bulk-status-rekap" class="border rounded-lg px-2 py-1.5 text-xs font-medium dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none">
+                                    <option value="">Ubah Status Massal</option>
+                                    <option value="Hadir">Hadir</option>
+                                    <option value="Terlambat">Terlambat</option>
+                                    <option value="Sakit">Sakit</option>
+                                    <option value="Izin">Izin</option>
+                                    <option value="Alfa">Alfa</option>
+                                </select>
+                                <button onclick="bulkUpdateStatusRekap()" class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-secondary transition-colors">Terapkan</button>
+                                <button onclick="bulkDeleteRekap()" class="bg-red-100 text-red-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1 hover:bg-red-200 transition-colors"><i class="fa-solid fa-trash-can"></i> Hapus</button>
+                            </div>
+                            <button onclick="sendWA_RekapKelas()" class="ml-auto bg-[#25D366] text-white px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1 hover:bg-green-600 transition-colors shadow-sm"><i class="fa-brands fa-whatsapp text-sm"></i> Bagikan WA Kelas</button>
                         </div>
                     </div>
                     
@@ -1262,14 +1274,56 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             
             message += `\n_Sistem Kehadiran Digital ${STATE.school.nama}_`;
             
-            // Salin ke clipboard lalu buka WA
-            navigator.clipboard.writeText(message).then(() => {
-                showToast("Teks Laporan disalin. Silakan Paste di Grup WA.", "success");
-                setTimeout(() => { window.open(`https://web.whatsapp.com/`, '_blank'); }, 1000);
-            }).catch(err => {
-                // Fallback URL if clipboard fails
-                window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+            // Menggunakan scheme URL yang lebih bersahabat untuk mobile app WA
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function sendWA_RekapKelas() {
+            const tipeWaktu = document.getElementById('rekap-tipe-waktu').value;
+            const filterKelas = document.getElementById('filter-kelas').value;
+            
+            if (filterKelas === 'all') {
+                showToast('Pilih satu kelas di menu dropdown (Pilih Kelas) terlebih dahulu!', 'warning');
+                return;
+            }
+            
+            let tglInfo = "Hari Ini";
+            if(tipeWaktu === 'tanggal') {
+                tglInfo = document.getElementById('rekap-val-tanggal').value;
+            } else if(tipeWaktu !== 'hari_ini') {
+                showToast('Hanya mendukung format Hari Ini / Tanggal tertentu.', 'warning');
+                return;
+            }
+            
+            let message = `*INFO ABSENSI HARIAN KELAS ${filterKelas}*\nTanggal: ${tglInfo}\n\n`;
+            
+            const rows = document.querySelectorAll('#table-rekap-body tr');
+            if(rows.length === 0 || (rows.length === 1 && rows[0].innerText.includes('Kosong'))) {
+                showToast("Tidak ada data untuk dibagikan", "warning"); return;
+            }
+
+            let list = { 'Hadir': [], 'Terlambat': [], 'Sakit': [], 'Izin': [], 'Alfa': [], 'Belum Presensi': [] };
+            
+            rows.forEach(row => {
+                const cols = row.querySelectorAll('td');
+                if(cols.length >= 6) {
+                    const nama = cols[2].innerText;
+                    const status = cols[5].innerText;
+                    if(list[status]) list[status].push(nama);
+                }
             });
+
+            const keys = ['Hadir', 'Terlambat', 'Sakit', 'Izin', 'Alfa', 'Belum Presensi'];
+            keys.forEach(st => {
+                if(list[st].length > 0) {
+                    message += `*${st} (${list[st].length} Siswa):*\n`;
+                    list[st].forEach((n, i) => message += `${i+1}. ${n}\n`);
+                    message += `\n`;
+                }
+            });
+            
+            message += `_Sistem Kehadiran Digital ${STATE.school.nama}_`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
 
 
@@ -1516,27 +1570,72 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
         
         function toggleAllRekap(source) { 
             const checkboxes = document.querySelectorAll('.rekap-checkbox'); 
-            checkboxes.forEach(cb => { if(!cb.value.startsWith('TEMP')) cb.checked = source.checked; }); 
+            checkboxes.forEach(cb => { cb.checked = source.checked; }); 
             checkRekapSelection(); 
         }
 
         function checkRekapSelection() { 
             const checkedCount = document.querySelectorAll('.rekap-checkbox:checked').length; 
-            const btnDelete = document.getElementById('btn-delete-selected-rekap'); 
-            if (checkedCount > 0) btnDelete.classList.remove('hidden'); else btnDelete.classList.add('hidden'); 
-            const validBoxes = document.querySelectorAll('.rekap-checkbox:not([value^="TEMP"])'); 
-            document.getElementById('checkAllRekap').checked = (checkedCount === validBoxes.length && validBoxes.length > 0); 
+            const bulkAction = document.getElementById('bulk-action-rekap'); 
+            if (checkedCount > 0) bulkAction.classList.remove('hidden'); else bulkAction.classList.add('hidden'); 
+            const allBoxes = document.querySelectorAll('.rekap-checkbox'); 
+            document.getElementById('checkAllRekap').checked = (checkedCount === allBoxes.length && allBoxes.length > 0); 
+        }
+
+        function bulkUpdateStatusRekap() {
+            const newStatus = document.getElementById('bulk-status-rekap').value;
+            if(!newStatus) { showToast('Pilih status yang ingin diterapkan', 'warning'); return; }
+            
+            const checked = document.querySelectorAll('.rekap-checkbox:checked');
+            if(checked.length === 0) return;
+            
+            if(!confirm(`Apakah Anda yakin ingin mengubah status ${checked.length} siswa menjadi ${newStatus}?`)) return;
+
+            const now = new Date(); 
+            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+            checked.forEach(cb => {
+                const val = cb.value;
+                if(val.startsWith('TEMP|')) {
+                    // Buat data absensi baru karena sebelumnya tidak ada / implisit
+                    const parts = val.split('|');
+                    const tgl = parts[1];
+                    const nisn = parts[2];
+                    const attData = { id: "A"+Date.now()+Math.floor(Math.random()*1000), nisn: nisn, tanggal: tgl, waktu: timeStr, status: newStatus };
+                    STATE.attendance.push(attData);
+                    apiPost('recordAttendance', attData);
+                } else {
+                    // Update yang sudah ada
+                    const id = val;
+                    const idx = STATE.attendance.findIndex(a => a.id === id);
+                    if(idx >= 0) {
+                        STATE.attendance[idx].status = newStatus;
+                        apiPost('recordAttendance', STATE.attendance[idx]);
+                    }
+                }
+            });
+            
+            document.getElementById('bulk-status-rekap').value = "";
+            renderRekap();
+            showToast(`Berhasil mengubah status ${checked.length} siswa`, 'success');
         }
 
         function bulkDeleteRekap() { 
             const checked = document.querySelectorAll('.rekap-checkbox:checked'); 
             if(checked.length === 0) return; 
-            if(!confirm(`Hapus ${checked.length} rekapan kehadiran?`)) return; 
-            checked.forEach(cb => { 
+            
+            const toDelete = Array.from(checked).filter(cb => !cb.value.startsWith('TEMP|'));
+            if(toDelete.length === 0) { showToast('Tidak ada data tersimpan yang bisa dihapus', 'warning'); return; }
+
+            if(!confirm(`Hapus ${toDelete.length} rekapan kehadiran yang tersimpan?`)) return; 
+            
+            toDelete.forEach(cb => { 
                 const id = cb.value; 
-                if(!id.startsWith('TEMP')) { STATE.attendance = STATE.attendance.filter(a => a.id !== id); apiPost("deleteAttendance", {id: id}); }
+                STATE.attendance = STATE.attendance.filter(a => a.id !== id); 
+                apiPost("deleteAttendance", {id: id});
             }); 
-            renderRekap(); showToast(`${checked.length} rekapan dihapus`, 'success'); 
+            renderRekap(); 
+            showToast(`${toDelete.length} rekapan dihapus`, 'success'); 
         }
 
         function deleteRekap(id) { 
@@ -1595,7 +1694,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                     let badge = d.status==='Hadir'?'bg-green-100 text-green-700':(d.status==='Terlambat'?'bg-yellow-100 text-yellow-700':(d.status==='Sakit'?'bg-purple-100 text-purple-700':(d.status==='Izin'?'bg-orange-100 text-orange-700':(d.status==='Alfa'?'bg-red-100 text-red-700':'bg-gray-100 text-gray-600')))); 
                     const rowValue = d.id ? d.id : `TEMP|${d.tanggal}|${d.nisn}`;
                     tbody.innerHTML += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                        <td class="px-2 py-2 md:py-3 text-center"><input type="checkbox" class="rekap-checkbox" value="${rowValue}" onchange="checkRekapSelection()" ${!d.id ? 'disabled' : ''}></td>
+                        <td class="px-2 py-2 md:py-3 text-center"><input type="checkbox" class="rekap-checkbox" value="${rowValue}" onchange="checkRekapSelection()"></td>
                         <td class="px-3 md:px-4 py-2 md:py-3 whitespace-nowrap">${d.tanggal}</td>
                         <td class="px-3 md:px-4 py-2 md:py-3 truncate max-w-[100px] md:max-w-none">${d.nama}</td>
                         <td class="px-2 md:px-4 py-2 md:py-3">${d.kelas}</td>
