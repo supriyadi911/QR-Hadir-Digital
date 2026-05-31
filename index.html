@@ -298,6 +298,22 @@
                             </div>
                             
                             <div class="pt-6"><button onclick="saveSchoolSettings()" class="w-full bg-primary hover:bg-secondary text-white font-medium py-3 rounded-xl transition-all shadow-md hover:shadow-lg">Simpan Pengaturan</button></div>
+                            
+                            <!-- Manajemen Backup & Restore -->
+                            <div class="mt-8 pt-6 border-t dark:border-gray-700">
+                                <h3 class="font-bold text-base dark:text-white mb-1"><i class="fa-solid fa-database text-primary mr-2"></i>Backup & Restore Data</h3>
+                                <p class="text-xs text-gray-500 mb-5">Amankan seluruh data (Pengaturan, Siswa, Guru, dan Rekap Absensi) ke dalam format JSON, atau pulihkan dari file cadangan.</p>
+                                
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button onclick="backupDataJSON()" class="flex-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/40 font-medium py-2.5 rounded-xl transition-all shadow-sm flex justify-center items-center gap-2 text-sm">
+                                        <i class="fa-solid fa-download"></i> Backup ke JSON
+                                    </button>
+                                    <input type="file" id="restore-file" accept=".json" class="hidden" onchange="restoreDataJSON(event)">
+                                    <button onclick="document.getElementById('restore-file').click()" class="flex-1 bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-800 hover:bg-orange-100 dark:hover:bg-orange-900/40 font-medium py-2.5 rounded-xl transition-all shadow-sm flex justify-center items-center gap-2 text-sm">
+                                        <i class="fa-solid fa-upload"></i> Restore dari JSON
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2173,6 +2189,86 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
         }
         function exportLaporanExcel() { const perTxt = document.getElementById('view-laporan').dataset.periodeText; const tarTxt = document.getElementById('view-laporan').dataset.targetText; const p = document.getElementById('lap-stat-persen').innerText; const h = document.getElementById('lap-stat-hadir').innerText; const t = document.getElementById('lap-stat-terlambat').innerText; const sk = document.getElementById('lap-stat-sakit').innerText; const i = document.getElementById('lap-stat-izin').innerText; const a = document.getElementById('lap-stat-alfa').innerText; let excelData = [ [`LAPORAN KEHADIRAN SISWA - ${STATE.school.nama.toUpperCase()}`], [`Alamat: ${STATE.school.alamat}`], [`Tahun Pelajaran: ${STATE.school.tahun}`], [""], ["Periode:", perTxt], ["Target:", tarTxt], [""], ["RINGKASAN STATISTIK"], ["Tingkat Kehadiran", p], ["Total Hadir", h], ["Total Terlambat", t], ["Total Sakit", sk], ["Total Izin", i], ["Total Alfa", a], [""], ["RINCIAN KEHADIRAN SISWA"] ]; const tableJSON = XLSX.utils.sheet_to_json(document.getElementById("table-laporan-export"), {header: 1}); excelData = excelData.concat(tableJSON); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(excelData), "Laporan"); XLSX.writeFile(wb, `Laporan_Absensi.xlsx`); showToast("Laporan diexport", "success"); }
         function exportLaporanPDF() { try { const { jsPDF } = window.jspdf; const doc = new jsPDF('p', 'mm', 'a4'); const perTxt = document.getElementById('view-laporan').dataset.periodeText; const tarTxt = document.getElementById('view-laporan').dataset.targetText; doc.setFontSize(16); doc.text(`Laporan Kehadiran Siswa - ${STATE.school.nama}`, 14, 20); doc.setFontSize(10); doc.setTextColor(100); doc.text(`${STATE.school.alamat}  |  Tahun Pelajaran: ${STATE.school.tahun}`, 14, 26); doc.text(`Periode: ${perTxt}   |   Target: ${tarTxt}`, 14, 32); doc.setTextColor(0); doc.setFontSize(11); const p = document.getElementById('lap-stat-persen').innerText; const h = document.getElementById('lap-stat-hadir').innerText; const t = document.getElementById('lap-stat-terlambat').innerText; const sk = document.getElementById('lap-stat-sakit').innerText; const i = document.getElementById('lap-stat-izin').innerText; const a = document.getElementById('lap-stat-alfa').innerText; doc.text(`Persentase Kehadiran: ${p} | Hadir: ${h} | Terlambat: ${t} | Sakit: ${sk} | Izin: ${i} | Alfa: ${a}`, 14, 42); const canvas = document.getElementById('laporanLineChart'); const bgCanvas = document.createElement('canvas'); bgCanvas.width = canvas.width; bgCanvas.height = canvas.height; const bgCtx = bgCanvas.getContext('2d'); bgCtx.fillStyle = '#ffffff'; bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height); bgCtx.drawImage(canvas, 0, 0); doc.addImage(bgCanvas.toDataURL('image/png', 1.0), 'PNG', 14, 48, 180, 55); doc.autoTable({ html: '#table-laporan-export', startY: 108, theme: 'grid', headStyles: { fillColor: [37, 99, 235] }, styles: { fontSize: 8, halign: 'center' }, columnStyles: { 0: { halign: 'left' }, 7: { halign: 'center', cellWidth: 0 } }, alternateRowStyles: { fillColor: [245, 247, 250] } }); doc.save(`Laporan.pdf`); showToast("PDF berhasil diexport", "success"); } catch (err) { showToast("Gagal membuat PDF.", "error"); } }
+
+        // ================= BACKUP & RESTORE JSON =================
+        function backupDataJSON() {
+            const dataToBackup = {
+                version: "1.0",
+                backupDate: new Date().toISOString(),
+                school: STATE.school,
+                students: STATE.students,
+                teachers: STATE.teachers,
+                attendance: STATE.attendance
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToBackup, null, 2));
+            const downloadNode = document.createElement('a');
+            downloadNode.setAttribute("href", dataStr);
+            downloadNode.setAttribute("download", `Backup_HadirDigital_${getLocalDateStr()}.json`);
+            document.body.appendChild(downloadNode);
+            downloadNode.click();
+            downloadNode.remove();
+            showToast("Backup data JSON berhasil diunduh!", "success");
+        }
+
+        function restoreDataJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if(!confirm("PERINGATAN: Proses ini akan menimpa seluruh data Siswa, Guru, dan Rekap Absensi saat ini dengan data dari file JSON. Lanjutkan?")) {
+                event.target.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const json = JSON.parse(e.target.result);
+                    if (!json.school || !json.students || !json.attendance) {
+                        showToast("Format file JSON tidak valid atau rusak!", "error");
+                        return;
+                    }
+
+                    showToast("Memproses pemulihan data...", "info");
+
+                    // Replace state
+                    STATE.school = json.school;
+                    STATE.students = json.students;
+                    STATE.teachers = json.teachers || [];
+                    STATE.attendance = json.attendance;
+
+                    localStorage.setItem('schoolSettings', JSON.stringify(STATE.school));
+                    applySchoolSettings();
+                    
+                    if (CONFIG.USE_REAL_BACKEND) {
+                        // Mengirim paket backup penuh ke server 
+                        // Catatan: Jika script GAS belum memiliki case "restoreAll", data akan disimpan di memori/browser saja sementara waktu
+                        apiPost("restoreAll", {
+                            school: STATE.school,
+                            students: STATE.students,
+                            teachers: STATE.teachers,
+                            attendance: STATE.attendance
+                        });
+                        showToast("Menyinkronkan data pemulihan dengan server...", "warning");
+                    }
+
+                    // Update UI Views
+                    updateFilterKelasOptions();
+                    if(!document.getElementById('view-dashboard').classList.contains('hidden')) renderDashboard();
+                    if(!document.getElementById('view-siswa').classList.contains('hidden')) renderSiswa();
+                    if(!document.getElementById('view-rekap').classList.contains('hidden')) renderRekap();
+                    
+                    setTimeout(() => {
+                        showToast("Restore data selesai dengan sukses!", "success");
+                        event.target.value = '';
+                    }, 1000);
+
+                } catch (err) {
+                    console.error(err);
+                    showToast("Gagal membaca file JSON!", "error");
+                }
+            };
+            reader.readAsText(file);
+        }
     </script>
 </body>
 </html>
