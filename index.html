@@ -188,7 +188,7 @@
 
                 <!-- VIEW: PENGATURAN SEKOLAH -->
                 <div id="view-school" class="view-section hidden space-y-4">
-                    <div class="bg-white dark:bg-gray-800 p-5 md:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 max-w-4xl mx-auto">
+                    <div class="bg-white dark:bg-gray-800 p-5 md:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 max-w-5xl mx-auto">
                         <div class="flex items-center gap-4 mb-6 pb-4 border-b dark:border-gray-700">
                             <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center text-xl"><i class="fa-solid fa-building-columns"></i></div>
                             <div><h2 class="font-semibold text-lg dark:text-white">Pengaturan Profil Sekolah</h2><p class="text-xs text-gray-500">Data ini akan tercetak otomatis pada ID Card dan Laporan PDF/Excel.</p></div>
@@ -222,14 +222,15 @@
                             </div>
                             
                             <div class="mt-8 pt-6 border-t dark:border-gray-700">
-                                <h3 class="font-bold text-base dark:text-white mb-1">Pengaturan Jam Masuk & Kelas (Pagi/Siang)</h3>
+                                <h3 class="font-bold text-base dark:text-white mb-1">Pengaturan Jam Masuk & Kelas (3 Sesi)</h3>
                                 <p class="text-xs text-gray-500 mb-5">Atur jam masuk, toleransi keterlambatan, dan centang kelas yang masuk pada sesi tersebut.</p>
                                 
                                 <div class="flex flex-col gap-6">
                                     <!-- SD/MI -->
                                     <div id="cfg-block-SD" class="border dark:border-gray-600 rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm">
                                         <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-child text-primary"></i> Jenjang SD/MI</h4>
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                                            <!-- Pagi -->
                                             <div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-100 dark:border-blue-800/50">
                                                 <p class="text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">Sesi Pagi</p>
                                                 <div class="grid grid-cols-2 gap-2 mb-2">
@@ -238,6 +239,7 @@
                                                 </div>
                                                 <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="sd-pagi-kelas" class="flex flex-wrap gap-1"></div></div>
                                             </div>
+                                            <!-- Siang -->
                                             <div class="bg-orange-50 dark:bg-orange-900/10 p-3 rounded-lg border border-orange-100 dark:border-orange-800/50">
                                                 <p class="text-xs font-bold text-orange-800 dark:text-orange-300 mb-2">Sesi Siang</p>
                                                 <div class="grid grid-cols-2 gap-2 mb-2">
@@ -246,13 +248,23 @@
                                                 </div>
                                                 <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="sd-siang-kelas" class="flex flex-wrap gap-1"></div></div>
                                             </div>
+                                            <!-- Sore -->
+                                            <div class="bg-purple-50 dark:bg-purple-900/10 p-3 rounded-lg border border-purple-100 dark:border-purple-800/50">
+                                                <p class="text-xs font-bold text-purple-800 dark:text-purple-300 mb-2">Sesi Sore</p>
+                                                <div class="grid grid-cols-2 gap-2 mb-2">
+                                                    <div><label class="text-[10px] text-gray-500">Jam Masuk</label><input type="time" id="cfg-sd-sore-jam" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
+                                                    <div><label class="text-[10px] text-gray-500">Toleransi (Mnt)</label><input type="number" id="cfg-sd-sore-tol" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
+                                                </div>
+                                                <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="sd-sore-kelas" class="flex flex-wrap gap-1"></div></div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- SMP/MTs -->
                                     <div id="cfg-block-SMP" class="hidden border dark:border-gray-600 rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm">
                                         <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-user-graduate text-primary"></i> Jenjang SMP/MTs</h4>
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                                            <!-- Pagi -->
                                             <div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-100 dark:border-blue-800/50">
                                                 <p class="text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">Sesi Pagi</p>
                                                 <div class="grid grid-cols-2 gap-2 mb-2">
@@ -261,6 +273,7 @@
                                                 </div>
                                                 <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="smp-pagi-kelas" class="flex flex-wrap gap-1"></div></div>
                                             </div>
+                                            <!-- Siang -->
                                             <div class="bg-orange-50 dark:bg-orange-900/10 p-3 rounded-lg border border-orange-100 dark:border-orange-800/50">
                                                 <p class="text-xs font-bold text-orange-800 dark:text-orange-300 mb-2">Sesi Siang</p>
                                                 <div class="grid grid-cols-2 gap-2 mb-2">
@@ -269,13 +282,23 @@
                                                 </div>
                                                 <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="smp-siang-kelas" class="flex flex-wrap gap-1"></div></div>
                                             </div>
+                                            <!-- Sore -->
+                                            <div class="bg-purple-50 dark:bg-purple-900/10 p-3 rounded-lg border border-purple-100 dark:border-purple-800/50">
+                                                <p class="text-xs font-bold text-purple-800 dark:text-purple-300 mb-2">Sesi Sore</p>
+                                                <div class="grid grid-cols-2 gap-2 mb-2">
+                                                    <div><label class="text-[10px] text-gray-500">Jam Masuk</label><input type="time" id="cfg-smp-sore-jam" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
+                                                    <div><label class="text-[10px] text-gray-500">Toleransi (Mnt)</label><input type="number" id="cfg-smp-sore-tol" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
+                                                </div>
+                                                <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="smp-sore-kelas" class="flex flex-wrap gap-1"></div></div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- SMA/SMK -->
                                     <div id="cfg-block-SMA" class="hidden border dark:border-gray-600 rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm">
                                         <h4 class="font-bold text-sm dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-primary"></i> Jenjang SMA/SMK</h4>
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                                            <!-- Pagi -->
                                             <div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-lg border border-blue-100 dark:border-blue-800/50">
                                                 <p class="text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">Sesi Pagi</p>
                                                 <div class="grid grid-cols-2 gap-2 mb-2">
@@ -284,6 +307,7 @@
                                                 </div>
                                                 <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="sma-pagi-kelas" class="flex flex-wrap gap-1"></div></div>
                                             </div>
+                                            <!-- Siang -->
                                             <div class="bg-orange-50 dark:bg-orange-900/10 p-3 rounded-lg border border-orange-100 dark:border-orange-800/50">
                                                 <p class="text-xs font-bold text-orange-800 dark:text-orange-300 mb-2">Sesi Siang</p>
                                                 <div class="grid grid-cols-2 gap-2 mb-2">
@@ -291,6 +315,15 @@
                                                     <div><label class="text-[10px] text-gray-500">Toleransi (Mnt)</label><input type="number" id="cfg-sma-siang-tol" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
                                                 </div>
                                                 <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="sma-siang-kelas" class="flex flex-wrap gap-1"></div></div>
+                                            </div>
+                                            <!-- Sore -->
+                                            <div class="bg-purple-50 dark:bg-purple-900/10 p-3 rounded-lg border border-purple-100 dark:border-purple-800/50">
+                                                <p class="text-xs font-bold text-purple-800 dark:text-purple-300 mb-2">Sesi Sore</p>
+                                                <div class="grid grid-cols-2 gap-2 mb-2">
+                                                    <div><label class="text-[10px] text-gray-500">Jam Masuk</label><input type="time" id="cfg-sma-sore-jam" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
+                                                    <div><label class="text-[10px] text-gray-500">Toleransi (Mnt)</label><input type="number" id="cfg-sma-sore-tol" class="w-full px-2 py-1 text-xs border rounded outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"></div>
+                                                </div>
+                                                <div><label class="text-[10px] text-gray-500 block mb-1">Pilih Kelas</label><div id="sma-sore-kelas" class="flex flex-wrap gap-1"></div></div>
                                             </div>
                                         </div>
                                     </div>
@@ -504,7 +537,7 @@
                 </div>
             </div>
             <div class="p-5 md:p-8 overflow-y-auto custom-scrollbar text-sm md:text-base text-gray-700 dark:text-gray-300 space-y-4" id="panduan-teks-lengkap">
-                <p>Selamat datang di <strong>Sistem Kehadiran Digital Terpadu</strong>. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA), sistem sesi (Pagi/Siang), dan tema warna yang dapat disesuaikan.</p>
+                <p>Selamat datang di <strong>Sistem Kehadiran Digital Terpadu</strong>. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA), sistem 3 sesi (Pagi/Siang/Sore), dan tema warna yang dapat disesuaikan.</p>
                 <p>Aplikasi ini membagi hak akses menjadi dua peran utama: <strong>Admin TU</strong> (Hak akses penuh) dan <strong>Guru Kelas</strong> (Hak akses terbatas/sesuai wewenang).</p>
                 
                 <h4 class="font-bold text-lg text-gray-900 dark:text-white mt-6 mb-2 border-b dark:border-gray-700 pb-2">BAB 1: PANDUAN UNTUK ADMIN TU</h4>
@@ -526,8 +559,8 @@
                     <li>Isi Nama Instansi, Tahun Pelajaran, dan Alamat Lengkap. Data ini akan otomatis tercetak di kop Surat Laporan dan Kartu QR Siswa.</li>
                     <li>Pilih <strong>Jenjang Aplikasi</strong> (SD/MI, SMP/MTs, atau SMA/SMK). Form pengaturan jam masuk di bawahnya akan menyesuaikan dengan jenjang yang dipilih.</li>
                     <li>Pilih <strong>Warna Tema</strong> untuk menyesuaikan tampilan aplikasi dengan identitas sekolah.</li>
-                    <li>Di bagian <strong>Pengaturan Jam Masuk & Kelas</strong>:<br>Tentukan Jam Masuk dan Toleransi Keterlambatan (dalam menit). <br><span class="text-blue-600 dark:text-blue-400 font-medium">Penting:</span> Sistem menggunakan waktu ini untuk logika status otomatis. Jika siswa belum absen dan waktu masih berada dalam batas toleransi (Jam Masuk + Toleransi), statusnya adalah <strong>"Belum Presensi"</strong>. Jika waktu melewati batas toleransi, status otomatis berubah menjadi <strong>"Alfa"</strong>.</li>
-                    <li class="italic text-gray-500">Catatan: Kolom ceklis kelas akan muncul secara otomatis setelah Anda menginput data siswa/guru. Centang kelas yang masuk di Sesi Pagi atau Sesi Siang.</li>
+                    <li>Di bagian <strong>Pengaturan Jam Masuk & Kelas (3 Sesi)</strong>:<br>Tentukan Jam Masuk dan Toleransi Keterlambatan (dalam menit) untuk Sesi Pagi, Siang, dan Sore. <br><span class="text-blue-600 dark:text-blue-400 font-medium">Penting:</span> Sistem menggunakan waktu ini untuk logika status otomatis. Jika siswa belum absen dan waktu masih berada dalam batas toleransi (Jam Masuk + Toleransi), statusnya adalah <strong>"Belum Presensi"</strong>. Jika waktu melewati batas toleransi, status otomatis berubah menjadi <strong>"Alfa"</strong>.</li>
+                    <li class="italic text-gray-500">Catatan: Kolom ceklis kelas akan muncul secara otomatis setelah Anda menginput data siswa/guru. Centang kelas yang masuk di Sesi Pagi, Sesi Siang, atau Sesi Sore.</li>
                     <li>Klik <strong>Simpan Pengaturan</strong>.</li>
                 </ul>
 
@@ -746,9 +779,9 @@
             school: JSON.parse(localStorage.getItem('schoolSettings')) || { 
                 nama: 'SDN Nusantara 1', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue', logo: '',
                 sessions: {
-                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
-                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
-                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } }
+                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
+                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
+                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } }
                 }
             },
             students: [], attendance: [], teachers: [], html5QrcodeScanner: null 
@@ -787,11 +820,19 @@
                 theme: fetchedData.theme || currentData.theme || 'blue',
                 logo: fetchedData.logo !== undefined ? fetchedData.logo : (currentData.logo || ''),
                 sessions: fetchedData.sessions || currentData.sessions || {
-                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
-                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
-                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } }
+                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
+                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
+                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } }
                 }
             };
+            
+            // Tambahkan sesi sore jika terlewat (Kompatibilitas versi sebelumnya)
+            ['SD', 'SMP', 'SMA'].forEach(j => {
+                if(STATE.school.sessions[j] && !STATE.school.sessions[j].sore) {
+                    STATE.school.sessions[j].sore = { jam: "15:00", tol: 15, kelas: [] };
+                }
+            });
+
             localStorage.setItem('schoolSettings', JSON.stringify(STATE.school));
             applySchoolSettings();
         }
@@ -862,8 +903,12 @@
             const jenjang = getJenjangFromKelas(student.kelas).toUpperCase();
             const sessions = STATE.school.sessions ? STATE.school.sessions[jenjang] : null;
             let jamMasukStr = "07:00"; let toleransiMenit = 15;
+            
             if (sessions) {
-                if (sessions.siang && sessions.siang.kelas && sessions.siang.kelas.includes(student.kelas)) {
+                if (sessions.sore && sessions.sore.kelas && sessions.sore.kelas.includes(student.kelas)) {
+                    jamMasukStr = sessions.sore.jam || "15:00";
+                    toleransiMenit = parseInt(sessions.sore.tol || 15);
+                } else if (sessions.siang && sessions.siang.kelas && sessions.siang.kelas.includes(student.kelas)) {
                     jamMasukStr = sessions.siang.jam || "13:00";
                     toleransiMenit = parseInt(sessions.siang.tol || 15);
                 } else {
@@ -871,6 +916,7 @@
                     toleransiMenit = parseInt(sessions.pagi?.tol || 15);
                 }
             }
+            
             const now = new Date(); const batasWaktu = new Date();
             const timeParts = jamMasukStr.split(':');
             batasWaktu.setHours(parseInt(timeParts[0]), parseInt(timeParts[1]) + toleransiMenit, 0, 0);
@@ -899,21 +945,22 @@
         // ================= SCHOOL SETTINGS =================
         function renderSchoolClassesUI(uniqueClasses) {
             const containers = {
-                SD: { pagi: document.getElementById('sd-pagi-kelas'), siang: document.getElementById('sd-siang-kelas') },
-                SMP: { pagi: document.getElementById('smp-pagi-kelas'), siang: document.getElementById('smp-siang-kelas') },
-                SMA: { pagi: document.getElementById('sma-pagi-kelas'), siang: document.getElementById('sma-siang-kelas') }
+                SD: { pagi: document.getElementById('sd-pagi-kelas'), siang: document.getElementById('sd-siang-kelas'), sore: document.getElementById('sd-sore-kelas') },
+                SMP: { pagi: document.getElementById('smp-pagi-kelas'), siang: document.getElementById('smp-siang-kelas'), sore: document.getElementById('smp-sore-kelas') },
+                SMA: { pagi: document.getElementById('sma-pagi-kelas'), siang: document.getElementById('sma-siang-kelas'), sore: document.getElementById('sma-sore-kelas') }
             };
 
             for(let j in containers) {
                 if(containers[j].pagi) containers[j].pagi.innerHTML = '';
                 if(containers[j].siang) containers[j].siang.innerHTML = '';
+                if(containers[j].sore) containers[j].sore.innerHTML = '';
             }
 
             if(!STATE.school.sessions) {
                 STATE.school.sessions = {
-                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
-                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } },
-                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] } }
+                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
+                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
+                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } }
                 };
             }
 
@@ -923,21 +970,28 @@
 
                 const isPagi = STATE.school.sessions[jenjang]?.pagi?.kelas?.includes(cls);
                 const isSiang = STATE.school.sessions[jenjang]?.siang?.kelas?.includes(cls);
+                const isSore = STATE.school.sessions[jenjang]?.sore?.kelas?.includes(cls);
 
                 containers[jenjang].pagi.innerHTML += `<label class="inline-flex items-center gap-1 bg-white dark:bg-gray-800 px-2 py-1 rounded border dark:border-gray-600 text-gray-700 dark:text-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"><input type="checkbox" value="${cls}" class="cb-kelas-pagi-${jenjang}" ${isPagi ? 'checked' : ''} onchange="handleSessionCbChange('${jenjang}', '${cls}', 'pagi')"> ${cls}</label>`;
                 containers[jenjang].siang.innerHTML += `<label class="inline-flex items-center gap-1 bg-white dark:bg-gray-800 px-2 py-1 rounded border dark:border-gray-600 text-gray-700 dark:text-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"><input type="checkbox" value="${cls}" class="cb-kelas-siang-${jenjang}" ${isSiang ? 'checked' : ''} onchange="handleSessionCbChange('${jenjang}', '${cls}', 'siang')"> ${cls}</label>`;
+                containers[jenjang].sore.innerHTML += `<label class="inline-flex items-center gap-1 bg-white dark:bg-gray-800 px-2 py-1 rounded border dark:border-gray-600 text-gray-700 dark:text-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"><input type="checkbox" value="${cls}" class="cb-kelas-sore-${jenjang}" ${isSore ? 'checked' : ''} onchange="handleSessionCbChange('${jenjang}', '${cls}', 'sore')"> ${cls}</label>`;
             });
         }
 
         window.handleSessionCbChange = function(jenjang, cls, sessionType) {
-            if(sessionType === 'pagi') {
-                const cbPagi = document.querySelector(`.cb-kelas-pagi-${jenjang}[value="${cls}"]`);
-                const cbSiang = document.querySelector(`.cb-kelas-siang-${jenjang}[value="${cls}"]`);
-                if(cbPagi && cbPagi.checked && cbSiang) cbSiang.checked = false;
-            } else {
-                const cbPagi = document.querySelector(`.cb-kelas-pagi-${jenjang}[value="${cls}"]`);
-                const cbSiang = document.querySelector(`.cb-kelas-siang-${jenjang}[value="${cls}"]`);
-                if(cbSiang && cbSiang.checked && cbPagi) cbPagi.checked = false;
+            const cbPagi = document.querySelector(`.cb-kelas-pagi-${jenjang}[value="${cls}"]`);
+            const cbSiang = document.querySelector(`.cb-kelas-siang-${jenjang}[value="${cls}"]`);
+            const cbSore = document.querySelector(`.cb-kelas-sore-${jenjang}[value="${cls}"]`);
+            
+            if(sessionType === 'pagi' && cbPagi && cbPagi.checked) {
+                if(cbSiang) cbSiang.checked = false;
+                if(cbSore) cbSore.checked = false;
+            } else if (sessionType === 'siang' && cbSiang && cbSiang.checked) {
+                if(cbPagi) cbPagi.checked = false;
+                if(cbSore) cbSore.checked = false;
+            } else if (sessionType === 'sore' && cbSore && cbSore.checked) {
+                if(cbPagi) cbPagi.checked = false;
+                if(cbSiang) cbSiang.checked = false;
             }
         };
 
@@ -984,16 +1038,22 @@
                     document.getElementById('cfg-sd-pagi-tol').value = STATE.school.sessions.SD?.pagi?.tol || 15;
                     document.getElementById('cfg-sd-siang-jam').value = STATE.school.sessions.SD?.siang?.jam || "13:00";
                     document.getElementById('cfg-sd-siang-tol').value = STATE.school.sessions.SD?.siang?.tol || 15;
+                    document.getElementById('cfg-sd-sore-jam').value = STATE.school.sessions.SD?.sore?.jam || "15:00";
+                    document.getElementById('cfg-sd-sore-tol').value = STATE.school.sessions.SD?.sore?.tol || 15;
 
                     document.getElementById('cfg-smp-pagi-jam').value = STATE.school.sessions.SMP?.pagi?.jam || "07:00";
                     document.getElementById('cfg-smp-pagi-tol').value = STATE.school.sessions.SMP?.pagi?.tol || 15;
                     document.getElementById('cfg-smp-siang-jam').value = STATE.school.sessions.SMP?.siang?.jam || "13:00";
                     document.getElementById('cfg-smp-siang-tol').value = STATE.school.sessions.SMP?.siang?.tol || 15;
+                    document.getElementById('cfg-smp-sore-jam').value = STATE.school.sessions.SMP?.sore?.jam || "15:00";
+                    document.getElementById('cfg-smp-sore-tol').value = STATE.school.sessions.SMP?.sore?.tol || 15;
 
                     document.getElementById('cfg-sma-pagi-jam').value = STATE.school.sessions.SMA?.pagi?.jam || "07:00";
                     document.getElementById('cfg-sma-pagi-tol').value = STATE.school.sessions.SMA?.pagi?.tol || 15;
                     document.getElementById('cfg-sma-siang-jam').value = STATE.school.sessions.SMA?.siang?.jam || "13:00";
                     document.getElementById('cfg-sma-siang-tol').value = STATE.school.sessions.SMA?.siang?.tol || 15;
+                    document.getElementById('cfg-sma-sore-jam').value = STATE.school.sessions.SMA?.sore?.jam || "15:00";
+                    document.getElementById('cfg-sma-sore-tol').value = STATE.school.sessions.SMA?.sore?.tol || 15;
                 }
             }
         }
@@ -1011,15 +1071,18 @@
             const sessions = {
                 SD: {
                     pagi: { jam: document.getElementById('cfg-sd-pagi-jam').value, tol: document.getElementById('cfg-sd-pagi-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-pagi-SD:checked')).map(cb => cb.value) },
-                    siang: { jam: document.getElementById('cfg-sd-siang-jam').value, tol: document.getElementById('cfg-sd-siang-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-siang-SD:checked')).map(cb => cb.value) }
+                    siang: { jam: document.getElementById('cfg-sd-siang-jam').value, tol: document.getElementById('cfg-sd-siang-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-siang-SD:checked')).map(cb => cb.value) },
+                    sore: { jam: document.getElementById('cfg-sd-sore-jam').value, tol: document.getElementById('cfg-sd-sore-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-sore-SD:checked')).map(cb => cb.value) }
                 },
                 SMP: {
                     pagi: { jam: document.getElementById('cfg-smp-pagi-jam').value, tol: document.getElementById('cfg-smp-pagi-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-pagi-SMP:checked')).map(cb => cb.value) },
-                    siang: { jam: document.getElementById('cfg-smp-siang-jam').value, tol: document.getElementById('cfg-smp-siang-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-siang-SMP:checked')).map(cb => cb.value) }
+                    siang: { jam: document.getElementById('cfg-smp-siang-jam').value, tol: document.getElementById('cfg-smp-siang-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-siang-SMP:checked')).map(cb => cb.value) },
+                    sore: { jam: document.getElementById('cfg-smp-sore-jam').value, tol: document.getElementById('cfg-smp-sore-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-sore-SMP:checked')).map(cb => cb.value) }
                 },
                 SMA: {
                     pagi: { jam: document.getElementById('cfg-sma-pagi-jam').value, tol: document.getElementById('cfg-sma-pagi-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-pagi-SMA:checked')).map(cb => cb.value) },
-                    siang: { jam: document.getElementById('cfg-sma-siang-jam').value, tol: document.getElementById('cfg-sma-siang-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-siang-SMA:checked')).map(cb => cb.value) }
+                    siang: { jam: document.getElementById('cfg-sma-siang-jam').value, tol: document.getElementById('cfg-sma-siang-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-siang-SMA:checked')).map(cb => cb.value) },
+                    sore: { jam: document.getElementById('cfg-sma-sore-jam').value, tol: document.getElementById('cfg-sma-sore-tol').value, kelas: Array.from(document.querySelectorAll('.cb-kelas-sore-SMA:checked')).map(cb => cb.value) }
                 }
             };
 
@@ -1163,7 +1226,7 @@
                 const doc = new jsPDF('p', 'mm', 'a4');
                 const text = `Buku Panduan Penggunaan Sistem Kehadiran Digital Terpadu
 
-Selamat datang di Sistem Kehadiran Digital Terpadu. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA), sistem sesi (Pagi/Siang), dan tema kustom.
+Selamat datang di Sistem Kehadiran Digital Terpadu. Aplikasi ini dirancang untuk memudahkan manajemen kehadiran siswa berbasis QR Code dengan dukungan multi-jenjang (SD/SMP/SMA), sistem 3 sesi (Pagi/Siang/Sore), dan tema kustom.
 
 BAB 1: PANDUAN UNTUK ADMIN TU
 Sebagai Admin, Anda memiliki kontrol penuh terhadap seluruh pengaturan sistem.
@@ -1523,7 +1586,10 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             let jamMasukStr = "07:00"; let toleransiMenit = 15;
             
             if (sessions) {
-                if (sessions.siang && sessions.siang.kelas && sessions.siang.kelas.includes(student.kelas)) {
+                if (sessions.sore && sessions.sore.kelas && sessions.sore.kelas.includes(student.kelas)) {
+                    jamMasukStr = sessions.sore.jam || "15:00";
+                    toleransiMenit = parseInt(sessions.sore.tol || 15);
+                } else if (sessions.siang && sessions.siang.kelas && sessions.siang.kelas.includes(student.kelas)) {
                     jamMasukStr = sessions.siang.jam || "13:00";
                     toleransiMenit = parseInt(sessions.siang.tol || 15);
                 } else {
@@ -2112,159 +2178,223 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             document.getElementById('view-laporan').dataset.periodeText = currentLaporanLabel; document.getElementById('view-laporan').dataset.targetText = targetLabel;
             
             const explicitHadir = fAtt.filter(a=>a.status === 'Hadir').length; 
-            const explicitTerlambat = fAtt.filter(a=>a.status === 'Terlambat').length; 
-            const explicitSakit = fAtt.filter(a=>a.status === 'Sakit').length; 
-            const explicitIzin = fAtt.filter(a=>a.status === 'Izin').length; 
-            const explicitAlfa = fAtt.filter(a=>a.status === 'Alfa').length;
-            
-            let uDt = [...new Set(fAtt.map(a=>a.tanggal))].sort(); if ((tipeWaktu === 'hari_ini' || tipeWaktu === 'tanggal') && uDt.length === 0) uDt = [todayStr];
-            
-            let totalAlfaCalculated = explicitAlfa;
-            let validRecordsCount = 0;
-            uDt.forEach(d => {
-                vNisn.forEach(n => {
-                    const hasRec = fAtt.some(a => a.nisn === n && a.tanggal === d);
-                    if (hasRec) {
-                        validRecordsCount++;
-                    } else {
-                        const s = getMyStudents().find(x => x.nisn === n);
-                        const implStatus = getImplicitStatus(s, d);
-                        if (implStatus === 'Alfa') {
-                            totalAlfaCalculated++;
-                            validRecordsCount++;
-                        }
-                    }
-                });
-            });
-            
-            const persentase = (validRecordsCount > 0 ? Math.round(((explicitHadir + explicitTerlambat) / validRecordsCount) * 100) : 0);
-            document.getElementById('lap-stat-persen').innerText = persentase + "%"; 
-            document.getElementById('lap-stat-hadir').innerText=explicitHadir; 
-            document.getElementById('lap-stat-terlambat').innerText=explicitTerlambat; 
-            document.getElementById('lap-stat-sakit').innerText=explicitSakit; 
-            document.getElementById('lap-stat-izin').innerText=explicitIzin; 
-            document.getElementById('lap-stat-alfa').innerText=totalAlfaCalculated;
+            const explicitTerlambat = fAtt.filter(a=>a.status === 'Terlambat').length;
+            const explicitSakit = fAtt.filter(a=>a.status === 'Sakit').length;
+            const explicitIzin = fAtt.filter(a=>a.status === 'Izin').length;
+            let explicitAlfa = fAtt.filter(a=>a.status === 'Alfa').length;
 
-            const lbls = [], dHd = [], dTh = []; 
-            uDt.forEach(d => { 
-                const o=new Date(d); lbls.push(`${o.getDate()}/${o.getMonth()+1}`); 
-                const at=fAtt.filter(a=>a.tanggal===d); 
-                const h=at.filter(x=>x.status==='Hadir' || x.status==='Terlambat').length; 
-                dHd.push(h); 
-                
-                let thCount = at.filter(x=>['Sakit','Izin','Alfa'].includes(x.status)).length;
-                vNisn.forEach(n => {
-                    if (!at.some(x => x.nisn === n)) {
-                        const s = getMyStudents().find(x => x.nisn === n);
-                        if (getImplicitStatus(s, d) === 'Alfa') thCount++;
-                    }
-                });
-                dTh.push(thCount); 
-            });
-            if(lapChart) lapChart.destroy(); lapChart = new Chart(document.getElementById('laporanLineChart').getContext('2d'), { type: 'line', data: { labels:lbls, datasets:[{label:'Hadir & Terlambat', data:dHd, borderColor:'var(--color-primary)', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill:true}, {label:'Tidak Hadir', data:dTh, borderColor:'#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.05)', fill:true}] }, options: { responsive:true, maintainAspectRatio:false, animation: false } });
+            const tbody = document.getElementById('laporan-table-body');
+            tbody.innerHTML = '';
             
-            const tb = document.getElementById('laporan-table-body'); tb.innerHTML='';
-            if(vNisn.length === 0) { tb.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-xs text-gray-500">Tidak ada data</td></tr>`; } 
-            else { 
-                vNisn.forEach(n => { 
-                    const s = getMyStudents().find(x=>x.nisn===n); if(!s)return; 
-                    const at=fAtt.filter(a=>a.nisn===n); 
-                    const h=at.filter(x=>x.status==='Hadir').length, t=at.filter(x=>x.status==='Terlambat').length, sk=at.filter(x=>x.status==='Sakit').length, i=at.filter(x=>x.status==='Izin').length, aExp=at.filter(x=>x.status==='Alfa').length; 
-                    
-                    let aTot = aExp;
-                    let validDaysForSiswa = at.length;
-                    uDt.forEach(d => {
-                        if (!at.some(x => x.tanggal === d)) {
-                            if (getImplicitStatus(s, d) === 'Alfa') {
-                                aTot++;
-                                validDaysForSiswa++;
-                            }
-                        }
+            const studentsToProcess = getMyStudents().filter(s => vNisn.includes(s.nisn));
+            let totalH = 0, totalT = 0, totalS = 0, totalI = 0, totalA = 0;
+            
+            let datesToProcess = [];
+            if (tipeWaktu === 'hari_ini') { datesToProcess = [todayStr]; }
+            else if (tipeWaktu === 'tanggal') { datesToProcess = [document.getElementById('laporan-val-tanggal').value || todayStr]; }
+            else { datesToProcess = [...new Set(fAtt.map(a => a.tanggal))]; }
+
+            let chartLabels = [];
+            let chartDataHadir = [];
+            let chartDataTerlambat = [];
+            let chartDataSakit = [];
+            let chartDataIzin = [];
+            let chartDataAlfa = [];
+
+            if(studentsToProcess.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-xs text-gray-500">Tidak ada data</td></tr>`;
+            } else {
+                studentsToProcess.forEach(s => {
+                    let h=0, t=0, sk=0, iz=0, al=0;
+                    datesToProcess.forEach(d => {
+                        const rec = fAtt.find(a => a.nisn === s.nisn && a.tanggal === d);
+                        const st = rec ? rec.status : getImplicitStatus(s, d);
+                        if(st === 'Hadir') h++;
+                        else if(st === 'Terlambat') t++;
+                        else if(st === 'Sakit') sk++;
+                        else if(st === 'Izin') iz++;
+                        else if(st === 'Alfa') al++;
                     });
+                    
+                    totalH += h; totalT += t; totalS += sk; totalI += iz; totalA += al;
+                    
+                    const totalHari = h + t + sk + iz + al;
+                    const prc = totalHari > 0 ? (((h+t)/totalHari)*100).toFixed(1) : 0;
+                    
+                    tbody.innerHTML += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <td class="px-2 py-2 font-medium dark:text-white">
+                            <p class="truncate max-w-[120px] md:max-w-none text-xs md:text-sm">${s.nama}</p>
+                            <p class="text-[10px] text-gray-500">${s.nisn} - Kls ${s.kelas}</p>
+                        </td>
+                        <td class="px-2 py-2 text-center text-green-600 font-semibold">${h}</td>
+                        <td class="px-2 py-2 text-center text-orange-600 font-semibold">${t}</td>
+                        <td class="px-2 py-2 text-center text-purple-600 font-semibold">${sk}</td>
+                        <td class="px-2 py-2 text-center text-yellow-600 font-semibold">${iz}</td>
+                        <td class="px-2 py-2 text-center text-red-600 font-semibold">${al}</td>
+                        <td class="px-2 py-2 text-center font-bold ${prc >= 80 ? 'text-green-600' : 'text-red-600'}">${prc}%</td>
+                        <td class="px-2 py-2 text-center">
+                            <button onclick="sendWA_LaporanIndividu('${s.nisn}', ${h}, ${t}, ${sk}, ${iz}, ${al}, ${prc})" class="text-green-600 p-1 hover:bg-green-50 rounded" title="Kirim Laporan WA"><i class="fa-brands fa-whatsapp text-sm md:text-base"></i></button>
+                        </td>
+                    </tr>`;
+                });
+                
+                datesToProcess.sort().slice(-10).forEach(d => {
+                    chartLabels.push(d);
+                    let dh=0, dt=0, dsk=0, diz=0, dal=0;
+                    studentsToProcess.forEach(s => {
+                        const rec = fAtt.find(a => a.nisn === s.nisn && a.tanggal === d);
+                        const st = rec ? rec.status : getImplicitStatus(s, d);
+                        if(st === 'Hadir') dh++;
+                        else if(st === 'Terlambat') dt++;
+                        else if(st === 'Sakit') dsk++;
+                        else if(st === 'Izin') diz++;
+                        else if(st === 'Alfa') dal++;
+                    });
+                    chartDataHadir.push(dh);
+                    chartDataTerlambat.push(dt);
+                    chartDataSakit.push(dsk);
+                    chartDataIzin.push(diz);
+                    chartDataAlfa.push(dal);
+                });
+            }
+            
+            document.getElementById('lap-stat-hadir').innerText = totalH;
+            document.getElementById('lap-stat-terlambat').innerText = totalT;
+            document.getElementById('lap-stat-sakit').innerText = totalS;
+            document.getElementById('lap-stat-izin').innerText = totalI;
+            document.getElementById('lap-stat-alfa').innerText = totalA;
+            
+            const grandTotal = totalH + totalT + totalS + totalI + totalA;
+            const grandPrc = grandTotal > 0 ? (((totalH + totalT)/grandTotal)*100).toFixed(1) : 0;
+            document.getElementById('lap-stat-persen').innerText = `${grandPrc}%`;
+            document.getElementById('lap-stat-persen').className = `text-lg md:text-2xl font-bold ${grandPrc >= 80 ? 'text-green-600' : 'text-red-600'}`;
 
-                    const p = validDaysForSiswa>0?Math.round(((h+t)/validDaysForSiswa)*100):0; 
-                    tb.innerHTML+=`<tr class="border-b dark:border-gray-700"><td class="px-2 py-2 truncate max-w-[120px] md:max-w-none">${s.nama}</td><td class="text-center">${h}</td><td class="text-center">${t}</td><td class="text-center">${sk}</td><td class="text-center">${i}</td><td class="text-center">${aTot}</td><td class="text-center font-bold text-${p>=80?'green':(p>=60?'yellow':'red')}-600">${p}%</td><td class="text-center"><button onclick="sendWA_LaporanIndividu('${s.nisn}', ${h}, ${t}, ${sk}, ${i}, ${aTot}, ${p})" class="text-green-600 hover:text-green-800 p-1" title="Kirim Laporan via WA"><i class="fa-brands fa-whatsapp text-base"></i></button></td></tr>`; 
-                }); 
+            updateLaporanChart(chartLabels, chartDataHadir, chartDataTerlambat, chartDataSakit, chartDataIzin, chartDataAlfa);
+        }
+
+        function updateLaporanChart(labels, hadir, terlambat, sakit, izin, alfa) {
+            const ctx = document.getElementById('laporanLineChart');
+            if(!ctx) return;
+            if(lapChart) lapChart.destroy();
+            
+            const isDark = document.documentElement.classList.contains('dark');
+            const gridColor = isDark ? '#374151' : '#e5e7eb';
+            const textColor = isDark ? '#9ca3af' : '#6b7280';
+
+            lapChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Hadir', data: hadir, borderColor: '#16a34a', backgroundColor: '#16a34a20', tension: 0.3, fill: true },
+                        { label: 'Terlambat', data: terlambat, borderColor: '#ea580c', backgroundColor: '#ea580c20', tension: 0.3, fill: true },
+                        { label: 'Sakit', data: sakit, borderColor: '#9333ea', backgroundColor: 'transparent', tension: 0.3 },
+                        { label: 'Izin', data: izin, borderColor: '#ca8a04', backgroundColor: 'transparent', tension: 0.3 },
+                        { label: 'Alfa', data: alfa, borderColor: '#dc2626', backgroundColor: '#dc262620', tension: 0.3, fill: true }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 } } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { stepSize: 1, color: textColor }, grid: { color: gridColor } },
+                        x: { ticks: { color: textColor }, grid: { color: gridColor } }
+                    }
+                }
+            });
+        }
+
+        function exportLaporanExcel() {
+            const wb = XLSX.utils.table_to_book(document.getElementById('table-laporan-export'), {sheet: "Laporan"});
+            XLSX.writeFile(wb, `Laporan_Kehadiran_${getLocalDateStr()}.xlsx`);
+            showToast('Laporan Excel berhasil diunduh');
+        }
+
+        function exportLaporanPDF() {
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('l', 'mm', 'a4');
+                
+                doc.setFontSize(14);
+                doc.setFont("helvetica", "bold");
+                doc.text(`LAPORAN KEHADIRAN SISWA - ${STATE.school.nama}`, 14, 15);
+                
+                doc.setFontSize(10);
+                doc.setFont("helvetica", "normal");
+                doc.text(`Periode: ${document.getElementById('view-laporan').dataset.periodeText}`, 14, 22);
+                doc.text(`Target: ${document.getElementById('view-laporan').dataset.targetText}`, 14, 27);
+                doc.text(`Tahun Pelajaran: ${STATE.school.tahun}`, 14, 32);
+                
+                doc.autoTable({
+                    html: '#table-laporan-export',
+                    startY: 38,
+                    theme: 'grid',
+                    headStyles: { fillColor: [37, 99, 235] },
+                    columns: [
+                        { header: 'Nama Siswa' }, { header: 'Hadir' }, { header: 'Terlambat' }, 
+                        { header: 'Sakit' }, { header: 'Izin' }, { header: 'Alfa' }, { header: 'Persentase' }
+                    ]
+                });
+                
+                doc.save(`Laporan_Kehadiran_${getLocalDateStr()}.pdf`);
+                showToast('Laporan PDF berhasil diunduh');
+            } catch(e) {
+                console.error(e);
+                showToast('Gagal membuat PDF. Pastikan library ter-load', 'error');
             }
         }
-        function exportLaporanExcel() { const perTxt = document.getElementById('view-laporan').dataset.periodeText; const tarTxt = document.getElementById('view-laporan').dataset.targetText; const p = document.getElementById('lap-stat-persen').innerText; const h = document.getElementById('lap-stat-hadir').innerText; const t = document.getElementById('lap-stat-terlambat').innerText; const sk = document.getElementById('lap-stat-sakit').innerText; const i = document.getElementById('lap-stat-izin').innerText; const a = document.getElementById('lap-stat-alfa').innerText; let excelData = [ [`LAPORAN KEHADIRAN SISWA - ${STATE.school.nama.toUpperCase()}`], [`Alamat: ${STATE.school.alamat}`], [`Tahun Pelajaran: ${STATE.school.tahun}`], [""], ["Periode:", perTxt], ["Target:", tarTxt], [""], ["RINGKASAN STATISTIK"], ["Tingkat Kehadiran", p], ["Total Hadir", h], ["Total Terlambat", t], ["Total Sakit", sk], ["Total Izin", i], ["Total Alfa", a], [""], ["RINCIAN KEHADIRAN SISWA"] ]; const tableJSON = XLSX.utils.sheet_to_json(document.getElementById("table-laporan-export"), {header: 1}); excelData = excelData.concat(tableJSON); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(excelData), "Laporan"); XLSX.writeFile(wb, `Laporan_Absensi.xlsx`); showToast("Laporan diexport", "success"); }
-        function exportLaporanPDF() { try { const { jsPDF } = window.jspdf; const doc = new jsPDF('p', 'mm', 'a4'); const perTxt = document.getElementById('view-laporan').dataset.periodeText; const tarTxt = document.getElementById('view-laporan').dataset.targetText; doc.setFontSize(16); doc.text(`Laporan Kehadiran Siswa - ${STATE.school.nama}`, 14, 20); doc.setFontSize(10); doc.setTextColor(100); doc.text(`${STATE.school.alamat}  |  Tahun Pelajaran: ${STATE.school.tahun}`, 14, 26); doc.text(`Periode: ${perTxt}   |   Target: ${tarTxt}`, 14, 32); doc.setTextColor(0); doc.setFontSize(11); const p = document.getElementById('lap-stat-persen').innerText; const h = document.getElementById('lap-stat-hadir').innerText; const t = document.getElementById('lap-stat-terlambat').innerText; const sk = document.getElementById('lap-stat-sakit').innerText; const i = document.getElementById('lap-stat-izin').innerText; const a = document.getElementById('lap-stat-alfa').innerText; doc.text(`Persentase Kehadiran: ${p} | Hadir: ${h} | Terlambat: ${t} | Sakit: ${sk} | Izin: ${i} | Alfa: ${a}`, 14, 42); const canvas = document.getElementById('laporanLineChart'); const bgCanvas = document.createElement('canvas'); bgCanvas.width = canvas.width; bgCanvas.height = canvas.height; const bgCtx = bgCanvas.getContext('2d'); bgCtx.fillStyle = '#ffffff'; bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height); bgCtx.drawImage(canvas, 0, 0); doc.addImage(bgCanvas.toDataURL('image/png', 1.0), 'PNG', 14, 48, 180, 55); doc.autoTable({ html: '#table-laporan-export', startY: 108, theme: 'grid', headStyles: { fillColor: [37, 99, 235] }, styles: { fontSize: 8, halign: 'center' }, columnStyles: { 0: { halign: 'left' }, 7: { halign: 'center', cellWidth: 0 } }, alternateRowStyles: { fillColor: [245, 247, 250] } }); doc.save(`Laporan.pdf`); showToast("PDF berhasil diexport", "success"); } catch (err) { showToast("Gagal membuat PDF.", "error"); } }
 
-        // ================= BACKUP & RESTORE JSON =================
+        // ================= BACKUP & RESTORE =================
         function backupDataJSON() {
             const dataToBackup = {
-                version: "1.0",
-                backupDate: new Date().toISOString(),
                 school: STATE.school,
                 students: STATE.students,
                 teachers: STATE.teachers,
-                attendance: STATE.attendance
+                attendance: STATE.attendance,
+                exportDate: new Date().toISOString()
             };
+            
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToBackup, null, 2));
-            const downloadNode = document.createElement('a');
-            downloadNode.setAttribute("href", dataStr);
-            downloadNode.setAttribute("download", `Backup_HadirDigital_${getLocalDateStr()}.json`);
-            document.body.appendChild(downloadNode);
-            downloadNode.click();
-            downloadNode.remove();
-            showToast("Backup data JSON berhasil diunduh!", "success");
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", `Backup_HadirDigital_${getLocalDateStr()}.json`);
+            dlAnchorElem.click();
+            showToast("Backup JSON berhasil diunduh", "success");
         }
 
         function restoreDataJSON(event) {
             const file = event.target.files[0];
             if (!file) return;
             
-            if(!confirm("PERINGATAN: Proses ini akan menimpa seluruh data Siswa, Guru, dan Rekap Absensi saat ini dengan data dari file JSON. Lanjutkan?")) {
-                event.target.value = '';
-                return;
-            }
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
                     const json = JSON.parse(e.target.result);
-                    if (!json.school || !json.students || !json.attendance) {
-                        showToast("Format file JSON tidak valid atau rusak!", "error");
-                        return;
-                    }
-
-                    showToast("Memproses pemulihan data...", "info");
-
-                    // Replace state
-                    STATE.school = json.school;
-                    STATE.students = json.students;
-                    STATE.teachers = json.teachers || [];
-                    STATE.attendance = json.attendance;
-
+                    
+                    if(json.school) STATE.school = json.school;
+                    if(json.students) STATE.students = json.students;
+                    if(json.teachers) STATE.teachers = json.teachers;
+                    if(json.attendance) STATE.attendance = json.attendance;
+                    
                     localStorage.setItem('schoolSettings', JSON.stringify(STATE.school));
-                    applySchoolSettings();
                     
-                    if (CONFIG.USE_REAL_BACKEND) {
-                        // Mengirim paket backup penuh ke server 
-                        // Catatan: Jika script GAS belum memiliki case "restoreAll", data akan disimpan di memori/browser saja sementara waktu
-                        apiPost("restoreAll", {
-                            school: STATE.school,
-                            students: STATE.students,
-                            teachers: STATE.teachers,
-                            attendance: STATE.attendance
-                        });
-                        showToast("Menyinkronkan data pemulihan dengan server...", "warning");
+                    if(CONFIG.USE_REAL_BACKEND) {
+                        showToast("Menyinkronkan hasil restore ke server...", "info");
+                        apiPost("saveSchool", STATE.school);
+                        STATE.students.forEach((s, i) => setTimeout(() => apiPost("saveSiswa", s), i * 100));
+                        STATE.teachers.forEach((t, i) => setTimeout(() => apiPost("saveGuru", t), i * 100));
+                        STATE.attendance.forEach((a, i) => setTimeout(() => apiPost("recordAttendance", a), i * 100));
                     }
-
-                    // Update UI Views
-                    updateFilterKelasOptions();
-                    if(!document.getElementById('view-dashboard').classList.contains('hidden')) renderDashboard();
-                    if(!document.getElementById('view-siswa').classList.contains('hidden')) renderSiswa();
-                    if(!document.getElementById('view-rekap').classList.contains('hidden')) renderRekap();
                     
-                    setTimeout(() => {
-                        showToast("Restore data selesai dengan sukses!", "success");
-                        event.target.value = '';
-                    }, 1000);
-
+                    initApp();
+                    showToast("Restore data berhasil!", "success");
+                    event.target.value = '';
                 } catch (err) {
                     console.error(err);
-                    showToast("Gagal membaca file JSON!", "error");
+                    showToast("File JSON tidak valid atau rusak", "error");
                 }
             };
             reader.readAsText(file);
