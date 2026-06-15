@@ -172,6 +172,25 @@
                                 </table>
                             </div>
                         </div>
+
+                        <!-- TABEL JUMLAH SISWA BERDASARKAN KELAS (HANYA UNTUK ADMIN) -->
+                        <div id="dash-class-distribution-card" class="hidden bg-white dark:bg-gray-800 p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 w-full transition-colors duration-200">
+                            <div class="flex items-center gap-2 mb-3 md:mb-4">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 flex items-center justify-center text-sm"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <h3 class="font-semibold text-sm md:text-base dark:text-white">Jumlah Siswa Berdasarkan Kelas</h3>
+                            </div>
+                            <div class="overflow-x-auto pb-2 max-h-64 overflow-y-auto custom-scrollbar">
+                                <table class="w-full text-left text-xs md:text-sm whitespace-nowrap">
+                                    <thead class="bg-gray-50 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300">
+                                        <tr>
+                                            <th class="px-4 py-2.5 font-medium rounded-tl-lg">Nama Kelas</th>
+                                            <th class="px-4 py-2.5 font-medium rounded-tr-lg">Total Siswa Terdaftar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y dark:divide-gray-700 dark:text-gray-300" id="classDistributionTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
                         
                         <div class="bg-white dark:bg-gray-800 p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 w-full">
                             <h3 class="font-semibold text-sm md:text-base mb-3 md:mb-4 dark:text-white">Scan Terbaru</h3>
@@ -587,7 +606,7 @@
                         <ul class="list-circle pl-5 mt-1 text-xs md:text-sm">
                             <li>Klik tombol <strong>Template</strong> untuk mengunduh format standar.</li>
                             <li>Buka file Excel tersebut, isi data siswa. Pastikan format kolom NISN di Excel adalah "Teks" agar angka 0 di depan tidak hilang.</li>
-                            <li>Simpan Excel, lalu kembali ke aplikasi dan klik tombol <strong>Import</strong>. Pilih file Excel tadi. Data akan tersinkronisasi.</li>
+                            <li>Simpan Excel, lalu kembali ke aplikasi and klik tombol <strong>Import</strong>. Pilih file Excel tadi. Data akan tersinkronisasi.</li>
                         </ul>
                     </li>
                     <li><strong>Mencetak Kartu QR Massal:</strong> Klik tombol <strong>Cetak QR</strong>. Sistem akan otomatis menghasilkan file PDF berisi seluruh ID Card siswa dengan kode QR yang siap diprint dan dibagikan.</li>
@@ -995,6 +1014,7 @@
             }
         };
 
+        // ================= CONFIGURE JENJANG =================
         function toggleJenjangConfig() {
             const val = document.getElementById('cfg-school-jenjang').value;
             const bSD = document.getElementById('cfg-block-SD'); if(bSD) bSD.classList.toggle('hidden', val !== 'SD');
@@ -1131,7 +1151,6 @@
                 
                 if (STATE.school.logo && STATE.school.logo.trim() !== '') {
                     el.innerHTML = `<img src="${STATE.school.logo}" class="w-full h-full object-cover" onerror="window.handleImageError(this, '${container.id}', '${container.iconCls}')">`;
-                    // Jika ada gambar logo, buat container jadi putih polos & tanpa rotate padding yang aneh
                     el.classList.remove('bg-primary', 'text-white', 'p-3', 'rotate-3');
                     el.classList.add('bg-white', 'p-0.5', 'border-2', 'border-primary/20');
                     if(container.id === 'welcome-logo') el.classList.remove('transform', 'rotate-3');
@@ -1187,7 +1206,6 @@
             applyTheme(); checkSession(); updateClock(); setInterval(updateClock, 1000);
             applySchoolSettings(); toggleAutoRefresh();
             
-            // Background Sync agar Welcome Page langsung terupdate dari server (Termasuk Logo)
             silentInitSync();
             
             const fd = document.getElementById('filter-date'); if (fd) fd.value = todayStr;
@@ -1462,8 +1480,6 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             });
             
             message += `\n_Sistem Kehadiran Digital ${STATE.school.nama}_`;
-            
-            // Menggunakan scheme URL yang lebih bersahabat untuk mobile app WA
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
 
@@ -1563,6 +1579,44 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50"><td class="px-3 md:px-4 py-2 md:py-3 font-medium text-yellow-600 dark:text-yellow-400"><i class="fa-solid fa-circle text-[8px] md:text-[10px] mr-1.5 md:mr-2"></i>Izin</td><td class="px-3 md:px-4 py-2 md:py-3 font-semibold">${izin}</td><td class="px-3 md:px-4 py-2 md:py-3"><div class="flex items-center gap-2 md:gap-3"><span class="w-8 md:w-10 text-right font-medium text-xs">${pIzin}%</span><div class="w-full bg-gray-200 rounded-full h-1.5 md:h-2 dark:bg-gray-700"><div class="bg-yellow-500 h-1.5 md:h-2 rounded-full" style="width: ${pIzin}%"></div></div></div></td></tr>
             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50"><td class="px-3 md:px-4 py-2 md:py-3 font-medium text-red-600 dark:text-red-400"><i class="fa-solid fa-circle text-[8px] md:text-[10px] mr-1.5 md:mr-2"></i>Alfa</td><td class="px-3 md:px-4 py-2 md:py-3 font-semibold">${alfa}</td><td class="px-3 md:px-4 py-2 md:py-3"><div class="flex items-center gap-2 md:gap-3"><span class="w-8 md:w-10 text-right font-medium text-xs">${pAlfa}%</span><div class="w-full bg-gray-200 rounded-full h-1.5 md:h-2 dark:bg-gray-700"><div class="bg-red-600 h-1.5 md:h-2 rounded-full" style="width: ${pAlfa}%"></div></div></div></td></tr>
             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50"><td class="px-3 md:px-4 py-2 md:py-3 font-medium text-gray-500 dark:text-gray-400"><i class="fa-solid fa-circle text-[8px] md:text-[10px] mr-1.5 md:mr-2"></i>Belum Presensi</td><td class="px-3 md:px-4 py-2 md:py-3 font-semibold">${belum}</td><td class="px-3 md:px-4 py-2 md:py-3"><div class="flex items-center gap-2 md:gap-3"><span class="w-8 md:w-10 text-right font-medium text-xs">${pBelum}%</span><div class="w-full bg-gray-200 rounded-full h-1.5 md:h-2 dark:bg-gray-700"><div class="bg-gray-400 h-1.5 md:h-2 rounded-full" style="width: ${pBelum}%"></div></div></div></td></tr>`;
+
+            // HITUNG DAN TAMPILKAN DISTRIBUSI SISWA PER KELAS (DASHBOARD ADMIN)
+            if (STATE.user && STATE.user.isAdmin) {
+                const distCard = document.getElementById('dash-class-distribution-card');
+                if (distCard) distCard.classList.remove('hidden');
+                
+                const classDistBody = document.getElementById('classDistributionTableBody');
+                if (classDistBody) {
+                    classDistBody.innerHTML = '';
+                    const classCounts = {};
+                    
+                    // Hitung total siswa per kelas
+                    STATE.students.forEach(s => {
+                        if (s.kelas) {
+                            classCounts[s.kelas] = (classCounts[s.kelas] || 0) + 1;
+                        }
+                    });
+                    
+                    // Urutkan kelas secara Alfanumerik (misal: 1A, 1B, 2A...)
+                    const sortedClasses = Object.keys(classCounts).sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+                    
+                    if (sortedClasses.length === 0) {
+                        classDistBody.innerHTML = `<tr><td colspan="2" class="text-center py-4 text-xs text-gray-500">Belum ada data siswa terdaftar</td></tr>`;
+                    } else {
+                        sortedClasses.forEach(cls => {
+                            classDistBody.innerHTML += `
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
+                                    <td class="px-4 py-2.5 font-medium text-gray-800 dark:text-gray-200 text-xs md:text-sm">Kelas ${cls}</td>
+                                    <td class="px-4 py-2.5 font-bold text-primary dark:text-blue-400 text-xs md:text-sm">${classCounts[cls]} Siswa</td>
+                                </tr>
+                            `;
+                        });
+                    }
+                }
+            } else {
+                const distCard = document.getElementById('dash-class-distribution-card');
+                if (distCard) distCard.classList.add('hidden');
+            }
         }
 
         // ================= QR SCANNER =================
@@ -1710,7 +1764,6 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                     <style>
                         @page { size: auto; margin: 0mm; } 
                         body { display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f3f4f6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-                        /* Ensures colors and borders print perfectly */
                     </style>
                 </head>
                 <body>
@@ -1772,11 +1825,9 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             const { jsPDF } = window.jspdf; 
             const doc = new jsPDF('p', 'mm', 'a4'); 
             
-            // Ukuran Kartu CR80 Standar
             const cardW = 54; 
             const cardH = 86; 
             
-            // Konfigurasi Margin & Gap
             const startX = 15; 
             const startY = 15; 
             const gapX = 10; 
@@ -1784,9 +1835,8 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             let col = 0; 
             let row = 0; 
             
-            // Palet Warna Tema (Digunakan untuk membuat fallback block color)
             const themesRGB = { 
-                blue: { top: [37, 99, 235], bottom: [29, 78, 216] }, // Tailwind blue-600 to blue-700
+                blue: { top: [37, 99, 235], bottom: [29, 78, 216] }, 
                 emerald: { top: [16, 185, 129], bottom: [4, 120, 87] },
                 purple: { top: [139, 92, 246], bottom: [109, 40, 217] },
                 rose: { top: [244, 63, 94], bottom: [190, 18, 60] },
@@ -1794,7 +1844,6 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             };
             const themeColor = themesRGB[STATE.school.theme] || themesRGB.blue;
 
-            // Pre-load Logo if exists
             let logoB64 = null;
             if(STATE.school.logo && STATE.school.logo.trim() !== '') {
                 try {
@@ -1811,7 +1860,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                             logoB64 = canvas.toDataURL('image/png');
                             resolve();
                         };
-                        img.onerror = resolve; // Lanjut meskipun gagal
+                        img.onerror = resolve; 
                     });
                 } catch(e) {}
             }
@@ -1823,7 +1872,6 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             
             for (let i = 0; i < sorted.length; i++) { 
                 const s = sorted[i]; 
-                // Jika baris ke-3 penuh, buat halaman baru
                 if (row > 2) { 
                     doc.addPage(); 
                     col = 0; 
@@ -1833,54 +1881,42 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                 const x = startX + (col * (cardW + gapX)); 
                 const y = startY + (row * (cardH + gapY)); 
                 
-                // ================= BACKDROP KARTU (WARNA DASAR TEMA) =================
-                // Karena PDF murni sulit render CSS Gradient, kita simulasi menggunakan background solid tema
                 doc.setFillColor(themeColor.bottom[0], themeColor.bottom[1], themeColor.bottom[2]); 
                 doc.roundedRect(x, y, cardW, cardH, 2, 2, 'F');
                 
-                // Border Kartu
                 doc.setDrawColor(220, 220, 220); 
                 doc.setLineWidth(0.3); 
                 doc.roundedRect(x, y, cardW, cardH, 2, 2, 'S');
                 
-                // ================= HEADER KARTU (LOGO & NAMA SEKOLAH) =================
                 let logoYOffset = 0;
                 if (logoB64) {
-                    // Background bulat putih untuk logo
                     doc.setFillColor(255, 255, 255);
                     doc.circle(x + (cardW/2), y + 7, 4.5, 'F');
-                    // Render gambar logo
                     doc.addImage(logoB64, 'PNG', x + (cardW/2) - 3.5, y + 3.5, 7, 7);
                     logoYOffset = 9;
                 }
 
-                // Teks Nama Sekolah (Rata Tengah)
                 doc.setTextColor(255, 255, 255); 
                 doc.setFont("helvetica", "bold"); 
                 doc.setFontSize(7); 
                 
                 let schoolNameLines = doc.splitTextToSize(STATE.school.nama.toUpperCase(), cardW - 8);
-                if(schoolNameLines.length > 2) schoolNameLines = schoolNameLines.slice(0,2); // Max 2 baris
+                if(schoolNameLines.length > 2) schoolNameLines = schoolNameLines.slice(0,2); 
                 
                 let headerTextY = y + 5 + logoYOffset;
                 for(let l=0; l<schoolNameLines.length; l++) {
                     doc.text(schoolNameLines[l], x + (cardW/2), headerTextY + (l*3), { align: "center" }); 
                 }
                 
-                // ================= BACKGROUND BAWAH (PUTIH) =================
-                // Area putih dari tengah ke bawah untuk tempat informasi siswa
                 const whiteAreaStartY = y + 25;
                 doc.setFillColor(255, 255, 255);
                 doc.rect(x, whiteAreaStartY, cardW, cardH - 25, 'F');
-                // Menutupi ujung bawah agar tetap melengkung
                 doc.roundedRect(x, y, cardW, cardH, 2, 2, 'S');
 
-                // ================= NAMA SISWA (MAX 2 BARIS, RATA TENGAH) =================
-                doc.setTextColor(31, 41, 55); // gray-800
+                doc.setTextColor(31, 41, 55); 
                 doc.setFont("helvetica", "bold"); 
                 doc.setFontSize(10); 
                 
-                // Paksa pemisahan kata (word-wrap) agar tidak terpotong ke samping
                 let nameLines = doc.splitTextToSize(s.nama.toUpperCase(), cardW - 6);
                 if(nameLines.length > 2) nameLines = nameLines.slice(0, 2);
                 
@@ -1889,34 +1925,28 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                     doc.text(nameLines[l], x + (cardW/2), nameStartY + (l*4.5), { align: "center" }); 
                 }
                 
-                // ================= QR CODE IMAGE =================
                 const qrSize = 30; 
                 const qrBase64 = await generateQRBase64(s.nisn); 
-                let qrY = nameStartY + (nameLines.length * 4.5) + 1; // Dinamis mengikuti panjang nama
+                let qrY = nameStartY + (nameLines.length * 4.5) + 1; 
                 
                 if(qrBase64) {
-                    // Bingkai tipis abu-abu untuk QR
                     doc.setDrawColor(229, 231, 235); 
                     doc.setLineWidth(0.3);
                     doc.roundedRect(x + (cardW/2) - (qrSize/2) - 1.5, qrY - 1.5, qrSize + 3, qrSize + 3, 1.5, 1.5);
-                    // Render gambar QR
                     doc.addImage(qrBase64, 'PNG', x + (cardW/2) - (qrSize/2), qrY, qrSize, qrSize); 
                 }
                 
-                // ================= INFORMASI SISWA (NISN & KELAS) =================
                 let infoY = qrY + qrSize + 5;
                 
-                // NISN
                 doc.setFont("helvetica", "normal"); 
                 doc.setFontSize(7.5); 
-                doc.setTextColor(107, 114, 128); // gray-500
+                doc.setTextColor(107, 114, 128); 
                 doc.text(`NISN:`, x + (cardW/2) - 1.5, infoY, { align: "right" }); 
                 
                 doc.setFont("helvetica", "bold"); 
                 doc.setTextColor(31, 41, 55);
                 doc.text(`${s.nisn}`, x + (cardW/2) + 0.5, infoY, { align: "left" }); 
 
-                // Kelas
                 doc.setFont("helvetica", "normal"); 
                 doc.setTextColor(107, 114, 128); 
                 doc.text(`Kelas:`, x + (cardW/2) - 1.5, infoY + 4, { align: "right" }); 
@@ -1925,27 +1955,22 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                 doc.setTextColor(31, 41, 55);
                 doc.text(`${s.kelas}`, x + (cardW/2) + 0.5, infoY + 4, { align: "left" }); 
                 
-                // ================= FOOTER / WATERMARK =================
                 const footerY = y + cardH - 6.5;
                 
-                // Garis pembatas atas footer
-                doc.setDrawColor(243, 244, 246); // gray-100
+                doc.setDrawColor(243, 244, 246); 
                 doc.setLineWidth(0.5); 
                 doc.line(x, footerY - 2, x + cardW, footerY - 2);
                 
-                // Teks Watermark
                 doc.setFont("helvetica", "italic"); 
                 doc.setFontSize(5); 
-                doc.setTextColor(156, 163, 175); // gray-400
+                doc.setTextColor(156, 163, 175); 
                 doc.text("Kartu Presensi Digital", x + (cardW/2), footerY, { align: "center" }); 
                 
-                // Alamat Sekolah (Terpotong jika terlalu panjang)
                 doc.setFont("helvetica", "normal"); 
-                doc.setTextColor(107, 114, 128); // gray-500
+                doc.setTextColor(107, 114, 128); 
                 let shortAddress = STATE.school.alamat.length > 50 ? STATE.school.alamat.substring(0, 50) + "..." : STATE.school.alamat;
                 doc.text(shortAddress, x + (cardW/2), footerY + 3, { align: "center" }); 
                 
-                // ================= NAVIGASI BARIS & KOLOM =================
                 col++; 
                 if (col > 2) { 
                     col = 0; 
@@ -2031,15 +2056,13 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             checked.forEach(cb => {
                 const val = cb.value;
                 if(val.startsWith('TEMP|')) {
-                    // Buat data absensi baru karena sebelumnya tidak ada / implisit
                     const parts = val.split('|');
                     const tgl = parts[1];
                     const nisn = parts[2];
-                    const attData = { id: "A"+Date.now()+Math.floor(Math.random()*1000), nisn: nisn, tanggal: tgl, waktu: timeStr, status: newStatus };
+                    const attData = { id: "A"+Date.now()+Math.floor(Math.random()*1000), nisn: nisn, text: nisn, tanggal: tgl, waktu: timeStr, status: newStatus };
                     STATE.attendance.push(attData);
                     apiPost('recordAttendance', attData);
                 } else {
-                    // Update yang sudah ada
                     const id = val;
                     const idx = STATE.attendance.findIndex(a => a.id === id);
                     if(idx >= 0) {
@@ -2175,18 +2198,17 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
         
         function renderLaporan() {
             const tipeWaktu = document.getElementById('laporan-tipe-waktu').value; const myAtt = getMyAttendance(); let fAtt = [];
-            if (tipeWaktu === 'hari_ini') { fAtt = myAtt.filter(a => a.tanggal === todayStr); currentLaporanLabel = `Hari Ini (${new Date().toLocaleDateString('id-ID')})`; } else if (tipeWaktu === 'tanggal') { const tgl = document.getElementById('laporan-val-tanggal').value || todayStr; fAtt = myAtt.filter(a => a.tanggal === tgl); currentLaporanLabel = `Tanggal ${new Date(tgl).toLocaleDateString('id-ID')}`; } else if (tipeWaktu === 'bulan') { const bln = document.getElementById('laporan-val-bulan').value; const thn = document.getElementById('laporan-val-tahun-bln').value; fAtt = myAtt.filter(a => a.tanggal.startsWith(`${thn}-${bln}`)); const namaBulan = document.getElementById('laporan-val-bulan').options[document.getElementById('laporan-val-bulan').selectedIndex].text; currentLaporanLabel = `Bulan ${namaBulan} ${thn}`; } else if (tipeWaktu === 'semester') { const smt = document.getElementById('laporan-val-semester').value; const thn = document.getElementById('laporan-val-tahun-smt').value; fAtt = myAtt.filter(a => { if(!a.tanggal.startsWith(thn)) return false; const m = parseInt(a.tanggal.split('-')[1]); if (smt === 'genap') return m >= 1 && m <= 6; return m >= 7 && m <= 12; }); currentLaporanLabel = `Semester ${smt.charAt(0).toUpperCase() + smt.slice(1)} ${thn}`; } else if (tipeWaktu === 'tahun') { const thn = document.getElementById('laporan-val-tahun-thn').value; fAtt = myAtt.filter(a => a.tanggal.startsWith(thn)); currentLaporanLabel = `Tahun ${thn}`; } else if (tipeWaktu === 'rentang_bulan') { const start = document.getElementById('laporan-val-rentang-start').value; const end = document.getElementById('laporan-val-rentang-end').value; if(start && end) { const sStr = start < end ? start : end; const eStr = start > end ? start : end; fAtt = myAtt.filter(a => { const m = a.tanggal.substring(0, 7); return m >= sStr && m <= eStr; }); const fm = (ym) => { const [y, m] = ym.split('-'); const ms = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"]; return `${ms[parseInt(m)-1]} ${y}`; }; currentLaporanLabel = `Periode ${fm(sStr)} - ${fm(eStr)}`; } }
+            if (tipeWaktu === 'hari_ini') { fAtt = myAtt.filter(a => a.tanggal === todayStr); currentLaporanLabel = `Hari Ini (${new Date().toLocaleDateString('id-ID')})`; } 
+            else if (tipeWaktu === 'tanggal') { const tgl = document.getElementById('laporan-val-tanggal').value || todayStr; fAtt = myAtt.filter(a => a.tanggal === tgl); currentLaporanLabel = `Tanggal ${new Date(tgl).toLocaleDateString('id-ID')}`; } 
+            else if (tipeWaktu === 'bulan') { const bln = document.getElementById('laporan-val-bulan').value; const thn = document.getElementById('laporan-val-tahun-bln').value; fAtt = myAtt.filter(a => a.tanggal.startsWith(`${thn}-${bln}`)); const namaBulan = document.getElementById('laporan-val-bulan').options[document.getElementById('laporan-val-bulan').selectedIndex].text; currentLaporanLabel = `Bulan ${namaBulan} ${thn}`; } 
+            else if (tipeWaktu === 'semester') { const smt = document.getElementById('laporan-val-semester').value; const thn = document.getElementById('laporan-val-tahun-smt').value; fAtt = myAtt.filter(a => { if(!a.tanggal.startsWith(thn)) return false; const m = parseInt(a.tanggal.split('-')[1]); if (smt === 'genap') return m >= 1 && m <= 6; return m >= 7 && m <= 12; }); currentLaporanLabel = `Semester ${smt.charAt(0).toUpperCase() + smt.slice(1)} ${thn}`; } 
+            else if (tipeWaktu === 'tahun') { const thn = document.getElementById('laporan-val-tahun-thn').value; fAtt = myAtt.filter(a => a.tanggal.startsWith(thn)); currentLaporanLabel = `Tahun ${thn}`; } 
+            else if (tipeWaktu === 'rentang_bulan') { const start = document.getElementById('laporan-val-rentang-start').value; const end = document.getElementById('laporan-val-rentang-end').value; if(start && end) { const sStr = start < end ? start : end; const eStr = start > end ? start : end; fAtt = myAtt.filter(a => { const m = a.tanggal.substring(0, 7); return m >= sStr && m <= eStr; }); const fm = (ym) => { const [y, m] = ym.split('-'); const ms = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"]; return `${ms[parseInt(m)-1]} ${y}`; }; currentLaporanLabel = `Periode ${fm(sStr)} - ${fm(eStr)}`; } }
             
             let vNisn = getMyStudents().map(s => s.nisn); const tar = document.getElementById('laporan-target').value; let targetLabel = STATE.user.isAdmin ? "Semua Siswa" : `Semua Siswa (Kelas ${STATE.user.kelas})`;
             if(tar==='kelas') { const k = STATE.user.isAdmin ? document.getElementById('laporan-val-kelas').value : STATE.user.kelas; vNisn=getMyStudents().filter(s=>s.kelas===String(k)).map(s=>s.nisn); fAtt=fAtt.filter(a=>vNisn.includes(a.nisn)); targetLabel = `Kelas ${k}`; } else if(tar==='siswa') { const s=document.getElementById('laporan-val-siswa').value; vNisn=[s]; fAtt=fAtt.filter(a=>a.nisn===s); targetLabel = `Siswa (${getMyStudents().find(x=>x.nisn===s)?.nama || ''})`; }
             document.getElementById('view-laporan').dataset.periodeText = currentLaporanLabel; document.getElementById('view-laporan').dataset.targetText = targetLabel;
             
-            const explicitHadir = fAtt.filter(a=>a.status === 'Hadir').length; 
-            const explicitTerlambat = fAtt.filter(a=>a.status === 'Terlambat').length;
-            const explicitSakit = fAtt.filter(a=>a.status === 'Sakit').length;
-            const explicitIzin = fAtt.filter(a=>a.status === 'Izin').length;
-            let explicitAlfa = fAtt.filter(a=>a.status === 'Alfa').length;
-
             const tbody = document.getElementById('laporan-table-body');
             tbody.innerHTML = '';
             
@@ -2339,7 +2361,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                     headStyles: { fillColor: [37, 99, 235] },
                     columns: [
                         { header: 'Nama Siswa' }, { header: 'Hadir' }, { header: 'Terlambat' }, 
-                        { header: 'Sakit' }, { header: 'Izin' }, { header: 'Alfa' }, { header: 'Persentase' }
+                        { header: 'Sakit' }, { header: 'Izin' }, { header: 'Alfa' }, { header: 'Persentase' }, { header: '' }
                     ]
                 });
                 
