@@ -970,6 +970,7 @@
         };
 
         const _encUrl = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5V093b2xuUm43cWpQUEJGdHBHa3M3cjZCRlYtaW1VVWNVX1dWNU1uOXN2YUhMMDFzZXRRNU83YUE5cS1aNXVxc3IvZXhlYw==";
+        const DEFAULT_LOGO_URL = "https://i.ibb.co.com/0VXDYm76/logo-sdn-1-dupaaa.png";
 
         const CONFIG = { 
             USE_REAL_BACKEND: true, 
@@ -978,7 +979,7 @@
         const STATE = { 
             user: null, theme: localStorage.getItem('theme') || 'light', 
             school: JSON.parse(localStorage.getItem('schoolSettings')) || { 
-                nama: 'SDN Nusantara 1', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue', logo: '',
+                nama: 'SDN Nusantara 1', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue', logo: DEFAULT_LOGO_URL,
                 sessions: {
                     SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
                     SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
@@ -1019,7 +1020,7 @@
                 tahun: fetchedData.tahun || currentData.tahun || '',
                 jenjang: fetchedData.jenjang || currentData.jenjang || 'SD',
                 theme: fetchedData.theme || currentData.theme || 'blue',
-                logo: fetchedData.logo !== undefined ? fetchedData.logo : (currentData.logo || ''),
+                logo: (fetchedData.logo && fetchedData.logo.trim() !== '') ? fetchedData.logo : (currentData.logo || DEFAULT_LOGO_URL),
                 sessions: fetchedData.sessions || currentData.sessions || {
                     SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
                     SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
@@ -1224,7 +1225,7 @@
                 fnama.value = STATE.school.nama || '';
                 document.getElementById('cfg-school-alamat').value = STATE.school.alamat || '';
                 document.getElementById('cfg-school-tahun').value = STATE.school.tahun || '';
-                document.getElementById('cfg-school-logo').value = STATE.school.logo || '';
+                document.getElementById('cfg-school-logo').value = STATE.school.logo || DEFAULT_LOGO_URL;
                 
                 const fjenjang = document.getElementById('cfg-school-jenjang');
                 if(fjenjang) {
@@ -1266,7 +1267,8 @@
             const tahun = document.getElementById('cfg-school-tahun').value;
             const jenjang = document.getElementById('cfg-school-jenjang').value;
             const theme = document.getElementById('cfg-school-theme').value;
-            const logo = document.getElementById('cfg-school-logo').value;
+            const logoInput = document.getElementById('cfg-school-logo').value.trim();
+            const logo = logoInput || DEFAULT_LOGO_URL;
             
             if(!nama) { showToast("Nama sekolah wajib diisi", "warning"); return; }
             
