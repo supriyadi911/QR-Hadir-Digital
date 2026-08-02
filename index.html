@@ -473,6 +473,7 @@
                                         <th class="px-2 md:px-4 py-2 md:py-3 font-medium cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" onclick="sortRekap('kelas')">Kls <i class="fa-solid fa-sort text-[10px] ml-1"></i></th>
                                         <th class="px-2 md:px-4 py-2 md:py-3 font-medium">Waktu</th>
                                         <th class="px-2 md:px-4 py-2 md:py-3 font-medium">Status</th>
+                                        <th class="px-2 md:px-4 py-2 md:py-3 font-medium text-center">Rincian</th>
                                         <th class="px-3 md:px-4 py-2 md:py-3 font-medium text-right">Aksi</th>
                                     </tr>
                                 </thead>
@@ -546,6 +547,80 @@
     </div>
 
     <!-- MODALS -->
+    <!-- Modal Rincian Presensi Siswa -->
+    <div id="modal-rincian-siswa" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[80] p-4 opacity-0 transition-opacity">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]" id="modal-rincian-siswa-content">
+            <div class="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800">
+                <h3 class="font-bold text-base md:text-lg dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-id-card text-primary"></i> Rincian Presensi Siswa
+                </h3>
+                <button onclick="closeModal('modal-rincian-siswa')" class="text-gray-500 hover:text-red-500 text-xl"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="p-4 md:p-6 overflow-y-auto custom-scrollbar space-y-4">
+                <!-- Header Info Siswa -->
+                <div class="bg-blue-50 dark:bg-blue-900/20 p-3.5 rounded-xl border border-blue-100 dark:border-blue-800/50 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-sm md:text-base text-gray-900 dark:text-white" id="rincian-siswa-nama">-</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">NISN: <span id="rincian-siswa-nisn" class="font-semibold text-gray-700 dark:text-gray-300">-</span> | Kelas: <span id="rincian-siswa-kelas" class="font-semibold text-gray-700 dark:text-gray-300">-</span></p>
+                    </div>
+                    <span class="text-xs bg-white dark:bg-gray-800 text-primary dark:text-blue-400 font-bold px-2.5 py-1 rounded-lg border border-blue-200 dark:border-blue-700 shadow-sm" id="rincian-periode-lbl">-</span>
+                </div>
+
+                <!-- Summary Cards Presensi -->
+                <div class="grid grid-cols-5 gap-1.5 text-center">
+                    <div class="bg-green-50 dark:bg-green-900/20 p-2 rounded-lg border border-green-200 dark:border-green-800/40">
+                        <p class="text-[10px] text-green-700 dark:text-green-400 font-medium">Hadir</p>
+                        <p class="text-base font-bold text-green-700 dark:text-green-400" id="rincian-count-hadir">0</p>
+                    </div>
+                    <div class="bg-orange-50 dark:bg-orange-900/20 p-2 rounded-lg border border-orange-200 dark:border-orange-800/40">
+                        <p class="text-[10px] text-orange-700 dark:text-orange-400 font-medium">Terlambat</p>
+                        <p class="text-base font-bold text-orange-700 dark:text-orange-400" id="rincian-count-terlambat">0</p>
+                    </div>
+                    <div class="bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg border border-purple-200 dark:border-purple-800/40">
+                        <p class="text-[10px] text-purple-700 dark:text-purple-400 font-medium">Sakit</p>
+                        <p class="text-base font-bold text-purple-700 dark:text-purple-400" id="rincian-count-sakit">0</p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded-lg border border-yellow-200 dark:border-yellow-800/40">
+                        <p class="text-[10px] text-yellow-700 dark:text-yellow-400 font-medium">Izin</p>
+                        <p class="text-base font-bold text-yellow-700 dark:text-yellow-400" id="rincian-count-izin">0</p>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/20 p-2 rounded-lg border border-red-200 dark:border-red-800/40">
+                        <p class="text-[10px] text-red-700 dark:text-red-400 font-medium">Alfa</p>
+                        <p class="text-base font-bold text-red-700 dark:text-red-400" id="rincian-count-alfa">0</p>
+                    </div>
+                </div>
+
+                <!-- Total Isian Presensi -->
+                <div class="bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border dark:border-gray-600 flex justify-between items-center text-xs">
+                    <span class="text-gray-600 dark:text-gray-300 font-medium">Total Presensi Terisi (Hadir + Terlambat):</span>
+                    <span class="font-bold text-primary dark:text-blue-400 text-sm" id="rincian-total-isi">0 Kali</span>
+                </div>
+
+                <!-- Log Riwayat Absensi -->
+                <div>
+                    <h5 class="font-bold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-2">Riwayat Presensi Per Tanggal</h5>
+                    <div class="border dark:border-gray-700 rounded-xl overflow-hidden max-h-52 overflow-y-auto custom-scrollbar">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 sticky top-0">
+                                <tr>
+                                    <th class="px-3 py-2 font-medium">Tanggal</th>
+                                    <th class="px-3 py-2 font-medium">Waktu Scan</th>
+                                    <th class="px-3 py-2 font-medium">Status</th>
+                                    <th class="px-3 py-2 font-medium text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian-log-body" class="divide-y dark:divide-gray-700 dark:text-gray-300">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 border-t dark:border-gray-700 flex justify-end bg-gray-50 dark:bg-gray-800/50">
+                <button onclick="closeModal('modal-rincian-siswa')" class="px-4 py-1.5 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg text-xs font-medium transition-colors">Tutup</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Panduan -->
     <div id="modal-panduan" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[80] p-4 opacity-0 transition-opacity">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]" id="modal-panduan-content">
@@ -2252,7 +2327,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             const startIndex = (rekapPage - 1) * rekapLimit; const endIndex = Math.min(startIndex + rekapLimit, totalItems);
             const paginated = displayData.slice(startIndex, endIndex);
 
-            if(paginated.length === 0) { tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-xs text-gray-500">Kosong</td></tr>`; }
+            if(paginated.length === 0) { tbody.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-xs text-gray-500">Kosong</td></tr>`; }
             else {
                 paginated.forEach(d => { 
                     let badge = d.status==='Hadir'?'bg-green-100 text-green-700':(d.status==='Terlambat'?'bg-yellow-100 text-yellow-700':(d.status==='Sakit'?'bg-purple-100 text-purple-700':(d.status==='Izin'?'bg-orange-100 text-orange-700':(d.status==='Alfa'?'bg-red-100 text-red-700':'bg-gray-100 text-gray-600')))); 
@@ -2264,6 +2339,11 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                         <td class="px-2 md:px-4 py-2 md:py-3">${d.kelas}</td>
                         <td class="px-2 md:px-4 py-2 md:py-3">${d.waktu}</td>
                         <td class="px-2 md:px-4 py-2 md:py-3"><span class="px-1.5 py-0.5 rounded text-[10px] md:text-xs font-medium ${badge}">${d.status}</span></td>
+                        <td class="px-2 md:px-4 py-2 md:py-3 text-center">
+                            <button onclick="openModalRincianSiswa('${d.nisn}')" class="bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-800/50 px-2.5 py-1 rounded-lg text-xs font-medium inline-flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-circle-info"></i> <span>Rincian</span>
+                            </button>
+                        </td>
                         <td class="px-3 md:px-4 py-2 md:py-3 text-right flex justify-end gap-1">
                             <button onclick="sendWA_Rekap('${d.nisn}', '${d.tanggal}', '${d.status}', '${d.waktu}')" class="text-green-600 p-1 hover:bg-green-50 rounded" title="Kirim Info Absen via WA"><i class="fa-brands fa-whatsapp text-sm"></i></button>
                             <select onchange="updateStatus('${d.nisn}', '${d.tanggal}', this.value)" class="text-[10px] md:text-xs border rounded p-1 dark:bg-gray-700 outline-none cursor-pointer">
@@ -2284,6 +2364,137 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             if (infoEl) infoEl.innerText = totalItems === 0 ? '0 data' : `Menampilkan ${startIndex + 1}-${endIndex} dari ${totalItems}`;
             if (btnPrev) btnPrev.disabled = rekapPage <= 1; if (btnNext) btnNext.disabled = rekapPage >= totalPages; 
             checkRekapSelection();
+        }
+
+        function openModalRincianSiswa(nisn) {
+            const student = STATE.students.find(s => s.nisn === nisn);
+            if (!student) return;
+
+            document.getElementById('rincian-siswa-nama').innerText = student.nama;
+            document.getElementById('rincian-siswa-nisn').innerText = student.nisn;
+            document.getElementById('rincian-siswa-kelas').innerText = student.kelas;
+
+            // Dapatkan rentang tanggal aktif dari filter Rekap Absensi
+            const tipeWaktu = document.getElementById('rekap-tipe-waktu').value;
+            const myAtt = getMyAttendance();
+            let datesInRange = [];
+            let labelPeriode = "Hari Ini";
+
+            if (tipeWaktu === 'hari_ini') {
+                datesInRange = [todayStr];
+                labelPeriode = "Hari Ini";
+            } else if (tipeWaktu === 'tanggal') {
+                const tgl = document.getElementById('rekap-val-tanggal').value || todayStr;
+                datesInRange = [tgl];
+                labelPeriode = tgl;
+            } else if (tipeWaktu === 'bulan') {
+                const bln = document.getElementById('rekap-val-bulan').value;
+                const thn = document.getElementById('rekap-val-tahun-bln').value;
+                const prefix = `${thn}-${bln}`;
+                datesInRange = [...new Set(myAtt.filter(a => a.tanggal.startsWith(prefix)).map(a => a.tanggal))].sort();
+                const selectBulan = document.getElementById('rekap-val-bulan');
+                const namaBulan = selectBulan.options[selectBulan.selectedIndex].text;
+                labelPeriode = `${namaBulan} ${thn}`;
+            } else if (tipeWaktu === 'semester') {
+                const smt = document.getElementById('rekap-val-semester').value;
+                const thn = document.getElementById('rekap-val-tahun-smt').value;
+                datesInRange = [...new Set(myAtt.filter(a => {
+                    if (!a.tanggal.startsWith(thn)) return false;
+                    const m = parseInt(a.tanggal.split('-')[1]);
+                    return smt === 'genap' ? (m >= 1 && m <= 6) : (m >= 7 && m <= 12);
+                }).map(a => a.tanggal))].sort();
+                labelPeriode = `Smt ${smt} ${thn}`;
+            } else if (tipeWaktu === 'tahun') {
+                const thn = document.getElementById('rekap-val-tahun-thn').value;
+                datesInRange = [...new Set(myAtt.filter(a => a.tanggal.startsWith(thn)).map(a => a.tanggal))].sort();
+                labelPeriode = `Thn ${thn}`;
+            }
+
+            if (datesInRange.length === 0 && (tipeWaktu === 'hari_ini' || tipeWaktu === 'tanggal')) {
+                datesInRange = [tipeWaktu === 'hari_ini' ? todayStr : document.getElementById('rekap-val-tanggal').value];
+            }
+
+            document.getElementById('rincian-periode-lbl').innerText = labelPeriode;
+
+            let countH = 0, countT = 0, countS = 0, countI = 0, countA = 0;
+            const logBody = document.getElementById('rincian-log-body');
+            logBody.innerHTML = '';
+
+            const logs = [];
+
+            datesInRange.forEach(d => {
+                const r = myAtt.find(a => a.nisn === student.nisn && a.tanggal === d);
+                const st = r ? r.status : getImplicitStatus(student, d);
+                if (st === 'Hadir') countH++;
+                else if (st === 'Terlambat') countT++;
+                else if (st === 'Sakit') countS++;
+                else if (st === 'Izin') countI++;
+                else if (st === 'Alfa') countA++;
+
+                logs.push({ id: r ? r.id : null, tanggal: d, waktu: r ? r.waktu : '-', status: st });
+            });
+
+            document.getElementById('rincian-count-hadir').innerText = countH;
+            document.getElementById('rincian-count-terlambat').innerText = countT;
+            document.getElementById('rincian-count-sakit').innerText = countS;
+            document.getElementById('rincian-count-izin').innerText = countI;
+            document.getElementById('rincian-count-alfa').innerText = countA;
+
+            const totalIsiPresensi = countH + countT;
+            document.getElementById('rincian-total-isi').innerText = `${totalIsiPresensi} Kali (${countH} Hadir, ${countT} Terlambat)`;
+
+            if (logs.length === 0) {
+                logBody.innerHTML = `<tr><td colspan="4" class="text-center py-3 text-xs text-gray-400">Tidak ada riwayat presensi dalam periode ini</td></tr>`;
+            } else {
+                logs.reverse().forEach(log => {
+                    let badge = log.status === 'Hadir' ? 'bg-green-100 text-green-700' : (log.status === 'Terlambat' ? 'bg-orange-100 text-orange-700' : (log.status === 'Sakit' ? 'bg-purple-100 text-purple-700' : (log.status === 'Izin' ? 'bg-yellow-100 text-yellow-700' : (log.status === 'Alfa' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-600'))));
+                    
+                    const deleteBtn = log.id 
+                        ? `<button onclick="deleteRekapFromModal('${log.id}', '${student.nisn}')" class="text-red-600 hover:text-red-800 p-1 rounded" title="Hapus"><i class="fa-solid fa-trash"></i></button>`
+                        : `<button disabled class="text-gray-300 p-1 cursor-not-allowed" title="Belum tersimpan"><i class="fa-solid fa-trash"></i></button>`;
+
+                    logBody.innerHTML += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <td class="px-3 py-2 font-medium">${log.tanggal}</td>
+                        <td class="px-3 py-2 text-gray-500">${log.waktu}</td>
+                        <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-medium ${badge}">${log.status}</span></td>
+                        <td class="px-3 py-2 text-right">
+                            <div class="flex items-center justify-end gap-1">
+                                <select onchange="updateStatusFromModal('${student.nisn}', '${log.tanggal}', this.value)" class="text-[10px] border rounded p-1 dark:bg-gray-700 outline-none cursor-pointer">
+                                    <option value="">Ubah Status</option>
+                                    <option value="Hadir">Hadir</option>
+                                    <option value="Terlambat">Terlambat</option>
+                                    <option value="Sakit">Sakit</option>
+                                    <option value="Izin">Izin</option>
+                                    <option value="Alfa">Alfa</option>
+                                </select>
+                                ${deleteBtn}
+                            </div>
+                        </td>
+                    </tr>`;
+                });
+            }
+
+            const m = document.getElementById('modal-rincian-siswa');
+            const c = document.getElementById('modal-rincian-siswa-content');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+            setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
+        }
+
+        function updateStatusFromModal(nisn, tgl, st) {
+            if(!st) return;
+            updateStatus(nisn, tgl, st);
+            openModalRincianSiswa(nisn);
+        }
+
+        function deleteRekapFromModal(id, nisn) {
+            if(confirm('Hapus rekapan kehadiran tanggal ini?')) {
+                STATE.attendance = STATE.attendance.filter(a => a.id !== id);
+                apiPost("deleteAttendance", {id: id});
+                showToast('Rekapan dihapus', 'success');
+                renderRekap();
+                openModalRincianSiswa(nisn);
+            }
         }
 
         function updateStatus(nisn, tgl, st) { 
