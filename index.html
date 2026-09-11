@@ -969,12 +969,11 @@
             if(e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83)) return false; // Blokir Ctrl+U/S
         };
 
-        const _encUrl = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5V093b2xuUm43cWpQUEJGdHBHa3M3cjZCRlYtaW1VVWNVX1dWNU1uOXN2YUhMMDFzZXRRNU83YUE5cS1aNXVxc3IvZXhlYw==";
         const DEFAULT_LOGO_URL = "https://i.ibb.co.com/0VXDYm76/logo-sdn-1-dupaaa.png";
 
         const CONFIG = { 
             USE_REAL_BACKEND: true, 
-            GAS_API_URL: atob(_encUrl) 
+            GAS_API_URL: "https://script.google.com/macros/s/AKfycbyyR91xlYkFMJptV_QfFLLyqZtBqIjqtS4m8igedBnwx3gf6kpZTvvpR7139AMgA27NaQ/exec"
         };
         const STATE = { 
             user: null, theme: localStorage.getItem('theme') || 'light', 
@@ -1005,6 +1004,31 @@
             if (/^\d{4}-\d{2}-\d{2}$/.test(dateVal.substring(0,10))) return dateVal.substring(0, 10);
             try { const d = new Date(dateVal); if (!isNaN(d.getTime())) { return getLocalDateStr(d); } } catch(e) {}
             return dateVal;
+        }
+
+        // TAMBAHKAN FUNGSI NORMALISASI WAKTU
+        function normalizeTimeStr(timeVal) {
+            if (!timeVal || timeVal === "-") return "-";
+            let t = String(timeVal).trim();
+            
+            // Ekstrak pola jam:menit dari format panjang (contoh: "Tue Nov 10 2026 15:00:00 GMT...")
+            let timeMatch = t.match(/(\d{2}):(\d{2})(?::\d{2})?/);
+            if (timeMatch) {
+                return `${timeMatch[1]}:${timeMatch[2]} WIB`;
+            }
+            
+            // Coba parsing ke Date object sebagai fallback
+            try {
+                let d = new Date(t);
+                if (!isNaN(d.getTime())) {
+                    let hh = String(d.getHours()).padStart(2, '0');
+                    let mm = String(d.getMinutes()).padStart(2, '0');
+                    return `${hh}:${mm} WIB`;
+                }
+            } catch(e) {}
+            
+            // Kembalikan aslinya beserta keterangan WIB jika belum ada
+            return t.toUpperCase().includes('WIB') ? t : t + " WIB";
         }
 
         const MOCK_ATTENDANCE = []; const today = new Date(); const todayStr = getLocalDateStr(today);
@@ -1067,7 +1091,7 @@
                 if(json.status === "success") {
                     updateDbStatus('success');
                     STATE.students = (json.students || []).map(s => { if(s.nisn && s.nisn.startsWith("'")) s.nisn = s.nisn.substring(1); if(s.hp && s.hp.startsWith("'")) s.hp = s.hp.substring(1); return s; });
-                    STATE.attendance = (json.attendance || []).map(a => { if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1); a.tanggal = normalizeDateStr(a.tanggal); return a; });
+                    STATE.attendance = (json.attendance || []).map(a => { if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1); a.tanggal = normalizeDateStr(a.tanggal); a.waktu = normalizeTimeStr(a.waktu); return a; });
                     STATE.teachers = json.teachers || [];
                     if (json.school) { safeMergeSchool(json.school); }
                     
@@ -1556,6 +1580,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                         STATE.attendance = (json.attendance || []).map(a => {
                             if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1);
                             a.tanggal = normalizeDateStr(a.tanggal);
+                            a.waktu = normalizeTimeStr(a.waktu);
                             return a;
                         });
                         STATE.teachers = json.teachers || [];
@@ -1821,7 +1846,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             const alreadyScanned = STATE.attendance.find(a => a.nisn === dt && a.tanggal === todayStr);
             if (alreadyScanned) { resBox.classList.add('bg-yellow-100', 'text-yellow-800', 'border-yellow-300'); resBox.innerHTML = `<b>Sudah Absen (${alreadyScanned.waktu})</b>`; setTimeout(() => { isScanningProcess = false; }, 2000); return; }
             
-            const now = new Date(); const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }); 
+            const now = new Date(); const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ' WIB'; 
             
             const jenjang = getJenjangFromKelas(student.kelas).toUpperCase(); 
             const sessions = STATE.school.sessions ? STATE.school.sessions[jenjang] : null;
@@ -2235,7 +2260,7 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             if(!confirm(`Apakah Anda yakin ingin mengubah status ${checked.length} siswa menjadi ${newStatus}?`)) return;
 
             const now = new Date(); 
-            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ' WIB';
 
             checked.forEach(cb => {
                 const val = cb.value;
@@ -2502,7 +2527,9 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
         function updateStatus(nisn, tgl, st) { 
             if(!st)return; 
             const idx = STATE.attendance.findIndex(a => a.nisn===nisn && a.tanggal===tgl); 
-            const attData = { id: idx >= 0 && STATE.attendance[idx].id ? STATE.attendance[idx].id : "A"+Date.now(), nisn:nisn, tanggal:tgl, waktu: idx >= 0 ? STATE.attendance[idx].waktu : "-", status:st }; 
+            const now = new Date();
+            const currTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ' WIB';
+            const attData = { id: idx >= 0 && STATE.attendance[idx].id ? STATE.attendance[idx].id : "A"+Date.now(), nisn:nisn, tanggal:tgl, waktu: (idx >= 0 && STATE.attendance[idx].waktu && STATE.attendance[idx].waktu !== "-") ? STATE.attendance[idx].waktu : currTime, status:st }; 
             if(idx>=0) STATE.attendance[idx] = attData; 
             else STATE.attendance.push(attData); 
             apiPost('recordAttendance', attData); 
