@@ -154,7 +154,7 @@
                     Selamat Datang di <br class="hidden md:block">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary school-name-display">Hadir Digital</span>
                 </h1>
-                <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed" id="landing-profile-desc">
+                <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed whitespace-pre-line" id="landing-profile-desc">
                     Kami berkomitmen untuk menjadi institusi pendidikan terdepan yang mengedepankan keunggulan akademik, pembentukan karakter, kedisiplinan, dan pemanfaatan teknologi digital guna menciptakan lingkungan belajar yang inklusif dan inovatif bagi seluruh peserta didik.
                 </p>
                 
@@ -210,7 +210,7 @@
                             <i class="fa-solid fa-eye"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 z-10">Visi Kami</h3>
-                        <p class="text-gray-700 dark:text-gray-300 italic text-lg md:text-xl leading-relaxed z-10 font-medium" id="landing-visi">
+                        <p class="text-gray-700 dark:text-gray-300 italic text-sm md:text-base leading-relaxed z-10 font-medium whitespace-pre-line" id="landing-visi">
                             "Mewujudkan Generasi Unggul, Berakhlak Mulia, Berwawasan Global, dan Berbudaya Lingkungan Berlandaskan Nilai-Nilai Pancasila."
                         </p>
                     </div>
@@ -471,10 +471,9 @@
                             </span>
                             <span class="text-[8px] text-gray-500 font-bold" id="db-lbl">DB</span>
                         </div>
-                        <div class="relative inline-block w-6 align-middle select-none transition duration-200 ease-in mt-0.5">
-                            <input type="checkbox" id="toggle-auto-refresh" class="toggle-checkbox absolute block w-3 h-3 rounded-full bg-white border-2 appearance-none cursor-pointer transition-transform duration-200 ease-in-out z-10" checked onchange="toggleAutoRefresh()"/>
-                            <label for="toggle-auto-refresh" class="toggle-label block overflow-hidden h-3 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
-                        </div>
+                        <button id="btn-manual-sync" onclick="manualSync()" class="mt-0.5 text-[9px] md:text-[10px] bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:hover:bg-blue-800/50 dark:text-blue-400 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-700 transition-colors flex items-center gap-1 shadow-sm" title="Tarik Data Terbaru dari Server">
+                            <i class="fa-solid fa-rotate" id="icon-sync"></i>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -861,7 +860,7 @@
                 </div>
 
                 <!-- VIEW: SCAN QR -->
-                <div id="view-scan" class="view-section hidden max-w-3xl mx-auto"><div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden"><div class="p-4 md:p-5 text-center bg-gray-50 dark:bg-gray-700/50 border-b dark:border-gray-700"><h2 class="text-lg md:text-xl font-bold dark:text-white">Scanner Siswa</h2><p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mt-1">Arahkan QR Code ke Kamera</p></div><div class="p-4 md:p-6"><div class="flex justify-center mb-4"><div class="relative w-full max-w-sm"><select id="camera-facing-mode" onchange="switchCamera()" class="w-full px-4 py-2 border rounded-xl text-sm font-medium dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-primary shadow-sm appearance-none cursor-pointer text-center"><option value="environment">📸 Kamera Belakang</option><option value="user">🤳 Kamera Depan</option></select><i class="fa-solid fa-chevron-down absolute right-4 top-3.5 text-gray-400 text-xs pointer-events-none"></i></div></div><div class="relative w-full max-w-sm mx-auto bg-black rounded-xl overflow-hidden shadow-inner aspect-square mb-4 md:mb-6" id="reader-container"><div id="reader" class="w-full h-full"></div></div><div id="scan-result" class="hidden text-center p-3 md:p-4 rounded-xl border mb-4 text-sm md:text-base"></div><div class="flex justify-center gap-3"><button id="btn-start-scan" class="bg-primary hover:bg-secondary text-white px-5 py-2 md:px-6 md:py-2.5 text-sm md:text-base rounded-lg font-medium transition-colors w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i> Mulai Scan</button><button id="btn-stop-scan" class="hidden bg-red-600 hover:bg-red-700 text-white px-5 py-2 md:px-6 md:py-2.5 text-sm md:text-base rounded-lg font-medium transition-colors w-full sm:w-auto"><i class="fa-solid fa-stop mr-2"></i> Berhenti</button></div></div></div></div>
+                <div id="view-scan" class="view-section hidden max-w-3xl mx-auto"><div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden"><div class="p-4 md:p-5 text-center bg-gray-50 dark:bg-gray-700/50 border-b dark:border-gray-700"><h2 class="text-lg md:text-xl font-bold dark:text-white">Scanner Siswa</h2><p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mt-1">Arahkan QR Code ke Kamera</p></div><div class="p-4 md:p-6"><div class="flex justify-center mb-4"><div class="relative w-full max-w-sm"><select id="camera-facing-mode" onchange="switchCamera()" class="w-full px-4 py-2 border rounded-xl text-sm font-medium dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-primary shadow-sm appearance-none cursor-pointer text-center"><option value="environment">📸 Kamera Belakang</option><option value="user">🤳 Kamera Depan</option></select><i class="fa-solid fa-chevron-down absolute right-4 top-3.5 text-gray-400 text-xs pointer-events-none"></i></div></div><div class="relative w-full max-w-sm mx-auto bg-black rounded-xl overflow-hidden shadow-inner aspect-square mb-4 md:mb-6" id="reader-container"><div id="reader" class="w-full h-full"></div></div><div id="scan-result" class="hidden text-center p-3 md:p-4 rounded-xl border mb-4 text-sm md:text-base"></div><div class="flex justify-center gap-3"><button id="btn-start-scan" class="bg-primary hover:bg-secondary text-white px-5 py-2 md:px-6 md:py-2.5 text-sm md:text-base rounded-lg font-medium transition-colors w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i> Mulai Scan</button><button id="btn-stop-scan" class="hidden bg-red-600 hover:bg-red-700 text-white px-5 py-2 md:px-6 md:py-2.5 text-sm md:text-base rounded-lg font-medium transition-colors w-full sm:w-auto flex items-center justify-center"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Berhenti & Simpan <span id="pending-count" class="ml-2 bg-white text-red-600 px-2 py-0.5 rounded-full text-[10px] font-bold hidden">0</span></button></div></div></div></div>
                 
                 <!-- VIEW: DATA SISWA -->
                 <div id="view-siswa" class="view-section hidden space-y-3 md:space-y-4">
@@ -1838,43 +1837,393 @@
 
         const CONFIG = { 
             USE_REAL_BACKEND: true, 
-            GAS_API_URL: "https://script.google.com/macros/s/AKfycbyyR91xlYkFMJptV_QfFLLyqZtBqIjqtS4m8igedBnwx3gf6kpZTvvpR7139AMgA27NaQ/exec" 
+            GAS_API_URL: "https://script.google.com/macros/s/AKfycbwLf3-q9T4vk_dUsBetpNEssC6L-Ufo4yFBe-tBbAe-_k6S1BCk2JGO1znXrueMgxI/exec" 
         };
         const STATE = { 
             user: null, theme: localStorage.getItem('theme') || 'light', 
             school: JSON.parse(localStorage.getItem('schoolSettings')) || { 
-                nama: 'SDN 2 Sawah Lama', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue', logo: '',
+                nama: 'SDN 1 Durian Payung', alamat: 'Jl. Pendidikan No. 1, Jakarta Pusat', tahun: '2025/2026', jenjang: 'SD', theme: 'blue', logo: 'https://i.ibb.co.com/0VXDYm76/logo-sdn-1-dupaaa.png',
                 landing: {
-                    desc: "Kami berkomitmen untuk menjadi institusi pendidikan terdepan yang mengedepankan keunggulan akademik, pembentukan karakter, kedisiplinan, dan pemanfaatan teknologi digital guna menciptakan lingkungan belajar yang inklusif dan inovatif bagi seluruh peserta didik.",
-                    visi: "\"Mewujudkan Generasi Unggul, Berakhlak Mulia, Berwawasan Global, dan Berbudaya Lingkungan Berlandaskan Nilai-Nilai Pancasila.\"",
+                    desc: "Sekolah Negeri yang terletak ditengah kota Bandar Lampung, tepatnya di Jl. Khairil Anwar No. 40 Kel. Durian Payung Kec. Tanjung Karang Pusat Kota Bandar Lampung.\nKami berkomitmen untuk menjadi institusi pendidikan terdepan yang mengedepankan keunggulan akademik, pembentukan karakter, kedisiplinan, dan pemanfaatan teknologi digital guna menciptakan lingkungan belajar yang inklusif dan inovatif bagi seluruh peserta didik.",
+                    visi: "“Menciptakan peserta didik yang “MANTAP” (Mandiri, Adaptif, Nasionalis, Tanggungjawab, Agamis dan Prestasi).\nMandiri, memiliki jiwa kemandirian dan kewirausahaan.\nAdaptif, menguasai ilmu pengetahuan dan teknologi sesuai dengan perkembangan usianya.\nNasionalis, mencintai bangsa, negera dan ber-bhinneka tunggal ika.\nTanggung jawab, berintegritas dan memiliki akhlakul karimah yang dapat diimplementasikan dalam kehidupan sehari-hari.\nAgamis, taat dan terampil dalam beragama.\nPrestasi, mampu menguasai dan mengembangkan kompetensi yang ada pada diri peserta didik.",
                     misi: [
-                        "Menyelenggarakan pembelajaran aktif, inovatif, kreatif, efektif, dan menyenangkan berbasis teknologi.",
-                        "Membina karakter peserta didik melalui pembiasaan nilai-nilai religius dan budaya bangsa.",
-                        "Meningkatkan profesionalisme guru dan tenaga kependidikan secara berkelanjutan.",
-                        "Mengembangkan minat, bakat, dan potensi peserta didik melalui kegiatan ekstrakurikuler yang terarah."
+                        "Mengembangkan kemandirian, nalar kritis dan kreativitas yang memfasilitasi keragaman minat dan bakat peserta didik.",
+                        "Merancang pembelajaran yang menarik dan menyenangkan yang mampu memotivasi peserta didik untuk selalu belajar dan menemukan pembelajaran.",
+                        "Mengembangkan program sekolah yang membentuk ide dan gagasan cepat tanggap terhadap perubahan yang terjadi untuk merancang inovasi.",
+                        "Membangun lingkungan sekolah yang bertoleransi dalam kebhinekaan global, mencintai budaya lokal dan menjunjung nilai gotong royong.",
+                        "Membangun lingkungan sekolah yang membentuk peserta didik memiliki akhlak mulia melalui rutinitas kegiatan keagamaan dan menerapkan ajaran agama melalui cara berinteraksi di sekolah.",
+                        "Mengembangkan dan memfasilitasi peningkatan prestasi peserta didik sesuai minat dan bakatnya melalui proses pendampingan dan kerja sama dengan orang tua."
                     ],
-                    prestasi: [
-                        {judul: "Juara 1 Olimpiade Sains Nasional (OSN)", deskripsi: "Tingkat Provinsi, Kategori Matematika & IPA"},
-                        {judul: "Sekolah Adiwiyata Nasional", deskripsi: "Penghargaan Lingkungan Hidup Tingkat Nasional"},
-                        {judul: "Juara Umum Lomba Cerdas Cermat", deskripsi: "Tingkat Kabupaten / Kota, Bidang Kebudayaan"}
-                    ],
-                    ekskul: ["Pramuka", "PMR", "Futsal", "Basket", "Paduan Suara", "Klub IT"],
+                    prestasi: [],
+                    ekskul: ["Pramuka", "Seni Tari", "Pencak Silat", "BTQ", "Hadroh"],
                     struktur: { kepsek: 'Kepala Sekolah', komite: 'Komite Sekolah', tu: 'Tata Usaha (TU)', kurikulum: 'Waka Kurikulum', kesiswaan: 'Waka Kesiswaan' },
-                    sosmed: { fb: '', ig: '', tk: '' }
+                    sosmed: { fb: 'https://sites.google.com/guru.sd.belajar.id/sdn1durianpayung/profil-sekolah', ig: 'https://www.instagram.com/sdn1_durianpayung?stkn=YWdjamRvZHpqc3No', tk: 'https://www.tiktok.com/@sd1durianpayung?_r=1&_t=ZS-99koKSABA0b' }
                 },
                 sessions: {
-                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
-                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
-                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } }
-                }
-            },
-            students: [], attendance: [], teachers: [], html5QrcodeScanner: null,
-            archives: JSON.parse(localStorage.getItem('data_arsip')) || [],
-            letters: [], duk: []
-        };
+                SD: { pagi: { jam: "07:00", tol: "60", kelas: ["1A","1B","5A","5B","6A","6B"] }, siang: { jam: "10:00", tol: "60", kelas: ["2A","2B","2C"] }, sore: { jam: "12:00", tol: "60", kelas: ["3A","3B","4A","4B"] } },
+                SMP: { pagi: { jam: "07:00", tol: "15", kelas: [] }, siang: { jam: "13:00", tol: "15", kelas: [] }, sore: { jam: "15:00", tol: "15", kelas: [] } },
+                SMA: { pagi: { jam: "07:00", tol: "15", kelas: [] }, siang: { jam: "13:00", tol: "15", kelas: [] }, sore: { jam: "15:00", tol: "15", kelas: [] } }
+            }
+        },
+        students: [], attendance: [], teachers: [], html5QrcodeScanner: null,
+        archives: JSON.parse(localStorage.getItem('data_arsip')) || [],
+        letters: [], duk: [], pendingAttendance: []
+    };
 
-        const MOCK_TEACHERS = [{ id: "T001", username: "guru1", password: "123", kelas: "1A", fullFeature: true }];
-        const MOCK_STUDENTS = [{ id: "S001", nisn: "0011223344", nama: "Ahmad Budi Santoso", kelas: "1A", jk: "L", hp: "6281234567890" }];
+    const MOCK_TEACHERS = [
+        { id: "T1778912187830", username: "supriyadi", password: "291188", kelas: "5B", fullFeature: true },
+            { id: "T1778912580146", username: "lady6b", password: "lady6b", kelas: "6B", fullFeature: true },
+            { id: "T1778912591761", username: "yeny6a", password: "yeny6a", kelas: "6A", fullFeature: true },
+            { id: "T1781118985516", username: "lola5a", password: "lola5a", kelas: "5A", fullFeature: true },
+            { id: "T1781119001300", username: "tursinah1a", password: "tursinah1a", kelas: "1A", fullFeature: true },
+            { id: "T1781119016367", username: "ani1b", password: "ani1b", kelas: "1B", fullFeature: true },
+            { id: "T1781119081117", username: "riami2a", password: "riami2a", kelas: "2A", fullFeature: true },
+            { id: "T1781119097435", username: "siti2b", password: "siti2b", kelas: "2B", fullFeature: true },
+            { id: "T1781119110709", username: "fia2c", password: "fia2c", kelas: "2C", fullFeature: true },
+            { id: "T1781119132851", username: "nova3a", password: "nova3a", kelas: "3A", fullFeature: true },
+            { id: "T1781119145166", username: "helen3b", password: "helen3b", kelas: "3B", fullFeature: true },
+            { id: "T1781119162672", username: "ana4a", password: "ana4a", kelas: "4A", fullFeature: true },
+            { id: "T1781119176415", username: "elsa4b", password: "elsa4b", kelas: "4B", fullFeature: true },
+            { id: "T1784821244839", username: "demo", password: "demo", kelas: "1C", fullFeature: true }
+        ];
+        const MOCK_STUDENTS = [
+            { id: "S1781495687936_14", nisn: "3193775109", nama: "MUHAMMAD ADNAN ADYARISKY", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_15", nisn: "3183046721", nama: "MUHAMMAD SA'IF ALI KHAN", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_16", nisn: "3190993142", nama: "ALIZA SAFEA FEBRIYANI", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_17", nisn: "3180661439", nama: "HENDRIH MAULLANAH", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_18", nisn: "3183566010", nama: "SITI NAURA ASIPIN", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_19", nisn: "3188954332", nama: "BADRA SAFWAN FEBRIAN", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_20", nisn: "3197219084", nama: "KAYRA HUMAIRA MULIKA", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_22", nisn: "3182448362", nama: "SUFIE WIDYA UTAMI", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_23", nisn: "3195932524", nama: "ATHA FARIZ RADEYA AKBAR", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_24", nisn: "3196360486", nama: "ELZIO ZHIAN KAVAYA", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_26", nisn: "3183392168", nama: "HAURA SALSABILLAH", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_25", nisn: "3180066790", nama: "MUHAMMAD ALDI SAPUTRA", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_21", nisn: "3194024956", nama: "NABILA RISYANTI", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_28", nisn: "3188086767", nama: "ALVARO REZVAN ARIKA", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_29", nisn: "3181947993", nama: "GEISCILA PUTRI ALINDA", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_30", nisn: "3196641109", nama: "M.FASYA RAMADAN", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_31", nisn: "3196820535", nama: "MESSI PERMAISEHEELA", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781495687936_32", nisn: "3199114917", nama: "MUHAMAD ILHAM", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_33", nisn: "3187001276", nama: "MUHAMMAD ALBANY FIRASH", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1781495687936_34", nisn: "3186847578", nama: "SYAHLA INARA SAPUTRA", kelas: "2A", jk: "P", hp: "" },
+            { id: "S1781174232840_2", nisn: "3187148555", nama: "MUHAMMAD AL-FATIH", kelas: "2B", jk: "L", hp: "0895320976822" },
+            { id: "S1781174232840_3", nisn: "3183178183", nama: "MUHAMMAD BAHARZEIN ALFARIZQI", kelas: "2B", jk: "L", hp: "089666782125" },
+            { id: "S1781174232840_1", nisn: "3189482192", nama: "AFZAR HAZIQ MUSYAFFA", kelas: "2B", jk: "L", hp: "089523627213" },
+            { id: "S1781174232840_4", nisn: "3184106088", nama: "MUHAMMAD KAUTSAR BILFAQIH", kelas: "2B", jk: "L", hp: "085924815914" },
+            { id: "S1781174232840_5", nisn: "3180564477", nama: "MUHAMMAD RAFISQI", kelas: "2B", jk: "L", hp: "0895415801200" },
+            { id: "S1781174232840_6", nisn: "3186826890", nama: "MUHAMMAD YUSUF IBRAHIM", kelas: "2B", jk: "L", hp: "0895323149244" },
+            { id: "S1781174232840_7", nisn: "3197748896", nama: "MUHAMMAD RAFISQI AL-GAZZAL", kelas: "2B", jk: "L", hp: "081279249288" },
+            { id: "S1781174232840_8", nisn: "3198746995", nama: "SANDRA VALLERIE SHAQILA", kelas: "2B", jk: "P", hp: "083184837478" },
+            { id: "S1781495687936_1", nisn: "3186839382", nama: "MUHAMMAD YUSUF AL FARID", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_2", nisn: "3184992742", nama: "MUHAMMAD PANJI", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_3", nisn: "3192741714", nama: "MUHAMMAD NAZRIEL", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_4", nisn: "3196910093", nama: "MUHAMMAD KENZO ALFATIH", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_5", nisn: "3193637580", nama: "IMAH SABIRA", kelas: "2B", jk: "P", hp: "" },
+            { id: "S1781495687936_7", nisn: "3185327751", nama: "KIRANA PUTRI SUKMA", kelas: "2B", jk: "P", hp: "" },
+            { id: "S1781495687936_8", nisn: "3184953463", nama: "MUHAMMAD YUSUF ASAUQI", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_9", nisn: "3184810864", nama: "KHOIRUL HUDA", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_10", nisn: "3195927957", nama: "ZAURA MAZNA MAZIYA", kelas: "2B", jk: "P", hp: "" },
+            { id: "S1781495687936_6", nisn: "3199078862", nama: "SABILA APRIYANI", kelas: "2B", jk: "P", hp: "" },
+            { id: "S1781495687936_11", nisn: "3192529088", nama: "MUHAMMAD ALFARO", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_12", nisn: "3185033606", nama: "MUHAMMAD DEVAN", kelas: "2B", jk: "L", hp: "" },
+            { id: "S1781495687936_13", nisn: "3185959848", nama: "MUTIARA PUTRI", kelas: "2B", jk: "P", hp: "" },
+            { id: "S1781495687936_36", nisn: "3193186484", nama: "NISA FEBRIYANA", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_35", nisn: "3161634123", nama: "MUHAMMAD FAQIH RAMADHAN", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_37", nisn: "3194430077", nama: "R.A BALQIS TAQIYA SAJIDA", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_38", nisn: "3181090503", nama: "MUHAMMAD ABDUL GHANI", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_39", nisn: "3175499405", nama: "KEYSHA WULANSARI", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_41", nisn: "3185019983", nama: "M. RAFA ALHAFIZ", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_40", nisn: "3196693641", nama: "RAYYAN ALFARIZQI BAHRI", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_42", nisn: "3196414852", nama: "AZALIA BILQIS ALMAIRA", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_43", nisn: "3187425883", nama: "MUHAMMAD DZAKY", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_44", nisn: "3190200782", nama: "ALEEYA NAURAHUMAIRA", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_45", nisn: "3181222081", nama: "MUHAMMAD ARDHAN AL ARRAS", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_46", nisn: "3194409605", nama: "ZERA FAHIRA", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_48", nisn: "3190657235", nama: "MUHAMMAD VICKY PRATAMA", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_47", nisn: "3197371127", nama: "M. FAREL DAVIANSYAH", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_49", nisn: "3196436185", nama: "PUTRI NAWANG WULAN", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_51", nisn: "3165108651", nama: "VINA DESTIYANI", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_52", nisn: "3184091408", nama: "YUSUF AL ZAHIR", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_53", nisn: "3190867136", nama: "RAFASYAH LAZUARDI WIJAYA", kelas: "2C", jk: "L", hp: "" },
+            { id: "S1781495687936_54", nisn: "3183079957", nama: "CARLA ANINDITA", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1781495687936_55", nisn: "3192418730", nama: "JASMINE NUR ANISA RAMADANTI", kelas: "2C", jk: "P", hp: "" },
+            { id: "S1782229052721_1", nisn: "3167242584", nama: "ADIBA ALMAIRA SETIA DEWI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_2", nisn: "3169239814", nama: "AILEEN NATANIA SUWANDI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_3", nisn: "3168811842", nama: "ARSYAD JILI", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_4", nisn: "316072825", nama: "ARYASENO AL-FATIH", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_5", nisn: "3174638125", nama: "BAGAS MAULANA HAFIZ", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_6", nisn: "3167494494", nama: "CANTIKA PUTRI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_7", nisn: "3172841220", nama: "DEWI ROSA INDAH", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_8", nisn: "3174639285", nama: "DWI PUTERI AYU", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_9", nisn: "3162511663", nama: "HAFIZAAH MAYLI FAHLUTFI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_10", nisn: "3165525335", nama: "IMAM AKHMAD ALGHIFARI", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_11", nisn: "3170729212", nama: "INDRI KUSUMAWATI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_12", nisn: "316807085", nama: "INTAN NURAISYAH WIJAYA", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_13", nisn: "3178732502", nama: "KIREI KARUNIA RAMADHANI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_14", nisn: "3172024043", nama: "M.ALTHAF HANIF AL-JINAN", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_15", nisn: "3168982991", nama: "M.AZZAM NURWAHID APRIADI", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_16", nisn: "3165727744", nama: "M.DYAHFAHRI RAMADHAN", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_17", nisn: "3175673315", nama: "M.RAKA AZKA PUTRA", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_19", nisn: "3161478750", nama: "M.VINO AGUNG PRATAMA", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_18", nisn: "3167680548", nama: "M.RIDWAN", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_20", nisn: "3162924367", nama: "MUHAMAD FARDHAN MAULANA", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_21", nisn: "3174097036", nama: "MUHAMAD KASIFUL HAAFIZH", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_22", nisn: "3172428766", nama: "NAURA ZAHIRA", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_23", nisn: "3176507357", nama: "NAZRIL IRHAM PUTRA SYAHRONI", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_24", nisn: "3175717463", nama: "NAZWA ALYA RAMADHANI", kelas: "4A", jk: "P", hp: "" },
+            { id: "S1782229052721_25", nisn: "3170858498", nama: "RAFA ABDILLAH PRATAMA", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_26", nisn: "3166228908", nama: "RIDHO RAFIZQI BAHRI", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782229052721_27", nisn: "3165719758", nama: "SATRIA EL AZZAM MALIK", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1781491334616_2", nisn: "3160097416", nama: "ADINDA NURSYIFA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781491334616_1", nisn: "3166347754", nama: "ADAM HAZLAM INDRA PUTRA", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_3", nisn: "3162765790", nama: "ALEA ADRIANA JAHRI", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781491334616_5", nisn: "3169958864", nama: "ASYIFA RAMADHANI", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781491334616_4", nisn: "3157140571", nama: "ALKANZA DZAKIRA AFTANI", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781491334616_6", nisn: "3158206324", nama: "DIO HERIYAWAN", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_7", nisn: "3151228956", nama: "IRFAN RAMADAN", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_8", nisn: "3156332689", nama: "M. ALFIN HARAFAH", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_9", nisn: "3146083322", nama: "M. ALVIANO VIRLIAN PRATAMA", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_10", nisn: "3155680892", nama: "M.LUTFIE SAKHI ZAIDAN", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_11", nisn: "3159618609", nama: "MUHAMMAD ARYA PANDU", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_13", nisn: "3168261189", nama: "NUR HAFIFAH", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781491334616_12", nisn: "0153244915", nama: "MUHAMMAD ZAKKY RISQULLAH", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_14", nisn: "3156836377", nama: "SAFIRA PUTRI", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781491334616_15", nisn: "3152280809", nama: "SITI AURA NABILA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_1", nisn: "3169134760", nama: "PUTRI ADIBA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_2", nisn: "3163359783", nama: "M AZKA AL HAFIZ", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781510112177_4", nisn: "3157137225", nama: "MUHAMMAD NAUFAL HANIF", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781510112177_6", nisn: "3154992197", nama: "NURBATRISYA RAHMA KHALIZA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_7", nisn: "3153256512", nama: "ANINDHITA ZAHRA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_5", nisn: "0152820869", nama: "GEYSA NURHALIFA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_8", nisn: "3154240263", nama: "FIKA AULIA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_10", nisn: "3157836280", nama: "M. ARKAN RAMAZAN", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781510112177_9", nisn: "3169015631", nama: "MUHAMMAD SULTHON ARDITIA RIZAL", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781510112177_11", nisn: "3167528278", nama: "NELIDA NURAINI", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_12", nisn: "3159565468", nama: "FADHAL YAQDHAN NASRULLAH", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781510112177_13", nisn: "3157777117", nama: "REYHAN ADI SANTOSO", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781510112177_15", nisn: "3155640262", nama: "ATIKA PUTRI KANZA AZ'ZAHRA", kelas: "5A", jk: "P", hp: "" },
+            { id: "S1781510112177_16", nisn: "3152404873", nama: "MUHAMAD AZIZ FAHRI", kelas: "5A", jk: "L", hp: "" },
+            { id: "S1781491334616_16", nisn: "3153291625", nama: "ABDUL ROSYID ZAIN", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_17", nisn: "0143922897", nama: "ABDULLAH AL AUFAR", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_18", nisn: "3150291665", nama: "ALFIYA NURJANA", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781491334616_19", nisn: "3141968364", nama: "BIMA JAFARUDIN", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_20", nisn: "3149342567", nama: "FAQIH KHAIRY RAHMAN", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_21", nisn: "3169032247", nama: "JAQI WIJAYA", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_22", nisn: "3154570338", nama: "MUHAMMAD RAFFA SYAHZIDAN", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_23", nisn: "3159364837", nama: "MELATI PUTRI ANGGRAINI", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781491334616_24", nisn: "3162274344", nama: "MUHAMAD PUTRA SATRIA", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_25", nisn: "3156711981", nama: "MUHAMMAD ALIF ALFATAN", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_26", nisn: "3169802468", nama: "MUHAMMAD FAEZA GAVIN ISKANDAR", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_27", nisn: "3166872765", nama: "MUHAMMAD INZAGHI AL FACHRI", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781491334616_28", nisn: "3146754841", nama: "R.A TIARA ULYA SALSABILA", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781491334616_29", nisn: "3154883906", nama: "SHAKILA CALLISTA PUTRI ADIBAH", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781491334616_30", nisn: "0156155377", nama: "SILVI RAMADHANI", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781491334616_31", nisn: "3167834457", nama: "SITI AN-NAZWA NUR ROHMAH", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781510112177_17", nisn: "3153039889", nama: "MUHAMMAD FRENDY DIRGANTARA", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_19", nisn: "3154913008", nama: "ALESYA NABILA INARA", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781510112177_20", nisn: "3158026163", nama: "AL- FASYAH", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_21", nisn: "3152753541", nama: "MUHAMMAD RAFA AZKA PERMANA", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_23", nisn: "3167540557", nama: "WINDI SALSABILLAH PUTRI", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781510112177_18", nisn: "3166212159", nama: "FILDZAH DZAHABIYYAH RUPAWAN", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781510112177_24", nisn: "3167244357", nama: "ANNISA FEBRIANI", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781510112177_25", nisn: "3151156032", nama: "RESTU AULIA SAFITRI", kelas: "5B", jk: "P", hp: "" },
+            { id: "S1781510112177_26", nisn: "3142659188", nama: "MUHAMMAD ABI FATIH AL JABAR", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_27", nisn: "3156292835", nama: "DIGO MAHARDHIKA PUTRA", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_29", nisn: "3156511478", nama: "RIZKY HABIB RAMDHANI", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_30", nisn: "3145852693", nama: "HENDRO RAMADHAN", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_28", nisn: "3167830523", nama: "MUHAMMAD PUTRA DIMAS", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_32", nisn: "3141431822", nama: "YUZARSIF ALVARO", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781510112177_31", nisn: "3153628491", nama: "FERDIYANSAH SAPUTRA", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781742186943", nisn: "3142111516", nama: "AHMAD SEPI AF'AL", kelas: "5B", jk: "L", hp: "" },
+            { id: "S1781118807869_1", nisn: "3149377988", nama: "ABU YAZEED AL BUSTOMI", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_4", nisn: "0152562710", nama: "ADIBAH ALISYAH", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_2", nisn: "3148975555", nama: "SOFIANA FAHRUNSYAQ", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_6", nisn: "3154061545", nama: "REZA UTOMO", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_3", nisn: "0143393131", nama: "ALVIAN DANISH FAEZA", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_5", nisn: "3149544672", nama: "FIRDA SUSANTI", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_7", nisn: "0146249949", nama: "MUHAMMAD NUR HUDA", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_8", nisn: "3158577669", nama: "PUTRI MAHWA JELITA", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_9", nisn: "3131430119", nama: "INDRI SEPTIYANI", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_11", nisn: "3145597441", nama: "Amelita Azzahra Putri Kurnia", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_10", nisn: "0155605187", nama: "Nadhiva Nur Maulida", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_13", nisn: "0148021887", nama: "ANISA NURJANAH", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_15", nisn: "0137983512", nama: "QAISHAR OMAR ALKAHFI", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_16", nisn: "0142717223", nama: "DEBBY LIYANA BUDIYANTO", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_12", nisn: "3137283506", nama: "SELY REGA ANZANI", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_14", nisn: "3145630201", nama: "RIDHO ALIF", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_17", nisn: "3144720801", nama: "MUHAMAD ANDRIAN SAPUTRA", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_19", nisn: "3147479144", nama: "NASYWA OKTARIANI SISWANTO", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_18", nisn: "0144725339", nama: "SINTIA PUTRI AULIA", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_20", nisn: "3140977859", nama: "M.FARHAN AL HAFIZ", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_21", nisn: "3149197516", nama: "FELIZHA ZEA AMORA", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_22", nisn: "0136519550", nama: "HILDA HIDAYATI", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_23", nisn: "3130289684", nama: "FARHAT AL MUHYI", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_24", nisn: "3138717048", nama: "CINTA MAURELYA KANZA AZAHRA", kelas: "6A", jk: "P", hp: "" },
+            { id: "S1781118807869_25", nisn: "3136366976", nama: "RANO IMAMSYAH", kelas: "6A", jk: "L", hp: "" },
+            { id: "S1781118807869_26", nisn: "0144767322", nama: "BALQIS ADZRA ZHAFIRA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_28", nisn: "0157733275", nama: "SUCI DAMAYANTI", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_27", nisn: "3145988493", nama: "NAYLA RAMADHANI", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_29", nisn: "3150121461", nama: "NAYLA AZALEA PUTRI", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_31", nisn: "3159884806", nama: "INARA MEISHA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_32", nisn: "3145592598", nama: "M.NIKO FERDIANSYAH", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_30", nisn: "0145332620", nama: "Muhammad Fardan Zaki Saputra", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_34", nisn: "3150095596", nama: "MUHAMMAD GATAN ARSYA SAPUTRA", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_33", nisn: "3159842909", nama: "IBNU AZKA AL ARKHAN", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_35", nisn: "0137794537", nama: "ASYIFA PUTRI", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_36", nisn: "3159440967", nama: "ALIYSA KHAIRA WILDAYANI", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_38", nisn: "0152074198", nama: "BILQIS MAULIDA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_37", nisn: "0149947302", nama: "SAFHIRA FAIQA KIRANA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_39", nisn: "0149099370", nama: "Nikyrta Kaisa Rahman", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_40", nisn: "0131018879", nama: "NAZQIA VELYZA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_41", nisn: "3145318334", nama: "ILHAM FATAHILLAH", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_42", nisn: "3158865672", nama: "M. HANAFI SAPUTRA", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_43", nisn: "0132820621", nama: "M. RASYA AL GOFAHRI", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_44", nisn: "3141333949", nama: "DEVA REFANA", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807869_45", nisn: "3159116671", nama: "MUZDHALIFFA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807869_46", nisn: "3153997656", nama: "SINTA APRILIA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807870_47", nisn: "0142945166", nama: "MUHAMMAD ISAM AL SHAQIRI", kelas: "6B", jk: "L", hp: "" },
+            { id: "S1781118807870_48", nisn: "3145230465", nama: "RAHEL ADINDA SILA", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1781118807870_49", nisn: "3146910215", nama: "Nabila Anggraini", kelas: "6B", jk: "P", hp: "" },
+            { id: "S1782485066773_2", nisn: "3172385311", nama: "AHMAD HAIKAL AL-FATIH", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_1", nisn: "3162415179", nama: "AFIFAH AZKA LABIBAH", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_4", nisn: "3163118683", nama: "AZZAM ZHAFIR RAMADHAN", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_3", nisn: "3165265943", nama: "ANINDYA TRI FAUZIAH", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_6", nisn: "3161400719", nama: "HAFIDZIDAN ARGA FADHILLAH", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_8", nisn: "3164171951", nama: "M.ABRIZAM SANTOSO", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_7", nisn: "3175701425", nama: "M.KHOLID HASAN", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_9", nisn: "3176811400", nama: "M.DION SAPUTRA", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_5", nisn: "3167354950", nama: "FAZIA ZAHRA DWITA PUTRI", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_10", nisn: "3165013697", nama: "M.FAUZAN AZHIMA", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_11", nisn: "3155749174", nama: "RAISA MUTIARA PUTRI", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_12", nisn: "3165982152", nama: "TITO KUNTARA MADNGOREJO", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_13", nisn: "3173762863", nama: "VINA MIRANDA", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_15", nisn: "3179891537", nama: "ANDRA FATIH RAMADHAN", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_14", nisn: "3166809257", nama: "ADREENA SALSABILA dinata", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_16", nisn: "3170863234", nama: "ARIN SASI KIRANA", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_18", nisn: "3169934955", nama: "GIO ANDAMI TUA SELLA", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_17", nisn: "3168033608", nama: "ARSYAD HAFIZH YUSUP ALFALAH", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_19", nisn: "3178278637", nama: "RAKHIL A'BIDAH", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_20", nisn: "3169660482", nama: "M.DAFFI KHUMAIDI", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_21", nisn: "3156564744", nama: "MUHAMAD ALFINO", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_22", nisn: "3171073739", nama: "KHAIRUNNISA SALSABILA", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_23", nisn: "3169059402", nama: "MUHAMAD ABDULLAH", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_24", nisn: "3167235005", nama: "SHAQILA ANDINI RAHMA", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_25", nisn: "3165322535", nama: "NANDA HUMAIRA", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_26", nisn: "3166277162", nama: "NAURA SABILA", kelas: "4B", jk: "P", hp: "" },
+            { id: "S1782485066773_27", nisn: "3160656893", nama: "M.RAYEN ALFADILLAH", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1782485066773_28", nisn: "3161606994", nama: "ALDEN ADIYASTHA ARISTO", kelas: "4A", jk: "L", hp: "" },
+            { id: "S1782485330383_2", nisn: "3181966184", nama: "MUHAMMAD YUSUF AL-HADI", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_1", nisn: "3177039703", nama: "KANIA PUTRI AULIA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_3", nisn: "3176713228", nama: "SALIFAH PUTRI SALAM", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_4", nisn: "3171629584", nama: "REVINA OKTAVIANI", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_5", nisn: "3187680770", nama: "M. REYHAN AQIL FIRASH", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_6", nisn: "3171048409", nama: "UFAIRAH HAYATUL HIKAM", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_7", nisn: "3178969134", nama: "MUHAMMAD ZIDAN SOFWAN", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_8", nisn: "3177107075", nama: "SHAQEENA NUR AQSHO", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_9", nisn: "3177554398", nama: "AMANDA KANZILLA MILENIA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_10", nisn: "3174779835", nama: "AUZAN RAHANDIKA AL FARIQ", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_11", nisn: "3179115556", nama: "AZQIA SILVI AURA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_12", nisn: "3173718210", nama: "HABIBAH WAFIYA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_13", nisn: "3181654515", nama: "MUHAMMAD ADRYAN TSAQIB", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_14", nisn: "3188339601", nama: "ADINDA FREDELLA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_15", nisn: "3176511121", nama: "ADNAN KHIARUL FATIH", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_16", nisn: "0133523918", nama: "MUHAMMAD AL-MALIK GOPAR", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_17", nisn: "3171865056", nama: "BILKIS AYUNDA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_18", nisn: "3170566100", nama: "DIMAS IBRAM PRATAMA", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_19", nisn: "3175089995", nama: "ELSA RAHMADANI", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_20", nisn: "3180208603", nama: "KENZIE SHARAFAT FITRAH", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_21", nisn: "3171291277", nama: "NOVA HERLINA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_23", nisn: "3176221893", nama: "M. SAYYID AL-MAHDI", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_22", nisn: "3171057014", nama: "M.RAHESIYA NUR HAKIM", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_24", nisn: "3180205054", nama: "MUHAMMAD DHIYAULI IZZUL HAQ", kelas: "3A", jk: "L", hp: "" },
+            { id: "S1782485330383_25", nisn: "3170668473", nama: "ZAVIRA ALFATUNNISA", kelas: "3A", jk: "P", hp: "" },
+            { id: "S1782485330383_26", nisn: "3171437335", nama: "ZAKIANDRA ASHAD MAULANA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_27", nisn: "3175926159", nama: "ADAM FAIZ AL ARKHAN", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_28", nisn: "3186604130", nama: "ABI RAHANDIKA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_29", nisn: "3180902044", nama: "MARZIA SHOFIA SYA'BAN", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_30", nisn: "3174143595", nama: "DYNNA SALSABILA PUTRI", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_31", nisn: "3176703899", nama: "ALMIRA NAYLAL RATIFAH", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_32", nisn: "3185927758", nama: "NAYYARA KHANZANIA SYAWAL", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_33", nisn: "3176049291", nama: "AL ZIO PRADATA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_34", nisn: "3188434593", nama: "FAEYZA ATHA RAZIQ", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_35", nisn: "3178435222", nama: "NAUREN NAZWA MIQAILA", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_36", nisn: "3183122787", nama: "SYAQILA SALWA UTAMI", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_37", nisn: "3182513933", nama: "HAFIFA ADINDA PUTRI", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_38", nisn: "3179735221", nama: "MUHAMMAD ADAM MIKRI PRATAMA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_39", nisn: "3173588956", nama: "ARSYA TRI AYUNDA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_40", nisn: "3183823786", nama: "ARFAN ALFARIZI", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_41", nisn: "3181243604", nama: "MUHAMAD AKHTAR ALFATIH", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_42", nisn: "3188277676", nama: "MUHAMMAD AFIF AMALDI", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_43", nisn: "3175812711", nama: "MUHAMMAD FARHAN AL AZKA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_44", nisn: "3177414849", nama: "MUHAMMAD RAFA AZKA PUTRA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_45", nisn: "3175224517", nama: "MUZZAMMIL YUSUF", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_46", nisn: "3178158368", nama: "NUR DURATUL ZINAN", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_48", nisn: "3176058238", nama: "RAISA APRIYANI", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_49", nisn: "3182874236", nama: "PUTRI DARLIA", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485330383_50", nisn: "3177818959", nama: "ZEN ILMAN PUTRA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1782485330383_51", nisn: "3178123213", nama: "MAIRA FITRA NABILA", kelas: "3B", jk: "P", hp: "" },
+            { id: "S1782485912424", nisn: "3185270631", nama: "M AZZAM KHALIFA", kelas: "3B", jk: "L", hp: "" },
+            { id: "S1783926227448", nisn: "3155284663", nama: "KEENAND ATHAYA RAHMAN", kelas: "3B", jk: "L", hp: "089514514288" },
+            { id: "S1783926354396", nisn: "3167301655", nama: "ARDIYANSAH SAPUTRA", kelas: "3B", jk: "L", hp: "083182367642" },
+            { id: "S1784009706598", nisn: "3172726391", nama: "ARFAN NAUFAL RAFASSYA", kelas: "2A", jk: "L", hp: "" },
+            { id: "S1784261477318", nisn: "3169778705", nama: "REHAN RAMADHAN", kelas: "4B", jk: "L", hp: "" },
+            { id: "S1784272365430", nisn: "3174852883", nama: "AZALEA MAELA NAJWA", kelas: "4B", jk: "L", hp: "+62 831-6189-4745" },
+            { id: "S1786242367645", nisn: "3188986417", nama: "BINTANG BARNIR CHANDRA PRATAMA", kelas: "2C", jk: "L", hp: "085809240568" },
+            { id: "S1787247183763_1", nisn: "3209255594", nama: "AINUN IZZA TUNNISA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183763_2", nisn: "3195906736", nama: "AISA FAIHA SHALIHA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183763_3", nisn: "3205560555", nama: "AL ZAIDAN RAFISQY", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_5", nisn: "3195885332", nama: "DEVANO ADITYA PRATAMA", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_6", nisn: "3209355580", nama: "ELVANO PRASETYO", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_4", nisn: "1111111111", nama: "ALVINO DAFFA MUWAFFAQ", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_7", nisn: "3209993344", nama: "GENDIS MUTIARA PUTRI", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_8", nisn: "3209818894", nama: "HASBULLOH YUSUF AKMAL", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_9", nisn: "3194888367", nama: "KHANZA PUTRI NAIRA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_10", nisn: "3192419932", nama: "KHAYLA SHAQUEENA FIZHA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_11", nisn: "3190236486", nama: "KHEMAL ATHALLAH RAHMAN", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_12", nisn: "3193453025", nama: "KHESTURY JELITA AULIA RAHMAN", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_14", nisn: "3208727598", nama: "M. KELVIN AL ZAYN", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_13", nisn: "3204166670", nama: "M. HAFIZ AL GHUFRON", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_15", nisn: "3172896950", nama: "M. RIZWAN", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_16", nisn: "1111111112", nama: "MUHAMMAD DEVANO SETIAWAN", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_17", nisn: "3189538374", nama: "MUHAMMAD GIBRAN AL FATHIR", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_18", nisn: "1111111113", nama: "MUHAMMAD ILHAM AL-FARIZKI", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_19", nisn: "3190930552", nama: "MUHAMMAD NASARUDDIN SULAIMAN", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_20", nisn: "3196295431", nama: "MUHAMMAD RAFFA ABRISAM", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_21", nisn: "3186969953", nama: "MUHAMMAD RAYKAL FAREQ HASSAR", kelas: "1A", jk: "L", hp: "" },
+            { id: "S1787247183764_22", nisn: "3198707101", nama: "NAYLA PUTRI AZZAHRA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_23", nisn: "3205051779", nama: "NAYYARA DOVI ALKANTARA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_24", nisn: "1111111114", nama: "QUEENSHE NUR RACHMAN", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_26", nisn: "3192574212", nama: "SHANA MARYAM JAMILAH", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_25", nisn: "3196109258", nama: "RAISA SASI KIRANA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_27", nisn: "3193808720", nama: "YULIA NAZUA SAKILA", kelas: "1A", jk: "P", hp: "" },
+            { id: "S1787247183764_28", nisn: "3194295688", nama: "AHMAD KABIR IBNU ALWAN", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_29", nisn: "3194825696", nama: "AIZA HILYA SAFITRI", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_30", nisn: "3201161511", nama: "ARINDI PUTRI ADITYA", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_31", nisn: "1111111115", nama: "ATHAYA SHAKIY", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_32", nisn: "3208704136", nama: "AYRA FAZIA ADHIAPUTRI", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_33", nisn: "3193475648", nama: "AYYARA RIZA AYUBIE", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_34", nisn: "3195826464", nama: "DANAR ZAHIR HANDARU", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_35", nisn: "3199792917", nama: "ELVANO BINTANG PRATAMA", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_36", nisn: "3199636451", nama: "FAWAZ NAWASENA RAHMAN", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_37", nisn: "3192367505", nama: "HABIB AFNAN JARIZ", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_38", nisn: "3193934627", nama: "KEVIN ALVIAN JUNIORDO", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_39", nisn: "1111111116", nama: "KHOIRUNISSA", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_40", nisn: "3206036336", nama: "M RAFFASYA ALFARIZKY", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_42", nisn: "3165184269", nama: "M. RIZKY FADILLA", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_41", nisn: "3200444105", nama: "M. RAFAN FII ARDANA", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_43", nisn: "3201557226", nama: "MUHAMAD ALVARO MARCH ABQARY", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_44", nisn: "3191526648", nama: "MUHAMMAD ADRIEL FAIZ", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_45", nisn: "3206950376", nama: "MUHAMMAD GAVIN SAPUTRA", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_46", nisn: "3194624326", nama: "MUHAMMAD LUKMAN NUL HAKIM", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_47", nisn: "3191040978", nama: "MUTIARA ARUMI", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_48", nisn: "3209824260", nama: "PUTRA ADITAMA RAFARDHAN", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_49", nisn: "3205035006", nama: "SARA TRI MIKAYA RAMADHANI", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_50", nisn: "3208010092", nama: "SITI AZZAHRA ALFATHUNISSA", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_52", nisn: "3194888525", nama: "ZACKA PUTRA ARRASIA", kelas: "1B", jk: "L", hp: "" },
+            { id: "S1787247183764_53", nisn: "3196526221", nama: "ZEA RIZKIA RAMADHAN", kelas: "1B", jk: "P", hp: "" },
+            { id: "S1787247183764_51", nisn: "3193274431", nama: "TANISA NAZAHRA PUTRI", kelas: "1B", jk: "P", hp: "" }
+        ];
         
         // ================= PERBAIKAN FORMAT TANGGAL LOKAL =================
         function getLocalDateStr(d = new Date()) {
@@ -1899,16 +2248,23 @@
             const currentData = JSON.parse(localStorage.getItem('schoolSettings')) || STATE.school;
             
             const defLanding = {
-                desc: "Kami berkomitmen untuk menjadi institusi pendidikan terdepan yang mengedepankan keunggulan akademik, pembentukan karakter, kedisiplinan, dan pemanfaatan teknologi digital guna menciptakan lingkungan belajar yang inklusif dan inovatif bagi seluruh peserta didik.",
-                visi: "\"Mewujudkan Generasi Unggul, Berakhlak Mulia, Berwawasan Global, dan Berbudaya Lingkungan Berlandaskan Nilai-Nilai Pancasila.\"",
-                misi: ["Menyelenggarakan pembelajaran aktif, inovatif, kreatif, efektif, dan menyenangkan berbasis teknologi.", "Membina karakter peserta didik melalui pembiasaan nilai-nilai religius dan budaya bangsa."],
-                prestasi: [{judul: "Juara 1 Lomba Cerdas Cermat", deskripsi: "Tingkat Kabupaten"}],
-                ekskul: ["Pramuka", "PMR", "Futsal", "Basket"],
-                sosmed: { fb: '', ig: '', tk: '' }
+                desc: "Sekolah Negeri yang terletak ditengah kota Bandar Lampung, tepatnya di Jl. Khairil Anwar No. 40 Kel. Durian Payung Kec. Tanjung Karang Pusat Kota Bandar Lampung.\nKami berkomitmen untuk menjadi institusi pendidikan terdepan yang mengedepankan keunggulan akademik, pembentukan karakter, kedisiplinan, dan pemanfaatan teknologi digital guna menciptakan lingkungan belajar yang inklusif dan inovatif bagi seluruh peserta didik.",
+                visi: "“Menciptakan peserta didik yang “MANTAP” (Mandiri, Adaptif, Nasionalis, Tanggungjawab, Agamis dan Prestasi).\nMandiri, memiliki jiwa kemandirian dan kewirausahaan.\nAdaptif, menguasai ilmu pengetahuan dan teknologi sesuai dengan perkembangan usianya.\nNasionalis, mencintai bangsa, negera dan ber-bhinneka tunggal ika.\nTanggung jawab, berintegritas dan memiliki akhlakul karimah yang dapat diimplementasikan dalam kehidupan sehari-hari.\nAgamis, taat dan terampil dalam beragama.\nPrestasi, mampu menguasai dan mengembangkan kompetensi yang ada pada diri peserta didik.",
+                misi: [
+                    "Mengembangkan kemandirian, nalar kritis dan kreativitas yang memfasilitasi keragaman minat dan bakat peserta didik.",
+                    "Merancang pembelajaran yang menarik dan menyenangkan yang mampu memotivasi peserta didik untuk selalu belajar dan menemukan pembelajaran.",
+                    "Mengembangkan program sekolah yang membentuk ide dan gagasan cepat tanggap terhadap perubahan yang terjadi untuk merancang inovasi.",
+                    "Membangun lingkungan sekolah yang bertoleransi dalam kebhinekaan global, mencintai budaya lokal dan menjunjung nilai gotong royong.",
+                    "Membangun lingkungan sekolah yang membentuk peserta didik memiliki akhlak mulia melalui rutinitas kegiatan keagamaan dan menerapkan ajaran agama melalui cara berinteraksi di sekolah.",
+                    "Mengembangkan dan memfasilitasi peningkatan prestasi peserta didik sesuai minat dan bakatnya melalui proses pendampingan dan kerja sama dengan orang tua."
+                ],
+                prestasi: [],
+                ekskul: ["Pramuka", "Seni Tari", "Pencak Silat", "BTQ", "Hadroh"],
+                sosmed: { fb: 'https://sites.google.com/guru.sd.belajar.id/sdn1durianpayung/profil-sekolah', ig: 'https://www.instagram.com/sdn1_durianpayung?stkn=YWdjamRvZHpqc3No', tk: 'https://www.tiktok.com/@sd1durianpayung?_r=1&_t=ZS-99koKSABA0b' }
             };
 
             STATE.school = {
-                nama: fetchedData.nama || currentData.nama || 'SDN 2 Sawah Lama',
+                nama: fetchedData.nama || currentData.nama || 'SDN 1 Durian Payung',
                 alamat: fetchedData.alamat || currentData.alamat || '',
                 tahun: fetchedData.tahun || currentData.tahun || '',
                 jenjang: fetchedData.jenjang || currentData.jenjang || 'SD',
@@ -1916,9 +2272,9 @@
                 logo: fetchedData.logo !== undefined ? fetchedData.logo : (currentData.logo || ''),
                 landing: fetchedData.landing || currentData.landing || defLanding,
                 sessions: fetchedData.sessions || currentData.sessions || {
-                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
-                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
-                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } }
+                    SD: { pagi: { jam: "07:00", tol: "60", kelas: ["1A","1B","5A","5B","6A","6B"] }, siang: { jam: "10:00", tol: "60", kelas: ["2A","2B","2C"] }, sore: { jam: "12:00", tol: "60", kelas: ["3A","3B","4A","4B"] } },
+                    SMP: { pagi: { jam: "07:00", tol: "15", kelas: [] }, siang: { jam: "13:00", tol: "15", kelas: [] }, sore: { jam: "15:00", tol: "15", kelas: [] } },
+                    SMA: { pagi: { jam: "07:00", tol: "15", kelas: [] }, siang: { jam: "13:00", tol: "15", kelas: [] }, sore: { jam: "15:00", tol: "15", kelas: [] } }
                 }
             };
             
@@ -1933,8 +2289,7 @@
             applySchoolSettings();
         }
 
-        // ================= FITUR AUTO REFRESH & STATUS DB =================
-        let autoRefreshTimer = null;
+        // ================= FITUR SINKRONISASI MANUAL & STATUS DB =================
         let isFetchingData = false; // Tambahan flag agar request tidak bertumpuk
 
         function updateDbStatus(status) {
@@ -1945,50 +2300,78 @@
             else if(status === 'error') { dot.className = "relative inline-flex rounded-full h-2 w-2 bg-red-500"; if(ping) ping.classList.add('hidden'); }
         }
 
-        function toggleAutoRefresh() {
-            const toggle = document.getElementById('toggle-auto-refresh');
-            if(toggle && toggle.checked) {
-                // UPDATE: Interval diubah dari 30 detik menjadi 3 menit (180000 ms) agar server Google tidak memutus koneksi (Limit/Quota Exceeded)
-                if(!autoRefreshTimer) autoRefreshTimer = setInterval(() => { if(STATE.user && !document.getElementById('page-app').classList.contains('hidden')) silentLoadData(); }, 180000); 
-            } else {
-                if(autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; }
-            }
-        }
-
-        async function silentLoadData() {
+        function manualSync() {
             if(!CONFIG.USE_REAL_BACKEND || isFetchingData) return;
-            isFetchingData = true; // Kunci proses (lock) agar request tidak saling bertumpuk
+            isFetchingData = true;
             updateDbStatus('fetching');
-            try {
-                // Menambahkan 'no-cache' agar mem-bypass error koneksi yang menempel di memori browser
-                const response = await fetch(CONFIG.GAS_API_URL + "?action=getData", { cache: 'no-cache' });
-                const json = await response.json();
-                if(json.status === "success") {
-                    updateDbStatus('success');
-                    STATE.students = (json.students || []).map(s => { if(s.nisn && s.nisn.startsWith("'")) s.nisn = s.nisn.substring(1); if(s.hp && s.hp.startsWith("'")) s.hp = s.hp.substring(1); return s; });
-                    STATE.attendance = (json.attendance || []).map(a => { if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1); a.tanggal = normalizeDateStr(a.tanggal); return a; });
-                    STATE.teachers = json.teachers || [];
-                    STATE.archives = json.archives || [];
-                    STATE.letters = json.letters || [];
-                    
-                    // Logika Pintar: Merge Data DUK dari Server (GAS) dengan extra column yang ada di LocalStorage
-                    const localDuk = JSON.parse(localStorage.getItem('data_duk')) || [];
-                    const gasDuk = json.duk || [];
-                    const mergedDuk = gasDuk.map(gd => {
-                        const localMatch = localDuk.find(ld => ld.id === gd.id);
-                        return localMatch ? {...gd, ...localMatch} : gd;
-                    });
-                    localDuk.forEach(ld => { if(!mergedDuk.find(md => md.id === ld.id)) mergedDuk.push(ld); });
-                    STATE.duk = mergedDuk;
-                    localStorage.setItem('data_duk', JSON.stringify(STATE.duk));
+            
+            const icon = document.getElementById('icon-sync');
+            if(icon) icon.classList.add('fa-spin');
+            
+            showToast("Memulai sinkronisasi data...", "info");
 
-                    if (json.school) { safeMergeSchool(json.school); }
-                    
-                    const vDash = document.getElementById('view-dashboard'); if(vDash && !vDash.classList.contains('hidden')) renderDashboard();
-                    const vRekap = document.getElementById('view-rekap'); if(vRekap && !vRekap.classList.contains('hidden')) renderRekap();
-                    const vLap = document.getElementById('view-laporan'); if(vLap && !vLap.classList.contains('hidden')) renderLaporan();
-                } else { updateDbStatus('error'); }
-            } catch(e) { updateDbStatus('error'); } finally { isFetchingData = false; }
+            fetch(CONFIG.GAS_API_URL + "?action=getData", { cache: 'no-cache' })
+                .then(res => res.json())
+                .then(json => {
+                    if(json.status === "success") {
+                        updateDbStatus('success');
+                        
+                        // Sesuai instruksi: HANYA menarik data Kehadiran, Arsip, Surat, dan DUK.
+                        // Pengaturan Sekolah (school settings), Siswa, dan Guru diabaikan (permanen lokal).
+                        
+                        if(json.attendance) {
+                            STATE.attendance = json.attendance.map(a => {
+                                if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1);
+                                a.tanggal = normalizeDateStr(a.tanggal);
+                                return a;
+                            });
+                            localStorage.setItem('data_attendance', JSON.stringify(STATE.attendance));
+                        }
+                        
+                        if(json.archives) {
+                            STATE.archives = json.archives;
+                            localStorage.setItem('data_arsip', JSON.stringify(STATE.archives));
+                        }
+                        
+                        if(json.letters) {
+                            STATE.letters = json.letters;
+                            localStorage.setItem('data_surat_masuk', JSON.stringify(STATE.letters));
+                        }
+                        
+                        if(json.duk) {
+                            const localDuk = JSON.parse(localStorage.getItem('data_duk')) || [];
+                            const gasDuk = json.duk || [];
+                            const mergedDuk = gasDuk.map(gd => {
+                                const localMatch = localDuk.find(ld => ld.id === gd.id);
+                                return localMatch ? {...gd, ...localMatch} : gd;
+                            });
+                            localDuk.forEach(ld => { if(!mergedDuk.find(md => md.id === ld.id)) mergedDuk.push(ld); });
+                            STATE.duk = mergedDuk;
+                            localStorage.setItem('data_duk', JSON.stringify(STATE.duk));
+                        }
+
+                        // Re-render UI yang sedang aktif
+                        const vDash = document.getElementById('view-dashboard'); if(vDash && !vDash.classList.contains('hidden')) renderDashboard();
+                        const vRekap = document.getElementById('view-rekap'); if(vRekap && !vRekap.classList.contains('hidden')) renderRekap();
+                        const vLap = document.getElementById('view-laporan'); if(vLap && !vLap.classList.contains('hidden')) renderLaporan();
+                        const vArsip = document.getElementById('view-arsip'); if(vArsip && !vArsip.classList.contains('hidden')) renderArsip();
+                        const vSurat = document.getElementById('view-surat'); if(vSurat && !vSurat.classList.contains('hidden')) renderSurat();
+                        const vDuk = document.getElementById('view-duk'); if(vDuk && !vDuk.classList.contains('hidden')) renderDuk();
+
+                        showToast("Sinkronisasi selesai", "success");
+                    } else { 
+                        updateDbStatus('error'); 
+                        showToast("Gagal menarik data terbaru", "error");
+                    }
+                })
+                .catch(e => {
+                    updateDbStatus('error');
+                    showToast("Koneksi server gagal", "error");
+                })
+                .finally(() => {
+                    isFetchingData = false;
+                    if(icon) icon.classList.remove('fa-spin');
+                });
         }
 
         function apiPost(action, payload) {
@@ -2000,7 +2383,10 @@
                 if (dataToSend.hp && !dataToSend.hp.startsWith("'")) dataToSend.hp = "'" + dataToSend.hp;
             } else if (action === "recordAttendance") {
                 if (dataToSend.nisn && !dataToSend.nisn.startsWith("'")) dataToSend.nisn = "'" + dataToSend.nisn;
+                // Simpan langsung ke memori lokal secara otomatis untuk keamanan sebelum disinkronkan ke server
+                localStorage.setItem('data_attendance', JSON.stringify(STATE.attendance));
             }
+            // Background Fetch: Mengirim diam-diam tanpa memblokir UI pengguna
             fetch(CONFIG.GAS_API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: action, data: dataToSend }) })
             .then(() => updateDbStatus('success')).catch(err => { console.log(err); updateDbStatus('error'); });
         }
@@ -2073,9 +2459,9 @@
 
             if(!STATE.school.sessions) {
                 STATE.school.sessions = {
-                    SD: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
-                    SMP: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } },
-                    SMA: { pagi: { jam: "07:00", tol: 15, kelas: [] }, siang: { jam: "13:00", tol: 15, kelas: [] }, sore: { jam: "15:00", tol: 15, kelas: [] } }
+                    SD: { pagi: { jam: "07:00", tol: "60", kelas: ["1A","1B","5A","5B","6A","6B"] }, siang: { jam: "10:00", tol: "60", kelas: ["2A","2B","2C"] }, sore: { jam: "12:00", tol: "60", kelas: ["3A","3B","4A","4B"] } },
+                    SMP: { pagi: { jam: "07:00", tol: "15", kelas: [] }, siang: { jam: "13:00", tol: "15", kelas: [] }, sore: { jam: "15:00", tol: "15", kelas: [] } },
+                    SMA: { pagi: { jam: "07:00", tol: "15", kelas: [] }, siang: { jam: "13:00", tol: "15", kelas: [] }, sore: { jam: "15:00", tol: "15", kelas: [] } }
                 };
             }
 
@@ -2187,11 +2573,11 @@
 
                 if(STATE.school.sessions) {
                     document.getElementById('cfg-sd-pagi-jam').value = STATE.school.sessions.SD?.pagi?.jam || "07:00";
-                    document.getElementById('cfg-sd-pagi-tol').value = STATE.school.sessions.SD?.pagi?.tol || 15;
-                    document.getElementById('cfg-sd-siang-jam').value = STATE.school.sessions.SD?.siang?.jam || "13:00";
-                    document.getElementById('cfg-sd-siang-tol').value = STATE.school.sessions.SD?.siang?.tol || 15;
-                    document.getElementById('cfg-sd-sore-jam').value = STATE.school.sessions.SD?.sore?.jam || "15:00";
-                    document.getElementById('cfg-sd-sore-tol').value = STATE.school.sessions.SD?.sore?.tol || 15;
+                    document.getElementById('cfg-sd-pagi-tol').value = STATE.school.sessions.SD?.pagi?.tol || 60;
+                    document.getElementById('cfg-sd-siang-jam').value = STATE.school.sessions.SD?.siang?.jam || "10:00";
+                    document.getElementById('cfg-sd-siang-tol').value = STATE.school.sessions.SD?.siang?.tol || 60;
+                    document.getElementById('cfg-sd-sore-jam').value = STATE.school.sessions.SD?.sore?.jam || "12:00";
+                    document.getElementById('cfg-sd-sore-tol').value = STATE.school.sessions.SD?.sore?.tol || 60;
 
                     document.getElementById('cfg-smp-pagi-jam').value = STATE.school.sessions.SMP?.pagi?.jam || "07:00";
                     document.getElementById('cfg-smp-pagi-tol').value = STATE.school.sessions.SMP?.pagi?.tol || 15;
@@ -2533,7 +2919,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const yr = document.getElementById('current-year'); if(yr) yr.innerText = new Date().getFullYear();
             applyTheme(); updateClock(); setInterval(updateClock, 1000);
-            applySchoolSettings(); toggleAutoRefresh();
+            applySchoolSettings(); 
             
             const fd = document.getElementById('filter-date'); if (fd) fd.value = todayStr;
             const ft = document.getElementById('laporan-val-tanggal'); if (ft) ft.value = todayStr;
@@ -2569,7 +2955,7 @@
             const splashProgress = document.getElementById('splash-progress');
             const splashText = document.getElementById('splash-text');
             
-            if(splashProgress) splashProgress.style.width = '20%';
+            if(splashProgress) splashProgress.style.width = '30%';
             
             // Periksa sesi login terlebih dahulu
             const session = localStorage.getItem('session');
@@ -2578,25 +2964,23 @@
                 document.getElementById('page-welcome').classList.add('hidden');
             }
 
-            if(splashText) splashText.innerText = "Sinkronisasi ke Google Database...";
-            if(splashProgress) splashProgress.style.width = '50%';
+            if(splashText) splashText.innerText = "Memuat antarmuka sistem...";
+            if(splashProgress) splashProgress.style.width = '70%';
 
-            // Muat Data Master secara Asinkronus (dari DB)
-            await loadData();
+            // Muat Data Master secara Asinkronus di background tanpa memblokir UI
+            loadData();
             
-            if(splashProgress) splashProgress.style.width = '90%';
-            if(splashText) splashText.innerText = "Memproses statistik aplikasi...";
-
-            // Perbarui Data Statistik Landing Page sesuai isi database
+            // Perbarui Data Statistik Landing Page
             updateLandingStatistics();
 
             if(splashProgress) splashProgress.style.width = '100%';
             if(splashText) splashText.innerText = "Memulai aplikasi...";
 
+            // Delay dipersingkat menjadi 300ms agar login lebih instan
             setTimeout(() => {
                 if(splash) {
                     splash.classList.add('opacity-0');
-                    setTimeout(() => splash.classList.add('hidden'), 700);
+                    setTimeout(() => splash.classList.add('hidden'), 500);
                 }
                 
                 if(STATE.user) {
@@ -2604,7 +2988,7 @@
                 } else {
                     document.getElementById('page-welcome').classList.remove('hidden');
                 }
-            }, 800);
+            }, 300);
         }
 
         function updateLandingStatistics() {
@@ -2783,15 +3167,30 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
                 document.getElementById('btn-submit-login').innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Memproses...`;
                 
                 if (r === 'admin') {
-                    if (u === 'supriyadi' && p === '291188') { STATE.user = { username: u, role: 'Admin TU', isAdmin: true, fullFeature: true }; localStorage.setItem('session', JSON.stringify(STATE.user)); loadData().then(initApp); } 
-                    else { showToast('Kredensial Admin salah!', 'error'); document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; }
+                    if (u === 'supriyadi' && p === '291188') { 
+                        STATE.user = { username: u, role: 'Admin TU', isAdmin: true, fullFeature: true }; 
+                        localStorage.setItem('session', JSON.stringify(STATE.user)); 
+                        initApp(); 
+                        document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; 
+                    } 
+                    else { 
+                        showToast('Kredensial Admin salah!', 'error'); 
+                        document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; 
+                    }
                 } else {
-                    loadData().then(() => {
-                        const targetDb = STATE.teachers.length > 0 ? STATE.teachers : MOCK_TEACHERS; 
-                        const teacher = targetDb.find(t => t.username === u && t.password === p); 
-                        if (teacher) { STATE.user = { username: u, role: `Guru Kelas ${teacher.kelas}`, isAdmin: false, kelas: teacher.kelas, fullFeature: teacher.fullFeature }; localStorage.setItem('session', JSON.stringify(STATE.user)); initApp(); } 
-                        else { showToast('Kredensial Guru salah!', 'error'); document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; }
-                    });
+                    // Cek cepat menggunakan data yang sudah ditanam (MOCK_TEACHERS) agar tidak ada delay login
+                    const allTeachers = [...MOCK_TEACHERS, ...STATE.teachers];
+                    const teacher = allTeachers.find(t => t.username === u && t.password === p); 
+                    if (teacher) { 
+                        STATE.user = { username: u, role: `Guru Kelas ${teacher.kelas}`, isAdmin: false, kelas: teacher.kelas, fullFeature: teacher.fullFeature }; 
+                        localStorage.setItem('session', JSON.stringify(STATE.user)); 
+                        initApp(); 
+                        document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; 
+                    } 
+                    else { 
+                        showToast('Kredensial Guru salah!', 'error'); 
+                        document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; 
+                    }
                 }
             });
         }
@@ -2799,51 +3198,18 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
         function logout() { localStorage.removeItem('session'); STATE.user = null; document.getElementById('page-app').classList.add('hidden'); document.getElementById('page-login').classList.add('hidden'); document.getElementById('page-welcome').classList.remove('hidden'); document.getElementById('btn-submit-login').innerHTML = `Masuk Ke Sistem`; stopScanner(); }
         
         async function loadData() { 
-            if(CONFIG.USE_REAL_BACKEND) {
-                if(isFetchingData) return;
-                isFetchingData = true;
-                updateDbStatus('fetching');
-                try {
-                    const response = await fetch(CONFIG.GAS_API_URL + "?action=getData", { cache: 'no-cache' });
-                    const json = await response.json();
-                    if(json.status === "success") {
-                        updateDbStatus('success');
-                        if (json.school) {
-                            safeMergeSchool(json.school);
-                        }
-                        STATE.students = (json.students || []).map(s => {
-                            if(s.nisn && s.nisn.startsWith("'")) s.nisn = s.nisn.substring(1);
-                            if(s.hp && s.hp.startsWith("'")) s.hp = s.hp.substring(1);
-                            return s;
-                        });
-                        STATE.attendance = (json.attendance || []).map(a => {
-                            if(a.nisn && a.nisn.startsWith("'")) a.nisn = a.nisn.substring(1);
-                            a.tanggal = normalizeDateStr(a.tanggal);
-                            return a;
-                        });
-                        STATE.teachers = json.teachers || [];
-                        STATE.archives = json.archives || [];
-                        STATE.letters = json.letters || [];
-                        
-                        // Merge DUK (Hibrida GAS & LocalStorage)
-                        const localDuk = JSON.parse(localStorage.getItem('data_duk')) || [];
-                        const gasDuk = json.duk || [];
-                        const mergedDuk = gasDuk.map(gd => {
-                            const localMatch = localDuk.find(ld => ld.id === gd.id);
-                            return localMatch ? {...gd, ...localMatch} : gd;
-                        });
-                        localDuk.forEach(ld => { if(!mergedDuk.find(md => md.id === ld.id)) mergedDuk.push(ld); });
-                        STATE.duk = mergedDuk;
-                        localStorage.setItem('data_duk', JSON.stringify(STATE.duk));
+            // Pendekatan OFFLINE-FIRST: Muat data dari memori lokal (cache) & data permanen secara instan
+            if(STATE.students.length === 0) STATE.students = [...MOCK_STUDENTS];
+            if(STATE.teachers.length === 0) STATE.teachers = [...MOCK_TEACHERS];
+            
+            const localAtt = localStorage.getItem('data_attendance');
+            if(localAtt) STATE.attendance = JSON.parse(localAtt);
+            else if(STATE.attendance.length === 0) STATE.attendance = [...MOCK_ATTENDANCE];
 
-                        isFetchingData = false;
-                        return;
-                    } else { updateDbStatus('error'); isFetchingData = false; }
-                } catch(e) { updateDbStatus('error'); isFetchingData = false; console.error("API Fetch Error:", e); showToast("Koneksi server gagal, pakai data lokal.", "warning"); }
-            }
-            if(STATE.students.length===0) { STATE.students = [...MOCK_STUDENTS]; STATE.attendance = [...MOCK_ATTENDANCE]; STATE.teachers = [...MOCK_TEACHERS]; }
+            // Bebaskan flag fetching. Pengguna dapat menggunakan tombol Sinkron Manual untuk menarik pembaruan
             isFetchingData = false;
         }
+
         function submitKirimSurat() {
             const pengirim = document.getElementById('form-surat-pengirim').value.trim();
             const jenis = document.getElementById('form-surat-jenis').value;
@@ -3154,9 +3520,76 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
 
         // ================= QR SCANNER =================
         const btnStartScan = document.getElementById('btn-start-scan'); if (btnStartScan) btnStartScan.addEventListener('click', startScanner);
-        const btnStopScan = document.getElementById('btn-stop-scan'); if (btnStopScan) btnStopScan.addEventListener('click', stopScanner);
+        const btnStopScan = document.getElementById('btn-stop-scan'); if (btnStopScan) btnStopScan.addEventListener('click', stopAndSaveScanner);
         function startScanner() { document.getElementById('btn-start-scan').classList.add('hidden'); document.getElementById('btn-stop-scan').classList.remove('hidden'); document.getElementById('scan-result').classList.add('hidden'); const camModeEl = document.getElementById('camera-facing-mode'); const facingMode = camModeEl ? camModeEl.value : "environment"; STATE.html5QrcodeScanner = new Html5Qrcode("reader"); STATE.html5QrcodeScanner.start({ facingMode: facingMode }, { fps: 10, qrbox: { width: 220, height: 220 }, aspectRatio: 1.0 }, onScanSuccess).catch(e => { showToast("Kamera ditolak atau tidak ditemukan.", "error"); stopScanner(); }); }
         function stopScanner() { if (STATE.html5QrcodeScanner) { STATE.html5QrcodeScanner.stop().then(() => { STATE.html5QrcodeScanner.clear(); STATE.html5QrcodeScanner = null; }).catch(e => console.error(e)); } document.getElementById('btn-start-scan').classList.remove('hidden'); document.getElementById('btn-stop-scan').classList.add('hidden'); }
+        
+        async function stopAndSaveScanner() {
+            stopScanner(); // Hentikan kamera terlebih dahulu
+
+            if (STATE.pendingAttendance && STATE.pendingAttendance.length > 0) {
+                if (!CONFIG.USE_REAL_BACKEND) {
+                    STATE.pendingAttendance = [];
+                    const pendCnt = document.getElementById('pending-count');
+                    if (pendCnt) { pendCnt.innerText = "0"; pendCnt.classList.add('hidden'); }
+                    return;
+                }
+
+                // Tampilkan modal progress bar upload
+                const modalProg = document.getElementById('modal-progress');
+                const modalProgContent = document.getElementById('modal-progress-content');
+                const progFill = document.getElementById('progress-bar-fill');
+                const progText = document.getElementById('progress-text');
+                const title = modalProgContent.querySelector('h3');
+                
+                if(title) title.innerText = "Menyimpan Presensi ke Database...";
+                
+                modalProg.classList.remove('hidden');
+                modalProg.classList.add('flex');
+                setTimeout(() => {
+                    modalProg.classList.remove('opacity-0');
+                    if(modalProgContent) modalProgContent.classList.remove('scale-95');
+                }, 10);
+
+                const batch = [...STATE.pendingAttendance];
+                for(let k = 0; k < batch.length; k++) {
+                    const att = batch[k];
+                    progText.innerText = `${k + 1} / ${batch.length} Data Tersimpan...`;
+                    progFill.style.width = `${((k + 1) / batch.length) * 100}%`;
+
+                    let dataToSend = JSON.parse(JSON.stringify(att));
+                    if (dataToSend.nisn && !dataToSend.nisn.startsWith("'")) dataToSend.nisn = "'" + dataToSend.nisn;
+
+                    try {
+                        await fetch(CONFIG.GAS_API_URL, { 
+                            method: 'POST', 
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                            body: JSON.stringify({ action: "recordAttendance", data: dataToSend }) 
+                        });
+                    } catch (err) {
+                        console.error("Gagal sinkron data presensi", err);
+                    }
+                }
+
+                // Kosongkan antrean setelah berhasil dikirim
+                STATE.pendingAttendance = [];
+                const pendCnt = document.getElementById('pending-count');
+                if (pendCnt) { pendCnt.innerText = "0"; pendCnt.classList.add('hidden'); }
+
+                // Tutup Modal Progress
+                setTimeout(() => {
+                    modalProg.classList.add('opacity-0');
+                    if(modalProgContent) modalProgContent.classList.add('scale-95');
+                    setTimeout(() => {
+                        modalProg.classList.add('hidden');
+                        modalProg.classList.remove('flex');
+                        if(title) title.innerText = "Menyinkronkan Database..."; 
+                    }, 300);
+                    showToast(`${batch.length} data presensi berhasil disimpan ke database.`, "success");
+                }, 1000);
+            }
+        }
+
         function switchCamera() { if (STATE.html5QrcodeScanner && !document.getElementById('btn-stop-scan').classList.contains('hidden')) { STATE.html5QrcodeScanner.stop().then(() => { STATE.html5QrcodeScanner.clear(); startScanner(); }).catch(e => { console.error("Gagal menukar kamera", e); stopScanner(); }); } }
         let isScanningProcess = false;
         
@@ -3193,7 +3626,21 @@ Guru Kelas menggunakan aplikasi ini untuk memantau absensi kelas yang menjadi ta
             batasWaktu.setHours(parseInt(timeParts[0]), parseInt(timeParts[1]) + toleransiMenit, 0, 0);
             
             const status = now > batasWaktu ? "Terlambat" : "Hadir";
-            const attData = { id: "A" + Date.now(), nisn: dt, tanggal: todayStr, waktu: timeStr, status: status }; STATE.attendance.push(attData); apiPost("recordAttendance", attData);
+            const attData = { id: "A" + Date.now(), nisn: dt, tanggal: todayStr, waktu: timeStr, status: status }; 
+            
+            // Simpan ke array utama dan antrean upload
+            STATE.attendance.push(attData); 
+            STATE.pendingAttendance.push(attData);
+            
+            // Simpan secara permanen di memori lokal agar aman jika internet mati
+            localStorage.setItem('data_attendance', JSON.stringify(STATE.attendance)); 
+            
+            // Update angka (badge) jumlah antrean yang belum diupload pada tombol Berhenti
+            const pendCnt = document.getElementById('pending-count');
+            if (pendCnt) { 
+                pendCnt.innerText = STATE.pendingAttendance.length; 
+                pendCnt.classList.remove('hidden'); 
+            }
             
             const statusClass = status === 'Hadir' ? 'bg-green-100 text-green-800 border-green-300' : 'bg-yellow-100 text-yellow-800 border-yellow-300';
             resBox.className = `text-center p-3 md:p-4 rounded-xl border mb-4 text-sm md:text-base ${statusClass}`; resBox.innerHTML = `<span class="font-bold">${student.nama}</span><br><span class="text-xs">${status} (${timeStr})</span>`;
